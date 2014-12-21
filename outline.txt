@@ -1,0 +1,31 @@
+Web Application
+Our Purpose:
+The journey to becoming a healthy and fit individual is a rewarding experience. The reality, though, is that the journey can be difficult and perplexing. Our purpose is to provide users with the tools necessary to travel the path that leads them to their goals. Our tools will allow users to determine their needs, create a plan of action, and monitor their progress. The path to success can be imperceptible; we’ll help you maintain your bearing.
+
+Feature List:
+Calorie Requirement Calculator: Whether your goal is to lose or gain weight, the most important step in your action plan is to determine your caloric needs. Our calorie requirement calculator will determine how many calories your body requires to maintain your current body weight, which will allow us to create a daily calorie goal for your action plan.
+Meal Tracker: The next most important part of an action plan is tracking calories and macro-/micro-nutrients. Consistently meeting your daily nutritional requirements is essential to success. Our meal tracker will allow users to do the following:
+Track meals (calories, macronutrients, and micronutrients)
+Meals can be grouped together within custom groups to provide organization for users. Groups are given custom names by the user; by default, there will be 3-4 groups and those can be easily added or removed by the user.
+Save foods into a personal database
+A universal database is a feature that may be created at a later date. For now, users will need to find the nutritional information on their packaging or via the Internet.
+Record recipes (such as protein shakes, weight gainer shakes, etc.)
+The recipe will be given a name (e.g. ON Protein Shake) and it will show up on the meal list as a single item.
+A one-time change in recipe will not be a big deal. Users will have the ability to modify the ingredients each time they add the recipe to their daily meal record; for example: if you use 2 bananas typically, but today you used 3 bananas, then you can easily adjust that number before saving the meal. You will not have to change the recipes ingredients permanently for this to work.
+Workout Routine Customization: There are hundreds of workout routines available on the Internet; this can be both intimidating and confusing to those who are new to working out. Our workout routine customizer will provide the following options for users:
+Our customizer will feature popular routines by default. This allows inexperienced individuals to choose an effective routine from the very beginning.
+Users may create their own custom routine or make modifications to an existing template and save it to their account. 
+Notice: Our setup wizard will make recommendations for routines.
+Progress Tracker: Users will be able to record personal statistics, such as:
+Body weight
+Height
+Arm, thigh, waist, etc. measurements
+Current lifts (i.e. 250lb bench press)
+Will be able to upload multiple photographs each time the user records statistics.
+Users will have the ability to compare two points in time (or view a single record). When comparing the two points in time, we will provide them with a side-by-side comparison of the two photos, with the page beneath it being divided in half with raw data (the data they entered) being displayed side-by-side with graphs illustrating the progress between the two dates.
+Basic Profile Page: We would like to begin by providing our users with the ability to share their progress with friends. A basic profile would include the following:
+Ability to upload a profile picture (that is not related to a progress picture)
+Ability to create a status and post to friends’ profiles
+Friends list
+Basic messaging feature
+Profile will display a “looking for gym partner” if the option is toggled in the user’s settings. Viewers will see this on the user’s profile and clicking the link will allow you to send a private message to the user.

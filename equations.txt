@@ -1,0 +1,20 @@
+Mifflin - St Jeor Formula
+	Men
+	10 x weight (kg) + 6.25 x height (cm) - 5 x age (y) + 5
+
+	Women
+	10 x weight (kg) + 6.25 x height (cm) - 5 x age (y) - 161.
+
+Routine Recommendation Equation
+	Variables
+		Age
+		Weight
+		Gender
+		Workout
+
+Universal Food Database
+	Food that reaches a minimum limit of occurances
+	Remove Outliers
+	Average Nutritional Facts to create identity
+
+Metric and Imperial Conversions

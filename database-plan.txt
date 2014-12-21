@@ -1,0 +1,167 @@
+A username called shared will hold public instances of recipies, routines, ect.
+
+Matching is used to indicate that it is used to link seperate tables
+
+Profile
+	ID
+	Initial Username
+	Password
+	Email
+	Facebook Account
+	First Name
+	Last Name
+	Location
+	Age
+	Gender
+	Height
+	Profile Picture File
+	Joined Date
+	Daily Calorie Requirement
+	Daily Macro Intake
+	Daily Micro Intake
+	Goal
+	Public Profile (TRUE or FALSE)
+	Looking for a Gym Partner (TRUE or FALSE)
+	Extra(for administration)
+
+	//Weight, Measurements, Lifts, and other varaible stats are stored in Progress Table
+
+Saved Friend Connections (A row for each side of the connection)
+	ID
+	Profile Matching Username 1
+	Profile Matching  Username 2
+	Status
+		Values include
+			Requested by User 1
+			Requested by User 2
+			Accepted
+
+Saved Messages
+	ID
+	Profile Matching Username 1
+	Profile Matching  Username 2
+	Message
+	Timestamp
+	Subject
+
+Saved Profile Wall Messages
+	ID
+	Profile Matching Username 1
+	Profile Matching  Username 1
+	Message
+	Timestamp
+
+Saved Status Messages
+	ID
+	Profile Matching Username
+	Status Message
+	Timestamp
+
+Saved Images
+	ID
+	Profile Matching Username
+	Profile and Progress Matching Filename
+	Progress Matching Progress Date
+	Image Name
+	Image Type
+	Caption
+	File Size
+
+Saved Meals
+	ID
+	Profile Matching Username
+	Meal Name
+	Meal Type
+	Date
+	Food Matching Name 1
+	Food Matching Name 2
+	Food Matching Name 3...
+	Number of Servings 1
+	Number of Servings 2
+	Number of Servings 3...
+
+Saved Recipies
+	ID
+	Profile Matching Username
+	Recipe Name
+	Recipie Type
+	Recipe Comment
+	Food Matching Name 1
+	Food Matching Name 2
+	Food Matching Name 3...
+	Number of Servings 1
+	Number of Servings 2
+	Number of Servings 3...
+
+Saved Routines
+	ID
+	Profile Matching Username
+	Routine Name
+	Routine Type
+	Workout Matching ID 1
+	Workout Matching ID 2
+	Workout Matching ID 3...
+
+Saved Workouts
+	ID
+	Workout Name
+	Workout Type
+	Length
+	Intensity
+	Equipment Needed
+	Muscle Worked 1
+	Muscle Worked 2
+	Muscle Worked 3...
+
+Saved Progress
+	ID
+	Profile Matching Username
+	Date
+	Image Matching ID
+	User comment
+		//Following is recorded into current profile table
+	Weight
+	Arm Measurement
+	Thigh Measurement
+	Waist Measurement
+	Current Bench Press
+	Current Leg Press
+	Current Pull Ups
+	Extra(for administration)
+
+Saved Food
+	ID
+	Name
+	Type
+	Serving size
+	Calories
+	Calories from Fat
+	Total Fat
+	Saturated Fat
+	Trans Fat
+	Cholesterol
+	Sodium
+	Potassium
+	Total Carbohydrate
+	Dietary Fiber
+	Sugars
+	Protein
+	Calcium
+	Folic Acid
+	Iron
+	Magnesium
+	Niacin
+	Potassium
+	Riboflavin
+	Vit A
+	Vit B12
+	Vit B6
+	Vit C
+	Vit D
+	Vit E
+	Zinc
+
+
+ADDITIONAL
+
+
