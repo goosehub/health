@@ -15,28 +15,11 @@
 	$300
 	1 week
 
-6. Advanced Text Formatting
-	$500
-7. Universal Food Database
-	$1000
-8.Progress Comments
-	$300
-9. Recipe Comments
-	$300
-10. Status Comments
-	$300
-
 
 Progress Comments
-	ID
-	Progress Matching ID
-	Profile Matching Username of Commenter
-	Comment
-	Timestamp
-
-Recipie Comments
-	ID
-	Recipie Matching ID
-	Recipe Matching Username of Commenter
-	Comment
-	Timestamp
+Recipe Comments
+Status Comments
+Advanced Text Formatting
+Universal Food Database
+Moderation Platform
+Blogging Platform

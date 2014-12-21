@@ -1,7 +1,6 @@
 Mifflin - St Jeor Formula
 	Men
 	10 x weight (kg) + 6.25 x height (cm) - 5 x age (y) + 5
-
 	Women
 	10 x weight (kg) + 6.25 x height (cm) - 5 x age (y) - 161.
 
@@ -10,11 +9,29 @@ Routine Recommendation Equation
 		Age
 		Weight
 		Gender
-		Workout
+		ECT...
 
 Universal Food Database
-	Food that reaches a minimum limit of occurances
-	Remove Outliers
-	Average Nutritional Facts to create identity
+	Foods that reaches a minimum limit of instances are included
+	Remove outliers, with a low tolerance
+	This
+		Find Average or Median of each nutritional fact
+		Record results into a universal instance of that food
+	Or This
+		Find high and low end of each nutritional fact
+		Record results as range into universal instance of that food
 
 Metric and Imperial Conversions
+	1 inch = 2.54 centimeters
+
+	1 pint = 2 cups
+	1 quart = 8 pints
+	1 US quart = 0.94635295 liters
+	1 gallon = 4 quarts
+	1 US gallon = 3.7854118 liters
+
+	1 ounce = 28.3495231 grams
+	1 ounce = 16 drams
+	1 ounce = 0.0625 pounds
+	1 pound = 16 ounces
+	1 pound = 0.45359237 kilograms

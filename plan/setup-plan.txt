@@ -1,1 +1,0 @@
-Id like to have an onboarding setup wizard during account creation that handles everything a user needs to get started... like determining how many calories they need to consume, what their macro intake should/could consist of, determine what routine they are using at the time and if they do not have one, then recommend one, and get them acquainted with the system

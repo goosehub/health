@@ -1,111 +1,96 @@
-A username called shared will hold public instances of recipies, routines, ect.
+Shared recipies, routines, ect will hold the restricted username "public" in database
 
-Matching is used to indicate that it is used to link seperate tables
+[______ Matching] indicates that it links another table
+
+* indicated optional
+
+T/F indicated values of TRUE or FALSE
+
+// indicates comments
+
+___________________
+
+Profile
+___________________
 
 Profile
 	ID
-	Initial Username
+	Username
 	Password
 	Email
-	Facebook Account
+	Facebook Account*
 	First Name
 	Last Name
 	Location
 	Age
 	Gender
 	Height
-	Profile Picture File
-	Joined Date
+	Profile Picture Filename*
+	Joined Timestamp
+	Last Online Timestamp
 	Daily Calorie Requirement
 	Daily Macro Intake
 	Daily Micro Intake
-	Goal
-	Public Profile (TRUE or FALSE)
-	Looking for a Gym Partner (TRUE or FALSE)
-	Extra(for administration)
+	Goal*
+	Public Profile (T/F)
+	Looking for a Gym Partner (T/F)
+	Extra(for administration)*
+		//Weight, Measurements, Lifts, and other varaible stats are stored in Progress Table
 
-	//Weight, Measurements, Lifts, and other varaible stats are stored in Progress Table
-
-Saved Friend Connections (A row for each side of the connection)
+Saved Friend Connections
 	ID
-	Profile Matching Username 1
-	Profile Matching  Username 2
+	[Profile Matching] Username 1
+	[Profile Matching] Username 2
 	Status
 		Values include
 			Requested by User 1
 			Requested by User 2
 			Accepted
 
-Saved Messages
+___________________
+
+Social Network Tables
+___________________
+
+Saved Messages (An instance will exist for each side of the connection)
 	ID
-	Profile Matching Username 1
-	Profile Matching  Username 2
-	Message
 	Timestamp
-	Subject
+	[Profile Matching] Username 1
+	[Profile Matching] Username 2
+	Message
+	Subject*
 
 Saved Profile Wall Messages
 	ID
-	Profile Matching Username 1
-	Profile Matching  Username 1
-	Message
 	Timestamp
+	[Profile Matching] Username 1
+	[Profile Matching]  Username 1
+	Message
 
 Saved Status Messages
 	ID
-	Profile Matching Username
-	Status Message
 	Timestamp
+	[Profile Matching] Username
+	Status Message
 
-Saved Images
+Status Comments
 	ID
-	Profile Matching Username
-	Profile and Progress Matching Filename
-	Progress Matching Progress Date
-	Image Name
-	Image Type
-	Caption
-	File Size
+	Timestamp
+	[Status Matching] ID
+	[Profile Matching] Username of Status
+	[Profile Matching] Username of Commenter
+	Comment
 
-Saved Meals
-	ID
-	Profile Matching Username
-	Meal Name
-	Meal Type
-	Date
-	Food Matching Name 1
-	Food Matching Name 2
-	Food Matching Name 3...
-	Number of Servings 1
-	Number of Servings 2
-	Number of Servings 3...
+___________________
 
-Saved Recipies
-	ID
-	Profile Matching Username
-	Recipe Name
-	Recipie Type
-	Recipe Comment
-	Food Matching Name 1
-	Food Matching Name 2
-	Food Matching Name 3...
-	Number of Servings 1
-	Number of Servings 2
-	Number of Servings 3...
-
-Saved Routines
-	ID
-	Profile Matching Username
-	Routine Name
-	Routine Type
-	Workout Matching ID 1
-	Workout Matching ID 2
-	Workout Matching ID 3...
+Excercize Tables
+___________________
 
 Saved Workouts
 	ID
+	Timestamp
 	Workout Name
-	Workout Type
+	Workout Category
 	Length
 	Intensity
 	Equipment Needed
@@ -113,26 +98,67 @@ Saved Workouts
 	Muscle Worked 2
 	Muscle Worked 3...
 
+Saved Routines
+	ID
+	Timestamp
+	[Profile Matching] Username
+	Routine Name
+	Routine Category
+	Active Routine (T/F)
+	[Workout Matching] ID 1
+	[Workout Matching] ID 2
+	[Workout Matching] ID 3...
+
+___________________
+
+Progress Tables
+___________________
+
 Saved Progress
 	ID
-	Profile Matching Username
-	Date
-	Image Matching ID
-	User comment
+	Timestamp
+	[Profile Matching] Username
+	[Image Matching] ID
+	User comment*
+	Images Exist (T/F)
 		//Following is recorded into current profile table
-	Weight
-	Arm Measurement
-	Thigh Measurement
-	Waist Measurement
-	Current Bench Press
-	Current Leg Press
-	Current Pull Ups
-	Extra(for administration)
+	Weight*
+	Arm Measurement*
+	Thigh Measurement*
+	Waist Measurement*
+	Current Bench Press*
+	Current Leg Press*
+	Current Pull Ups*
+	Extra(for administration)*
+
+Saved Progress Images
+	ID
+	[Progress Matching] Timestamp
+	[Profile Matching] Username
+	[Progress Matching] Filename
+	Image Name
+	Caption*
+	File Size
+
+Progress Comments
+	ID
+	Timestamp
+	[Progress Matching] ID
+	[Profile Matching] Username of Progress Owner
+	[Profile Matching] Username of Commenter
+	Comment
+
+___________________
+
+Nutrition Tables
+___________________
 
 Saved Food
 	ID
+	Timestamp
 	Name
-	Type
+	Category
+	User comment*
 	Serving size
 	Calories
 	Calories from Fat
@@ -161,7 +187,30 @@ Saved Food
 	Vit E
 	Zinc
 
+Saved Recipies
+	ID
+	Timestamp
+	[Profile Matching] Username
+	Recipe Name
+	Recipie Category
+	Recipie Instructions
+	Recipe Comment*
+	[Food Matching] Name 1
+	[Food Matching] Name 2
+	[Food Matching] Name 3...
+	Number of Servings 1
+	Number of Servings 2
+	Number of Servings 3...
 
-ADDITIONAL
-
-
+Saved Meals
+	ID
+	Timestamp
+	[Profile Matching] Username
+	Meal Name
+	Meal Category
+	[Food/Recipie Matching] Name 1
+	[Food/Recipie Matching] Name 2
+	[Food/Recipie Matching] Name 3...
+	Number of Servings 1
+	Number of Servings 2
+	Number of Servings 3...
