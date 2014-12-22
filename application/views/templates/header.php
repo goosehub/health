@@ -29,5 +29,6 @@
 	<div id="nav-bar">
 		<a id="home" class="nav-item" type="button" href="/health/">Home</a>
 		<a id="about" class="nav-item" type="button" href="/health/about">About</a>
+		<a id="login" class="nav-item" type="button" href="/health/login">Login</a>
 	</div>
 </header>
