@@ -2,7 +2,7 @@ Shared recipies, routines, ect will hold the restricted username "public" in dat
 
 [______ Matching] indicates that it links another table
 
-* indicated optional
+* indicated optional value
 
 T/F indicated values of TRUE or FALSE
 
@@ -22,7 +22,7 @@ Profile
 	First Name
 	Last Name
 	Location
-	Age
+	Birthdate
 	Gender
 	Height
 	Profile Picture Filename*
@@ -89,26 +89,34 @@ ___________________
 Saved Workouts
 	ID
 	Timestamp
+	[Profile Matching] Username
 	Workout Name
+	Infomation
+	Level
 	Workout Category
 	Length
-	Intensity
-	Equipment Needed
-	Muscle Worked 1
-	Muscle Worked 2
-	Muscle Worked 3...
+	Sets
+	Reps
+
+Saved Muscle / Workout Connections
+	ID
+	[Workout Matching] ID
+	Muscle Name
 
 Saved Routines
 	ID
 	Timestamp
 	[Profile Matching] Username
 	Routine Name
+	Infomation
+	Level
 	Routine Category
-	Active Routine (T/F)
-	[Workout Matching] ID 1
-	[Workout Matching] ID 2
-	[Workout Matching] ID 3...
+	Active Routine (T/F) [user is currently using this routine]
 
+Saved Workout / Routine Connections
+	ID
+	[Workout Matching] ID
+	[Routine Matching] ID
 ___________________
 
 Progress Tables
@@ -122,13 +130,20 @@ Saved Progress
 	User comment*
 	Images Exist (T/F)
 		//Following is recorded into current profile table
-	Weight*
+	Weight Measurement*
+	Height Measurement*
 	Arm Measurement*
 	Thigh Measurement*
 	Waist Measurement*
+	chest Measurement*
+	bodyfat Measurement*
+	calves Measurement*
+	forearms Measurement*
+	neck Measurement*
+	hips Measurement*
+	Current Squats*
 	Current Bench Press*
-	Current Leg Press*
-	Current Pull Ups*
+	Current Deadlift*
 	Extra(for administration)*
 
 Saved Progress Images
