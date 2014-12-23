@@ -8,11 +8,6 @@ class Login extends CI_Controller {
    $this->load->model('user','',TRUE);
  }
 
- function index()
- {
-   $this->load->helper(array('form'));
-   $this->load->view('login');
- }
  function verifylogin()
   {
    //This method will have the credentials validation

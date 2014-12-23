@@ -18,7 +18,6 @@
 	<![endif]-->
 <!-- Favicon Icon -->
     <link rel="shortcut icon" href="favicon.ico">
-	<!-- <link rel="icon" href="resources/favicon.ico" type="image/x-icon" /> -->
 <!-- CSS -->
 	<link type="text/css" rel="stylesheet" href="resources/style.css">
 </head>
@@ -29,6 +28,15 @@
 	<div id="nav-bar">
 		<a id="home" class="nav-item" type="button" href="/health/">Home</a>
 		<a id="about" class="nav-item" type="button" href="/health/about">About</a>
-		<a id="login" class="nav-item" type="button" href="/health/login">Login</a>
+
+<!-- log_check is TRUE when user is logged in -->
+		<?php
+		if ( $log_check === TRUE) {
+			echo '<a id="login" class="nav-item" type="button" href="/health/dashboard">Dashboard</a>';
+		} else {
+			echo '<a id="login" class="nav-item" type="button" href="/health/dashboard">Login</a>';
+		}
+		?>
+
 	</div>
 </header>
