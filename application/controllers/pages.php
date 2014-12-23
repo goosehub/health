@@ -39,7 +39,14 @@ class Pages extends CI_Controller {
 	    redirect('login', 'refresh');
 	  }
 	}
-
+	function join()
+	{
+	    $data['log_check'] = FALSE;
+	    $data['title'] = 'Join';
+		$this->load->view('templates/header', $data);
+	    $this->load->view('pages/join', $data);
+		$this->load->view('templates/footer', $data);
+	}
 	function logout()
 	{
 		session_start();

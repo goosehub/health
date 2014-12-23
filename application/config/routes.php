@@ -43,6 +43,7 @@ $route['default_controller'] = 'pages/view';
 $route['about'] = 'pages/view/about';
 $route['login'] = 'pages/view/login';
 $route['dashboard'] = 'pages/dashboard';
+$route['join'] = 'pages/join';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
