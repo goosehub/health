@@ -1,8 +1,6 @@
-<p>Login Not available</p>
-
-<!-- <h1>Simple Login with CodeIgniter</h1>
+<h1>Login</h1>
    <?php echo validation_errors(); ?>
-   <?php echo form_open('verifylogin'); ?>
+   <?php echo form_open('login/verifylogin'); ?>
      <label for="username">Username:</label>
      <input type="text" size="20" id="username" name="username"/>
      <br/>
@@ -10,4 +8,4 @@
      <input type="password" size="20" id="passowrd" name="password"/>
      <br/>
      <input type="submit" value="Login"/>
-   </form> -->
+   </form>
