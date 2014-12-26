@@ -65,7 +65,7 @@ class Join extends CI_Controller {
    if($result)
    {
 // Username already exists
-     $this->form_validation->set_message('check_database', 'Username already exists');
+     $this->form_validation->set_message('insert_database', 'Username already exists');
      return false;
    }
    else

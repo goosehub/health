@@ -67,14 +67,16 @@ Class health extends CI_Model
     'last_online' => $now
     );
    $this -> db -> insert('users', $data);
-   return FALSE;
+   return false;
   }
  }
-   function username($username)
+   function username($users_id, $username)
  {
+// Check if username is taken and not the current username
   $this -> db -> select('username');
   $this -> db -> from('users');
   $this -> db -> where('username', $username);
+  $this-> db -> where_not_in('id', $users_id);
   $this -> db -> limit(1);
   
   $query = $this -> db -> get();

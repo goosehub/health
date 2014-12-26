@@ -110,7 +110,7 @@ class Dashboard extends CI_Controller {
    $users_id = $data['id'] = $session_data['id'];;
 
 //query the database
-   $result = $this->health->username($username);
+   $result = $this->health->username($users_id, $username);
 
    if($result)
    {
