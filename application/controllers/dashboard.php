@@ -115,7 +115,7 @@ class Dashboard extends CI_Controller {
    if($result)
    {
 // Username already exists
-     $this->form_validation->set_message('check_database', 'Username already exists');
+     $this->form_validation->set_message('profile_insert_database', 'Username already exists');
      return false;
    }
    else
@@ -131,9 +131,9 @@ class Dashboard extends CI_Controller {
   {
 // Validation
    $this->load->library('form_validation');
-   $this->form_validation->set_rules('existing_password', 'Existing Password', 'trim|xss_clean|required');
+   $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|xss_clean|required');
    $this->form_validation->set_rules('password', 'New Password', 'trim|xss_clean|required|matches[confirm_password]');
-   $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|xss_clean|required|callback_password_insert_database');
+   $this->form_validation->set_rules('existing_password', 'Existing Password', 'trim|xss_clean|required|callback_password_insert_database');
 
    if($this->form_validation->run() == FALSE)
    {
@@ -151,12 +151,32 @@ class Dashboard extends CI_Controller {
    }
    else
    {
-     $result = $this->health->set_password($users_id, $password);
      //Go to dashboard
      redirect('dashboard', 'refresh');
    }
  }
+  public function password_insert_database($existing_password)
+ {
+// check password
+   $password = $existing_password;
+   $session_data = $this->session->userdata('logged_in');
+   $users_id = $data['id'] = $session_data['id'];
+   $username = $session_data['username'];
+   $result = $this->health->login($username, $password);
 
+   if(!$result)
+   {
+// Password incorrect
+     $this->form_validation->set_message('password_insert_database', 'Password incorrect');
+     return false;
+   }
+   else
+   {
+     $password = $this->input->post('password');
+     $result = $this->health->set_password($users_id, $password);
+     return TRUE;
+   }
+ }
 }
 
 ?>
