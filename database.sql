@@ -319,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `profile_picture_key` int(12) NOT NULL COMMENT 'images FK',
   `joined` int(12) NOT NULL COMMENT 'unix',
   `last_online` int(12) NOT NULL COMMENT 'unix',
-  `public_profile` int(12) NOT NULL COMMENT 'true/false',
+  `private` int(12) NOT NULL COMMENT 'true/false',
   `goal` text COLLATE utf8_bin NOT NULL,
   `about` text COLLATE utf8_bin NOT NULL,
   `gym_partner` int(12) NOT NULL COMMENT 'true/false',

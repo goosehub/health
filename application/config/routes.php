@@ -42,8 +42,10 @@ $route['404_override'] = '';
 $route['default_controller'] = 'pages/view';
 $route['about'] = 'pages/view/about';
 $route['login'] = 'pages/view/login';
-$route['dashboard'] = 'pages/dashboard';
-$route['join'] = 'pages/join';
+$route['start'] = 'pages/start';
+$route['dashboard/profile'] = 'dashboard/profile_form';
+$route['dashboard'] = 'dashboard';
+$route['join'] = 'join';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

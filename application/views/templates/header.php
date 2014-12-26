@@ -31,11 +31,14 @@
 
 <!-- log_check is TRUE when user is logged in -->
 		<?php
-		if ( $log_check === TRUE) {
-			echo '<a id="dashboard" class="nav-item" type="button" href="/health/dashboard">Dashboard</a>';
-		} else {
-			echo '<a id="login" class="nav-item" type="button" href="/health/dashboard">Login</a> ';
-			echo ' <a id="join" class="nav-item" type="button" href="/health/join">Join</a>';
+		if ( isset($log_check) ) {
+			if ($log_check === TRUE) {
+				echo '<a id="dashboard" class="nav-item" type="button" href="/health/dashboard">Dashboard</a> ';
+				echo '<a id="logout class="nav-item" type="button" href="/health/login/logout">Logout</a>';
+			} else {
+				echo '<a id="login" class="nav-item" type="button" href="/health/dashboard">Login</a> ';
+				echo ' <a id="join" class="nav-item" type="button" href="/health/join">Join</a>';
+			}
 		}
 		?>
 

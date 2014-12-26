@@ -10,7 +10,7 @@ class Login extends CI_Controller {
 
  function verifylogin()
   {
-   //This method will have the credentials validation
+//This method will have the validation
    $this->load->library('form_validation');
 
    $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
@@ -18,24 +18,24 @@ class Login extends CI_Controller {
 
    if($this->form_validation->run() == FALSE)
    {
-     //Field validation failed.  User redirected to login page
-     $this->load->view('templates/header', $data);
+//Field validation failed.  User redirected to login page
+     $this->load->view('templates/header');
      $this->load->view('pages/login');
-     $this->load->view('templates/footer', $data);
+     $this->load->view('templates/footer');
    }
    else
    {
-     //Go to private area
+//Go to private area
      redirect('dashboard', 'refresh');
    }
 
  }
   function check_database($password)
  {
-   //Field validation succeeded.  Validate against database
+//Field validation succeeded.  Validate against database
    $username = $this->input->post('username');
 
-   //query the database
+//query the database
    $result = $this->health->login($username, $password);
 
    if($result)
@@ -57,6 +57,15 @@ class Login extends CI_Controller {
      return false;
    }
  }
+  function logout()
+  {
+    session_start();
+// Clear session data
+    $this->session->unset_userdata('logged_in');
+    session_destroy();
+// Send to login page
+    redirect('pages/view/login', 'refresh');
+  }
 
 }
 
