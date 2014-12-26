@@ -42,8 +42,9 @@ $route['404_override'] = '';
 $route['default_controller'] = 'pages/view';
 $route['about'] = 'pages/view/about';
 $route['login'] = 'pages/view/login';
-$route['start'] = 'pages/start';
+$route['start'] = 'join/start';
 $route['dashboard/profile'] = 'dashboard/profile_form';
+$route['dashboard/password'] = 'dashboard/set_password';
 $route['dashboard'] = 'dashboard';
 $route['join'] = 'join';
 

@@ -1,4 +1,5 @@
 <h1>Join</h1>
+<h3>Instant - No email required</h3>
    <?php echo validation_errors(); ?>
    <?php echo form_open('join/verifyjoin'); ?>
      <label for="username">Username:</label>

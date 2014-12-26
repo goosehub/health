@@ -59,13 +59,32 @@ Class health extends CI_Model
   }
   else
   {
-    $joined = time();
+    $now = time();
     $data = array(
     'username' => $username,
     'password' => $password,
-    'joined' => $joined
+    'joined' => $now,
+    'last_online' => $now
     );
    $this -> db -> insert('users', $data);
+   return FALSE;
+  }
+ }
+   function username($username)
+ {
+  $this -> db -> select('username');
+  $this -> db -> from('users');
+  $this -> db -> where('username', $username);
+  $this -> db -> limit(1);
+  
+  $query = $this -> db -> get();
+  
+  if($query -> num_rows() == 1)
+  {
+    return $query->result();
+  }
+  else
+  {
    return FALSE;
   }
  }
@@ -92,11 +111,30 @@ Class health extends CI_Model
   'about' => $about,
   'username' => $username
   );
- $this->db->where('id', $users_id);
+ $this-> db ->where('id', $users_id);
  $this -> db -> update('users', $data);
+ return FALSE;
+
+ }
+    function set_password($users_id, $password)
+ {
+  $this -> db -> select('username');
+  $this -> db -> from('users');
+  $this -> db -> where('id', $users_id);
+  $this -> db -> limit(1);
+  
+  $query = $this -> db -> get();
+  
+  $data = array(
+  'password' => md5($password)
+  );
+ $this-> db ->where('id', $users_id);
+ $this-> db ->update('users', $data);
  return FALSE;
 
  }
 
 }
+// supersecret
+// 9a618248b64db62d15b300a07b00580b
 ?>

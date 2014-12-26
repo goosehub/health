@@ -33,13 +33,24 @@ class Join extends CI_Controller {
    }
    else
    {
-     //Go to login
-    $data['title'] = 'Success. Login to continue';
-    $this->load->helper(array('form'));
-    $this->load->view('templates/header', $data);
-    $this->load->view('pages/post_join', $data);
-    $this->load->view('pages/login', $data);
-    $this->load->view('templates/footer', $data);
+//Login
+   $username = $this->input->post('username');
+   $password = $this->input->post('password');
+   $result = $this->health->login($username, $password);
+   if($result)
+   {
+     $sess_array = array();
+     foreach($result as $row)
+     {
+       $sess_array = array(
+         'id' => $row->id,
+         'username' => $row->username
+       );
+       $this->session->set_userdata('logged_in', $sess_array);
+     }
+   }
+// Go to start function
+     redirect('join/start', 'refresh');
    }
  }
   function insert_database($password)
@@ -70,6 +81,30 @@ class Join extends CI_Controller {
      return TRUE;
    }
  }
+    function start()
+// This class is set_profile with starting out guidance
+  {
+    if($this->session->userdata('logged_in'))
+    {
+// Set data to populate form
+    $session_data = $this->session->userdata('logged_in');
+    $data['username'] = $session_data['username'];
+    $users_id = $data['id'] = $session_data['id'];
+    settype($users_id, "integer");
+    $data['profile'] = $this->health->get_profile($users_id);
+    $data['log_check'] = TRUE;
+    $data['title'] = 'Getting Set Up';
+    $this->load->view('templates/header', $data);
+    $this->load->view('pages/start', $data);
+    $this->load->view('user/set_profile', $data);
+    $this->load->view('templates/footer', $data);
+    }
+    else
+    {
+//If no session, redirect to login page
+      redirect('login', 'refresh');
+    }
+  }
 
 }
 

@@ -15,8 +15,10 @@ class Dashboard extends CI_Controller {
     {
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
+      settype($users_id, "integer");
 // Logged in, go to dashboard
       $this->health->last_online($users_id);
+      $data['profile'] = $this->health->get_profile($users_id);
       $data['log_check'] = TRUE;
       $data['username'] = $session_data['username'];
       $data['title'] = $session_data['username'];
@@ -34,6 +36,7 @@ class Dashboard extends CI_Controller {
   {
     if($this->session->userdata('logged_in'))
     {
+// Set data to populate form
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
       settype($users_id, "integer");
@@ -47,7 +50,7 @@ class Dashboard extends CI_Controller {
     }
     else
     {
-//If no session, redirect to login page
+// If no session, redirect to login page
       redirect('login', 'refresh');
     }
   }
@@ -65,9 +68,6 @@ class Dashboard extends CI_Controller {
    $this->form_validation->set_rules('private', 'Private', 'trim|xss_clean');
    $this->form_validation->set_rules('goal', 'Goal', 'trim|xss_clean|max_length[5000]');
    $this->form_validation->set_rules('about', 'About', 'trim|xss_clean|max_length[5000]');
-   // $this->form_validation->set_rules('existing_password', 'Existing Password', 'trim|xss_clean|callback_check_database');
-   // $this->form_validation->set_rules('new_password', 'New Password', 'trim|xss_clean|matches[confirm_password]');
-   // $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|xss_clean');
    $this->form_validation->set_rules('username', 'Username', 'trim|xss_clean|alpha_dash|max_length[24]|callback_profile_insert_database');
 
    if($this->form_validation->run() == FALSE)
@@ -104,31 +104,57 @@ class Dashboard extends CI_Controller {
    $private = $this->input->post('private');
    $goal = $this->input->post('goal');
    $about = $this->input->post('about');
-   $existing_password = $this->input->post('existing_password');
-   $new_password = $this->input->post('new_password');
-   $confirm_password = $this->input->post('confirm_password');
    $username = $this->input->post('username');
 
    $session_data = $this->session->userdata('logged_in');
    $users_id = $data['id'] = $session_data['id'];;
 
-// //query the database
-//    $result = $this->health->join($username, $password);
+//query the database
+   $result = $this->health->username($username);
 
-//    if($result)
-//    {
-// // Username already exists
-//      $this->form_validation->set_message('check_database', 'Username already exists');
-//      return false;
-//    }
-//    else
-//    {
+   if($result)
+   {
+// Username already exists
+     $this->form_validation->set_message('check_database', 'Username already exists');
+     return false;
+   }
+   else
+   {
 // Enter user into users tables
      $result = $this->health->set_profile($users_id, $email, $first_name, $last_name, $birthdate,
                                   $gender, $location, $gym_partner, $private, $goal, $about, $username);
 
-   //   return TRUE;
-   // }
+     return TRUE;
+   }
+ }
+ public function set_password()
+  {
+// Validation
+   $this->load->library('form_validation');
+   $this->form_validation->set_rules('existing_password', 'Existing Password', 'trim|xss_clean|required');
+   $this->form_validation->set_rules('password', 'New Password', 'trim|xss_clean|required|matches[confirm_password]');
+   $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|xss_clean|required|callback_password_insert_database');
+
+   if($this->form_validation->run() == FALSE)
+   {
+//Field validation failed.  User redirected to set_profile page
+      $session_data = $this->session->userdata('logged_in');
+      $users_id = $data['id'] = $session_data['id'];
+      settype($users_id, "integer");
+      $data['profile'] = $this->health->get_profile($users_id);
+      $data['username'] = $session_data['username'];
+      $data['log_check'] = TRUE;
+      $data['title'] = 'Changing Password';
+      $this->load->view('templates/header', $data);
+      $this->load->view('user/password_form', $data);
+      $this->load->view('templates/footer', $data);
+   }
+   else
+   {
+     $result = $this->health->set_password($users_id, $password);
+     //Go to dashboard
+     redirect('dashboard', 'refresh');
+   }
  }
 
 }

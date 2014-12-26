@@ -17,18 +17,6 @@
      <input value="<?php echo $profile['username']; ?>" class="input-textarea"
      type="text" size="20" id="username" name="username"/>
      <br/>
-<!--      <label for="existing_password">Existing Password:</label>
-     <input class="input-textarea"
-     type="password" size="20" id="existing_password" name="existing_password"/>
-     <br/>
-     <label for="new_password">New Password:</label>
-     <input class="input-textarea"
-     type="password" size="20" id="new_password" name="new_password"/>
-     <br/>
-     <label for="confirm_password">Confirm Password:</label>
-     <input class="input-textarea"
-     type="password" size="20" id="confirm_password" name="confirm_password"/>
-     <br/> -->
      <label for="email">Email:</label>
      <input value="<?php echo $profile['email']; ?>" class="input-textarea"
      type="email" size="20" id="email" name="email"/>
