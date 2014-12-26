@@ -10,7 +10,6 @@ class Join extends CI_Controller {
  }
   function index()
   {
-    $data['log_check'] = FALSE;
     $data['title'] = 'Join';
     $this->load->view('templates/header', $data);
     $this->load->view('pages/join', $data);
@@ -20,21 +19,27 @@ class Join extends CI_Controller {
   {
 // Validation
    $this->load->library('form_validation');
-   $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-   $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_insert_database');
+   $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean');
+   $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|alpha_dash|max_length[24]');
+   $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|alpha_dash|max_length[24]|matches[confirm_password]|callback_insert_database');
 
    if($this->form_validation->run() == FALSE)
    {
 //Field validation failed.  User redirected to join page
-      $data['log_check'] = FALSE;
+      $data['title'] = 'Join';
       $this->load->view('templates/header', $data);
       $this->load->view('pages/join', $data);
       $this->load->view('templates/footer', $data);
    }
    else
    {
-     //Go to private area
-     redirect('login', 'refresh');
+     //Go to login
+    $data['title'] = 'Success. Login to continue';
+    $this->load->helper(array('form'));
+    $this->load->view('templates/header', $data);
+    $this->load->view('pages/post_join', $data);
+    $this->load->view('pages/login', $data);
+    $this->load->view('templates/footer', $data);
    }
  }
   function insert_database($password)

@@ -13,9 +13,11 @@ class Dashboard extends CI_Controller {
   {
     if($this->session->userdata('logged_in'))
     {
-// Logged in, go to dashboard
-      $data['log_check'] = TRUE;
       $session_data = $this->session->userdata('logged_in');
+      $users_id = $data['id'] = $session_data['id'];
+// Logged in, go to dashboard
+      $this->health->last_online($users_id);
+      $data['log_check'] = TRUE;
       $data['username'] = $session_data['username'];
       $data['title'] = $session_data['username'];
       $this->load->view('templates/header', $data);
@@ -53,26 +55,31 @@ class Dashboard extends CI_Controller {
   {
 // Validation
    $this->load->library('form_validation');
-   $this->form_validation->set_rules('alias', 'Alias_Exist', 'trim|xss_clean|callback_profile_insert_database[livestock.alias]');
-   $this->form_validation->set_rules('email', 'Email', 'trim|xss_clean');
-   $this->form_validation->set_rules('first_name', 'First Name', 'trim|xss_clean');
-   $this->form_validation->set_rules('last_name', 'Last Name', 'trim|xss_clean');
+   $this->form_validation->set_rules('email', 'Email', 'trim|xss_clean|valid_email');
+   $this->form_validation->set_rules('first_name', 'First Name', 'trim|xss_clean|max_length[24]');
+   $this->form_validation->set_rules('last_name', 'Last Name', 'trim|xss_clean|max_length[24]');
    $this->form_validation->set_rules('birthdate', 'Birthdate', 'trim|xss_clean');
-   $this->form_validation->set_rules('location', 'Location', 'trim|xss_clean');
+   $this->form_validation->set_rules('location', 'Location', 'trim|xss_clean|max_length[100]');
    $this->form_validation->set_rules('gym_partner', 'Gym Partner', 'trim|xss_clean');
    // $this->form_validation->set_rules('profile_picture', 'Profile Picture', 'trim|xss_clean');
    $this->form_validation->set_rules('private', 'Private', 'trim|xss_clean');
-   $this->form_validation->set_rules('goal', 'Goal', 'trim|xss_clean');
-   $this->form_validation->set_rules('about', 'About', 'trim|xss_clean');
+   $this->form_validation->set_rules('goal', 'Goal', 'trim|xss_clean|max_length[5000]');
+   $this->form_validation->set_rules('about', 'About', 'trim|xss_clean|max_length[5000]');
    // $this->form_validation->set_rules('existing_password', 'Existing Password', 'trim|xss_clean|callback_check_database');
    // $this->form_validation->set_rules('new_password', 'New Password', 'trim|xss_clean|matches[confirm_password]');
    // $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|xss_clean');
-   $this->form_validation->set_rules('username', 'Username', 'trim|xss_clean|callback_profile_insert_database');
+   $this->form_validation->set_rules('username', 'Username', 'trim|xss_clean|alpha_dash|max_length[24]|callback_profile_insert_database');
 
    if($this->form_validation->run() == FALSE)
    {
 //Field validation failed.  User redirected to set_profile page
-      $data['log_check'] = FALSE;
+      $session_data = $this->session->userdata('logged_in');
+      $users_id = $data['id'] = $session_data['id'];
+      settype($users_id, "integer");
+      $data['profile'] = $this->health->get_profile($users_id);
+      $data['username'] = $session_data['username'];
+      $data['log_check'] = TRUE;
+      $data['title'] = 'Basic Info Settings';
       $this->load->view('templates/header', $data);
       $this->load->view('user/set_profile', $data);
       $this->load->view('templates/footer', $data);

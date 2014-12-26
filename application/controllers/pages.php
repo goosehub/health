@@ -19,7 +19,6 @@ class Pages extends CI_Controller {
 	  {
 	    $data['log_check'] = TRUE;
 	  } else {
-	  	$data['log_check'] = FALSE;
 	  }
 		$data['title'] = ucfirst($page); // Capitalize the first letter
     $this->load->helper(array('form'));
@@ -27,31 +26,34 @@ class Pages extends CI_Controller {
 		$this->load->view('pages/'.$page, $data);
 		$this->load->view('templates/footer', $data);
 	}
-// Landing page on joining
-   function start()
-  {
-    session_start();
-    if($this->session->userdata('logged_in'))
-    {
-      $session_data = $this->session->userdata('logged_in');
-      $users_id = $data['id'] = $session_data['id'];
-      settype($users_id, "integer");
-      $data['profile'] = $this->health->get_profile($users_id);
-      $data['log_check'] = TRUE;
-      $data['username'] = $session_data['username'];
-      // $data['title'] = $session_data['username'];
-      $data['title'] = 'Getting Started';
-      $this->load->view('templates/header', $data);
-      $this->load->view('pages/start', $data);
-      $this->load->view('user/set_profile', $data);
-      $this->load->view('templates/footer', $data);
-    }
-    else
-    {
-//If no session, redirect to login page
-      redirect('login', 'refresh');
-    }
-  }
+
+// Intended for potential use as 
+
+//    function start()
+//   {
+//     session_start();
+//     if($this->session->userdata('logged_in'))
+//     {
+//       $session_data = $this->session->userdata('logged_in');
+//       $users_id = $data['id'] = $session_data['id'];
+//       settype($users_id, "integer");
+//       $data['profile'] = $this->health->get_profile($users_id);
+//       $data['log_check'] = TRUE;
+//       $data['username'] = $session_data['username'];
+//       // $data['title'] = $session_data['username'];
+//       $data['title'] = 'Getting Started';
+//       $this->load->view('templates/header', $data);
+//       $this->load->view('pages/start', $data);
+//       $this->load->view('user/set_profile', $data);
+//       $this->load->view('templates/footer', $data);
+//     }
+//     else
+//     {
+// //If no session, redirect to login page
+//       redirect('login', 'refresh');
+//     }
+//   }
+
 }
 
 ?>

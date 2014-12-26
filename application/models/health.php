@@ -28,6 +28,22 @@ Class health extends CI_Model
   return $query->row_array();
 
  }
+   function last_online($users_id)
+ {
+  $this -> db -> select('username');
+  $this -> db -> from('users');
+  $this -> db -> where('id', $users_id);
+  $this -> db -> limit(1);
+  
+  $query = $this -> db -> get();
+  
+  $data = array(
+  'last_online' => time()
+  );
+ $this->db->where('id', $users_id);
+ $this -> db -> update('users', $data);
+ return FALSE;
+ }
   function join($username, $password)
  {
   $this -> db -> select('username');
@@ -43,9 +59,11 @@ Class health extends CI_Model
   }
   else
   {
+    $joined = time();
     $data = array(
     'username' => $username,
-    'password' => $password
+    'password' => $password,
+    'joined' => $joined
     );
    $this -> db -> insert('users', $data);
    return FALSE;
