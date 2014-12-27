@@ -34,8 +34,12 @@
      type="date" size="20" id="birthdate" name="birthdate"/>
      <br/>
      <label for="gender">Gender:</label>
-     <input value="<?php echo $profile['gender']; ?>" class="input-textarea"
-     type="gender" size="20" id="gender" name="gender"/>
+     <select class="input-textarea" type="gender" sixe="20" id="gender" name="gender">
+       <option value="<?php echo $profile['gender']; ?>"><?php echo $profile['gender']; ?></option>
+       <option value="Private">Private</option>
+       <option value="Male">Male</option>
+       <option value="Female">Female</option>
+     </select>
      <br/>
      <label for="location">Location:</label>
      <input value="<?php echo $profile['location']; ?>" class="input-textarea"

@@ -4,13 +4,13 @@ Class health extends CI_Model
 {
  function login($username, $password)
  {
-   $this -> db -> select('id, username, password');
-   $this -> db -> from('users');
-   $this -> db -> where('username', $username);
-   $this -> db -> where('password', MD5($password));
-   $this -> db -> limit(1);
+   $this->db->select('id, username, password');
+   $this->db->from('users');
+   $this->db->where('username', $username);
+   $this->db->where('password', MD5($password));
+   $this->db->limit(1);
  
-   $query = $this -> db -> get();
+   $query = $this->db->get();
  
    if($query -> num_rows() == 1)
    {
@@ -26,32 +26,31 @@ Class health extends CI_Model
   $query = $this->db->get_where('users', array('id' => $users_id));
   $this->db->limit(1);
   return $query->row_array();
-
  }
    function last_online($users_id)
  {
-  $this -> db -> select('username');
-  $this -> db -> from('users');
-  $this -> db -> where('id', $users_id);
-  $this -> db -> limit(1);
+  $this->db->select('username');
+  $this->db->from('users');
+  $this->db->where('id', $users_id);
+  $this->db->limit(1);
   
-  $query = $this -> db -> get();
+  $query = $this->db->get();
   
   $data = array(
   'last_online' => time()
   );
  $this->db->where('id', $users_id);
- $this -> db -> update('users', $data);
+ $this ->db->update('users', $data);
  return FALSE;
  }
   function join($username, $password)
  {
-  $this -> db -> select('username');
-  $this -> db -> from('users');
-  $this -> db -> where('username', $username);
-  $this -> db -> limit(1);
+  $this->db->select('username');
+  $this->db->from('users');
+  $this->db->where('username', $username);
+  $this->db->limit(1);
   
-  $query = $this -> db -> get();
+  $query = $this->db->get();
   
   if($query -> num_rows() == 1)
   {
@@ -59,6 +58,7 @@ Class health extends CI_Model
   }
   else
   {
+    // Insert user into users
     $now = time();
     $data = array(
     'username' => $username,
@@ -66,20 +66,34 @@ Class health extends CI_Model
     'joined' => $now,
     'last_online' => $now
     );
-   $this -> db -> insert('users', $data);
+   $this->db->insert('users', $data);
+// Find user id
+   $this->db->select_max('id');
+   $this->db->from('users');
+   $this->db->limit(1);
+   $query = $this->db->get()->row();
+   // $query->result();
+   $users_id = $query->id;
+// Create blank tables
+   $now = time();
+   $data = array(
+    'timestamp' => $now,
+    'user_key' => $users_id, 
+   ); 
+   $this->db->insert('progress', $data);
    return false;
   }
  }
    function username($users_id, $username)
  {
 // Check if username is taken and not the current username
-  $this -> db -> select('username');
-  $this -> db -> from('users');
-  $this -> db -> where('username', $username);
-  $this-> db -> where_not_in('id', $users_id);
-  $this -> db -> limit(1);
+  $this->db->select('username');
+  $this->db->from('users');
+  $this->db->where('username', $username);
+  $this->db-> where_not_in('id', $users_id);
+  $this->db->limit(1);
   
-  $query = $this -> db -> get();
+  $query = $this->db->get();
   
   if($query -> num_rows() == 1)
   {
@@ -93,12 +107,12 @@ Class health extends CI_Model
    function set_profile($users_id, $email, $first_name, $last_name, $birthdate, $gender,
                         $location, $gym_partner, $private, $goal, $about, $username)
  {
-  $this -> db -> select('username');
-  $this -> db -> from('users');
-  $this -> db -> where('username', $username);
-  $this -> db -> limit(1);
+  $this->db->select('username');
+  $this->db->from('users');
+  $this->db->where('username', $username);
+  $this->db->limit(1);
   
-  $query = $this -> db -> get();
+  $query = $this->db->get();
   
   $data = array(
   'email' => $email,
@@ -113,30 +127,29 @@ Class health extends CI_Model
   'about' => $about,
   'username' => $username
   );
- $this-> db ->where('id', $users_id);
- $this -> db -> update('users', $data);
+ $this->db->where('id', $users_id);
+ $this->db->update('users', $data);
  return FALSE;
 
  }
     function set_password($users_id, $password)
  {
-  $this -> db -> select('username');
-  $this -> db -> from('users');
-  $this -> db -> where('id', $users_id);
-  $this -> db -> limit(1);
+  $this->db->select('username');
+  $this->db->from('users');
+  $this->db->where('id', $users_id);
+  $this->db->limit(1);
   
-  $query = $this -> db -> get();
+  $query = $this->db->get();
   
   $data = array(
   'password' => md5($password)
   );
- $this-> db ->where('id', $users_id);
- $this-> db ->update('users', $data);
+ $this->db->where('id', $users_id);
+ $this->db->update('users', $data);
  return FALSE;
 
  }
 
 }
-// supersecret
-// 9a618248b64db62d15b300a07b00580b
+
 ?>

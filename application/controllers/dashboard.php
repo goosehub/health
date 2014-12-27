@@ -90,7 +90,7 @@ class Dashboard extends CI_Controller {
      redirect('dashboard', 'refresh');
    }
  }
-  public function profile_insert_database($foo)
+  public function profile_insert_database()
  {
 //Field validation succeeded.  Validate against database
    $email = $this->input->post('email');

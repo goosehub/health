@@ -4,3 +4,4 @@
 <a class="dashboard-link" href="dashboard/profile">Change/Add Basic Information</a><br/>
 <a class="dashboard-link" href="dashboard/password">Change Password</a><br/>
 <!-- <a class="dashboard-link" href="#">Change Profile Picture</a><br/> -->
+<a class="dashboard-link" href="dashboard/progress">Set New Progress Point</a><br/>

@@ -87,6 +87,7 @@ class Join extends CI_Controller {
     if($this->session->userdata('logged_in'))
     {
 // Set data to populate form
+    $data['foo'] = "foo";
     $session_data = $this->session->userdata('logged_in');
     $data['username'] = $session_data['username'];
     $users_id = $data['id'] = $session_data['id'];

@@ -47,6 +47,7 @@ $route['dashboard/profile'] = 'dashboard/profile_form';
 $route['dashboard/password'] = 'dashboard/set_password';
 $route['dashboard'] = 'dashboard';
 $route['join'] = 'join';
+$route['dashboard/progress'] = 'progress/progress_form';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
