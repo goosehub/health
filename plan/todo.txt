@@ -1,0 +1,47 @@
+== meal dashboard
+== meal/recipie enter
+== meal/recipie listing
+== meal/recipie view
+== food enter
+== food listing
+== food view
+== possibly combine meals and recipies into one table
+
+== routine dashboard
+== routine enter
+	== workout listing
+	== workout enter
+== routine listing
+== routine view
+== routine suggestion logic
+
+== progress dashboard
+== progress listing
+== progress view
+	== progress comments
+== progress comparison
+
+== profile feed
+== profile view
+	== profile wall
+	== profile statuses
+	== progress statuses comments
+	== profile image page
+	== profile image view
+	== profile friend request
+	== profile friend accept
+== profile listing
+== profile search
+== profile message enter
+== profile message listing
+== profile message view
+
+
+
+
+//To be discussed
+Recipe Comments
+Advanced Text Formatting
+Universal Food Database
+Moderation Platform
+Blogging Platform

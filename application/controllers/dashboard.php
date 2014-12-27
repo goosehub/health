@@ -7,23 +7,68 @@ class Dashboard extends CI_Controller {
  {
    parent::__construct();
    $this->load->model('health','',TRUE);
+   $this->load->model('progress_model','',TRUE);
  }
 
   function index()
   {
     if($this->session->userdata('logged_in'))
     {
+      $data['log_check'] = TRUE;
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
       settype($users_id, "integer");
 // Logged in, go to dashboard
       $this->health->last_online($users_id);
       $data['profile'] = $this->health->get_profile($users_id);
-      $data['log_check'] = TRUE;
       $data['username'] = $session_data['username'];
+// Load view
       $data['title'] = $session_data['username'];
       $this->load->view('templates/header', $data);
       $this->load->view('user/dashboard', $data);
+      $this->load->view('templates/footer', $data);
+    }
+    else
+    {
+//If no session, redirect to login page
+      redirect('login', 'refresh');
+    }
+  }
+  function requirements()
+  {
+    if($this->session->userdata('logged_in'))
+    {
+      $data['log_check'] = TRUE;
+      $session_data = $this->session->userdata('logged_in');
+      $data['username'] = $session_data['username'];
+      $users_id = $data['id'] = $session_data['id'];
+      settype($users_id, "integer");
+      $data['profile'] = $this->health->get_profile($users_id);
+      $data['progress'] = $this->progress_model->get_progress($users_id);
+// Define calorie requirement variables
+// Calculate age
+      $birthdate = $data['profile']['birthdate'];
+      $birthdate = date('Ymd', strtotime($birthdate));
+      $diff = date('Ymd') - $birthdate;
+      $years = $data['years'] = substr($diff, 0, -4);
+      $weight = $data['weight'] = $data['progress']->weight;
+      $height = $data['height'] = $data['progress']->height;
+      $gender = $data['gender'] = $data['profile']['gender'];
+// Run equation
+      if ($gender === 'Male') {
+        $cal_req = 10 * $weight + 6.25 * $height - 5 * $years + 5;
+      } else if ($gender === 'Female') {
+        $cal_req = 10 * $weight + 6.25 * $height - 5 * $years + 161;
+      }
+      else {
+        $cal_req = 'Unknown';
+      }
+      $data['cal_req'] = $cal_req;
+      $data['testvar'] = $gender;
+// Load view
+      $data['title'] = $session_data['username'];
+      $this->load->view('templates/header', $data);
+      $this->load->view('user/requirements', $data);
      $this->load->view('templates/footer', $data);
     }
     else
@@ -36,13 +81,13 @@ class Dashboard extends CI_Controller {
   {
     if($this->session->userdata('logged_in'))
     {
-// Set data to populate form
+      $data['log_check'] = TRUE;
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
       settype($users_id, "integer");
       $data['profile'] = $this->health->get_profile($users_id);
       $data['username'] = $session_data['username'];
-      $data['log_check'] = TRUE;
+// Load view
       $data['title'] = 'Basic Info Settings';
       $this->load->view('templates/header', $data);
       $this->load->view('user/set_profile', $data);
@@ -79,6 +124,7 @@ class Dashboard extends CI_Controller {
       $data['profile'] = $this->health->get_profile($users_id);
       $data['username'] = $session_data['username'];
       $data['log_check'] = TRUE;
+// Load view
       $data['title'] = 'Basic Info Settings';
       $this->load->view('templates/header', $data);
       $this->load->view('user/set_profile', $data);
@@ -144,6 +190,7 @@ class Dashboard extends CI_Controller {
       $data['profile'] = $this->health->get_profile($users_id);
       $data['username'] = $session_data['username'];
       $data['log_check'] = TRUE;
+// Load view
       $data['title'] = 'Changing Password';
       $this->load->view('templates/header', $data);
       $this->load->view('user/password_form', $data);

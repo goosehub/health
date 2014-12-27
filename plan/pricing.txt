@@ -14,12 +14,3 @@
 5. Basic Profile Page:
 	$300
 	1 week
-
-
-Progress Comments
-Recipe Comments
-Status Comments
-Advanced Text Formatting
-Universal Food Database
-Moderation Platform
-Blogging Platform

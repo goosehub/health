@@ -14,59 +14,59 @@
      <textarea class="input-textarea"
      rows="4" cols="50" id="comment" name="comment"/></textarea>
      <br/>
-     <label for="weight">Weight:</label>
+     <label for="weight">Weight measurement in cm:</label>
      <input value="<?php echo $progress->weight; ?>" class="input-textarea"
      type="text" size="20" id="weight" name="weight"/>
      <br/>
-     <label for="height">Height:</label>
+     <label for="height">Height measurement in cm:</label>
      <input value="<?php echo $progress->height; ?>" class="input-textarea"
      type="text" size="20" id="height" name="height"/>
      <br/>
-     <label for="arm">Arm:</label>
+     <label for="arm">Arm measurement in cm:</label>
      <input value="<?php echo $progress->arm; ?>" class="input-textarea"
      type="text" size="20" id="arm" name="arm"/>
      <br/>
-     <label for="thigh">Thigh:</label>
+     <label for="thigh">Thigh measurement in cm:</label>
      <input value="<?php echo $progress->thigh; ?>" class="input-textarea"
      type="text" size="20" id="thigh" name="thigh"/>
      <br/>
-     <label for="waist">Wasit:</label>
+     <label for="waist">Wasit measurement in cm:</label>
      <input value="<?php echo $progress->waist; ?>" class="input-textarea"
      type="text" size="20" id="waist" name="waist"/>
      <br/>
-     <label for="chest">Chest:</label>
+     <label for="chest">Chest measurement in cm:</label>
      <input value="<?php echo $progress->chest; ?>" class="input-textarea"
      type="text" size="20" id="chest" name="chest"/>
      <br/>
-     <label for="calves">Calves:</label>
+     <label for="calves">Calves measurement in cm:</label>
      <input value="<?php echo $progress->calves; ?>" class="input-textarea"
      type="text" size="20" id="calves" name="calves"/>
      <br/>
-     <label for="forearms">Forearms:</label>
+     <label for="forearms">Forearms measurement in cm:</label>
      <input value="<?php echo $progress->forearms; ?>" class="input-textarea"
      type="text" size="20" id="forearms" name="forearms"/>
      <br/>
-     <label for="neck">Neck:</label>
+     <label for="neck">Neck measurement in cm:</label>
      <input value="<?php echo $progress->neck; ?>" class="input-textarea"
      type="text" size="20" id="neck" name="neck"/>
      <br/>
-     <label for="hips">Hips:</label>
+     <label for="hips">Hips measurement in cm:</label>
      <input value="<?php echo $progress->hips; ?>" class="input-textarea"
      type="text" size="20" id="hips" name="hips"/>
      <br/>
-     <label for="bodyfat">Bodyfat:</label>
+     <label for="bodyfat">Bodyfat measurement in percent:</label>
      <input value="<?php echo $progress->bodyfat; ?>" class="input-textarea"
      type="text" size="20" id="bodyfat" name="bodyfat"/>
      <br/>
-     <label for="squats">Squats:</label>
+     <label for="squats">Squats in kg:</label>
      <input value="<?php echo $progress->squats; ?>" class="input-textarea"
      type="text" size="20" id="squats" name="squats"/>
      <br/>
-     <label for="bench">Bench:</label>
+     <label for="bench">Bench in kg:</label>
      <input value="<?php echo $progress->bench; ?>" class="input-textarea"
      type="text" size="20" id="bench" name="bench"/>
      <br/>
-     <label for="deadlift">Deadlift:</label>
+     <label for="deadlift">Deadlift in kg:</label>
      <input value="<?php echo $progress->deadlift; ?>" class="input-textarea"
      type="text" size="20" id="deadlift" name="deadlift"/>
      <br/>

@@ -5,3 +5,4 @@
 <a class="dashboard-link" href="dashboard/password">Change Password</a><br/>
 <!-- <a class="dashboard-link" href="#">Change Profile Picture</a><br/> -->
 <a class="dashboard-link" href="dashboard/progress">Set New Progress Point</a><br/>
+<a class="dashboard-link" href="dashboard/requirements">Nutritional Requirements</a><br/>

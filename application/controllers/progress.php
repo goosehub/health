@@ -24,6 +24,7 @@ class Progress extends CI_Controller {
       $data['profile'] = $this->health->get_profile($users_id);
       $data['progress'] = $this->progress_model->get_progress($users_id);
       $data['username'] = $session_data['username'];
+// Load view
       $data['title'] = 'Set a Progress Point';
       $this->load->view('templates/header', $data);
       $this->load->view('progress/progress_form', $data);
@@ -70,6 +71,7 @@ class Progress extends CI_Controller {
       $data['profile'] = $this->health->get_profile($users_id);
       $data['username'] = $session_data['username'];
       $data['log_check'] = TRUE;
+// Load view
       $data['title'] = 'Basic Info Settings';
       $this->load->view('templates/header', $data);
       $this->load->view('user/set_profile', $data);
