@@ -14,7 +14,7 @@
      <textarea class="input-textarea"
      rows="4" cols="50" id="comment" name="comment"/></textarea>
      <br/>
-     <label for="weight">Weight measurement in cm:</label>
+     <label for="weight">Weight measurement in kg:</label>
      <input value="<?php echo $progress->weight; ?>" class="input-textarea"
      type="text" size="20" id="weight" name="weight"/>
      <br/>
