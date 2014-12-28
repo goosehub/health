@@ -1,9 +1,9 @@
 <h2>Nutritional Requirements</h2>
 <?php
-if ($weight === 0
-	|| $height === 0
+if ($weight === '0'
+	|| $height === '0'
 	|| ($gender != 'Male' && $gender != 'Female')
-	|| $years === 44
+	|| $birthdate === ''
 	)
 {
 ?>
