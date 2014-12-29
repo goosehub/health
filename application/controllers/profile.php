@@ -27,6 +27,13 @@ class Profile extends CI_Controller {
 		$this->load->view('profile/not_found', $data);
 		$this->load->view('templates/footer', $data);
 	} 
+	else if ($data['profile']['private'] === 'on') {
+		$data['title'] = $slug;
+		$data['slug'] = $slug;
+		$this->load->view('templates/header', $data);
+		$this->load->view('profile/private', $data);
+		$this->load->view('templates/footer', $data);
+	}
 // Else, load all data and serve page
 	else
 	{
@@ -40,6 +47,9 @@ class Profile extends CI_Controller {
 // Calculate last online
 		$data['last_online'] = $data['profile']['last_online'];
 		$data['last_online'] = date("M j, g:i A T", $data['last_online']);
+// Format joined
+		$data['joined'] = $data['profile']['joined'];
+		$data['joined'] = date("M j, g:i A T", $data['joined']);
 // Translate gym_partner to phrase
 		if ($data['profile']['gym_partner'] === 'on') {
 			$data['gym_partner'] = 'I am looking for a gym partner';

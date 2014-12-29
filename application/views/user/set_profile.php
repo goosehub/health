@@ -17,7 +17,7 @@
      <input value="<?php echo $profile['username']; ?>" class="input-textarea"
      type="text" size="20" id="username" name="username"/>
      <br/>
-     <label for="email">Email:</label>
+     <label for="email">Email (Kept Private):</label>
      <input value="<?php echo $profile['email']; ?>" class="input-textarea"
      type="email" size="20" id="email" name="email"/>
      <br/>

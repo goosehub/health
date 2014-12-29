@@ -1,6 +1,7 @@
 <h1><?php echo $profile['username']; ?>!</h1>
 <hr/>
 <p>Username: <?php echo $profile['username']; ?></p>
+<p>Joined: <?php echo $joined; ?></p>
 <p>Last online: <?php echo $last_online; ?></p>
 <p>Email: <?php echo $profile['email']; ?></p>
 <p>Name: <?php echo $profile['first_name'].' '.$profile['last_name']; ?></p>

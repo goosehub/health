@@ -12,7 +12,7 @@
      <input class="input-textarea"
      type="password" size="20" id="confirm_password" name="confirm_password"/>
      <br/>
-     <label for="email">Email:</label>
+     <label for="email">Email (Kept Private):</label>
      <input class="input-textarea"
      type="email" size="20" id="email" name="email"/>
      <br/>
