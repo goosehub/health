@@ -27,6 +27,12 @@ Class health extends CI_Model
   $this->db->limit(1);
   return $query->row_array();
  }
+  function get_profile_slug($slug)
+ {
+  $query = $this->db->get_where('users', array('username' => $slug));
+  $this->db->limit(1);
+  return $query->row_array();
+ }
    function last_online($users_id)
  {
   $this->db->select('username');
@@ -43,7 +49,7 @@ Class health extends CI_Model
  $this ->db->update('users', $data);
  return FALSE;
  }
-  function join($username, $password)
+  function join($username, $password, $email)
  {
   $this->db->select('username');
   $this->db->from('users');
@@ -63,6 +69,7 @@ Class health extends CI_Model
     $data = array(
     'username' => $username,
     'password' => $password,
+    'email' => $email,
     'joined' => $now,
     'last_online' => $now
     );
@@ -78,7 +85,7 @@ Class health extends CI_Model
    $now = time();
    $data = array(
     'timestamp' => $now,
-    'user_key' => $users_id, 
+    'user_key' => $users_id
    ); 
    $this->db->insert('progress', $data);
    return false;

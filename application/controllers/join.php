@@ -22,6 +22,7 @@ class Join extends CI_Controller {
    $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean');
    $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|alpha_dash|max_length[24]');
    $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|alpha_dash|max_length[24]|matches[confirm_password]|callback_insert_database');
+   $this->form_validation->set_rules('email', 'Email', 'trim|xss_clean|valid_email');
 
    if($this->form_validation->run() == FALSE)
    {
@@ -55,12 +56,13 @@ class Join extends CI_Controller {
  }
   function insert_database($password)
  {
-//Field validation succeeded.  Validate against database
+//Field validation succeeded.
+   $email = $this->input->post('email');
    $username = $this->input->post('username');
    $password = md5($password);
 
-//query the database
-   $result = $this->health->join($username, $password);
+//Submit to model to enter user into users table
+   $result = $this->health->join($username, $password, $email);
 
    if($result)
    {
@@ -70,8 +72,7 @@ class Join extends CI_Controller {
    }
    else
    {
-// Enter user into users tables
-     $result = $this->health->join($username, $password);
+// Success
      $sess_array = array();
      $sess_array = array(
      'username' => $username

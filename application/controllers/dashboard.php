@@ -51,6 +51,7 @@ class Dashboard extends CI_Controller {
       $birthdate = date('Ymd', strtotime($birthdate));
       $diff = date('Ymd') - $birthdate;
       $years = $data['years'] = substr($diff, 0, -4);
+// Set other variables
       $weight = $data['weight'] = $data['progress']->weight;
       $height = $data['height'] = $data['progress']->height;
       $gender = $data['gender'] = $data['profile']['gender'];
@@ -58,7 +59,7 @@ class Dashboard extends CI_Controller {
       if ($gender === 'Male') {
         $cal_req = 10 * $weight + 6.25 * $height - 5 * $years + 5;
       } else if ($gender === 'Female') {
-        $cal_req = 10 * $weight + 6.25 * $height - 5 * $years + 161;
+        $cal_req = 10 * $weight + 6.25 * $height - 5 * $years - 161;
       }
       else {
         $cal_req = 'Unknown';

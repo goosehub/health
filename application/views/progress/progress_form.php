@@ -30,7 +30,7 @@
      <input value="<?php echo $progress->thigh; ?>" class="input-textarea"
      type="text" size="20" id="thigh" name="thigh"/>
      <br/>
-     <label for="waist">Wasit measurement in cm:</label>
+     <label for="waist">Waist measurement in cm:</label>
      <input value="<?php echo $progress->waist; ?>" class="input-textarea"
      type="text" size="20" id="waist" name="waist"/>
      <br/>
