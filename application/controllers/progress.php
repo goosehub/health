@@ -13,11 +13,10 @@ class Progress extends CI_Controller {
   {
     if($this->session->userdata('logged_in'))
     {
+      $data['log_check'] = TRUE;
 // Set data to populate form
-      $data['foo'] = "foo";
       $time = time();
 	    $data['date'] = date("m/d/y gA");
-      $data['log_check'] = TRUE;
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
       settype($users_id, "integer");
