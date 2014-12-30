@@ -40,10 +40,14 @@ class Profile extends CI_Controller {
 		$users_id = $data['profile']['id'];
 		$data['progress'] = $this->progress_model->get_progress($users_id);
 // Calculate age
-		$birthdate = $data['birthdate'] = $data['profile']['birthdate'];
-		$birthdate = date('Ymd', strtotime($birthdate));
-		$diff = date('Ymd') - $birthdate;
-		$data['age'] = $data['years'] = substr($diff, 0, -4);
+		if ($data['profile']['birthdate'] === '') {
+			$data['age'] = 'Not entered';
+		} else {
+			$birthdate = $data['birthdate'] = $data['profile']['birthdate'];
+			$birthdate = date('Ymd', strtotime($birthdate));
+			$diff = date('Ymd') - $birthdate;
+			$data['age'] = $data['years'] = substr($diff, 0, -4);
+		}
 // Calculate last online
 		$data['last_online'] = $data['profile']['last_online'];
 		$data['last_online'] = date("M j, g:i A T", $data['last_online']);

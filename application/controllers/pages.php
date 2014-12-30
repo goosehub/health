@@ -74,10 +74,14 @@ class Pages extends CI_Controller {
 			$data['users'] = $this->health->get_all_users();
 			foreach ( $data['users'] as $user):
 	// Calculate age
-			$birthdate = $data['birthdate'] = $user->birthdate;
-			$birthdate = date('Ymd', strtotime($birthdate));
-			$diff = date('Ymd') - $birthdate;
-			$data['age'] = $data['years'] = substr($diff, 0, -4);
+			if ($user->birthdate === '') {
+				$data['age'] = 'Not entered';
+			} else {
+				$birthdate = $data['birthdate'] = $user->birthdate;
+				$birthdate = date('Ymd', strtotime($birthdate));
+				$diff = date('Ymd') - $birthdate;
+				$data['age'] = $data['years'] = substr($diff, 0, -4);
+			}
 	// Calculate last online
 			$data['last_online'] = $user->last_online;
 			$data['last_online'] = date("M j, g:i A T", $data['last_online']);
