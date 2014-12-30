@@ -33,6 +33,12 @@ Class health extends CI_Model
   $this->db->limit(1);
   return $query->row_array();
  }
+  function get_all_users()
+ {
+  $query = $this->db->get('users');
+  // $this->db->order_by("id", "desc");
+  return $query->result();
+ }
    function last_online($users_id)
  {
   $this->db->select('username');

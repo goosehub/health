@@ -59,7 +59,7 @@ class Profile extends CI_Controller {
 // Load view
 		$data['title'] = $slug;
 		$this->load->view('templates/header', $data);
-		$this->load->view('profile/view', $data);
+		$this->load->view('profile/profile_view', $data);
 		$this->load->view('templates/footer', $data);
 	}
   }

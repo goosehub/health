@@ -28,6 +28,7 @@
 	<div id="nav-bar">
 		<a id="home" class="nav-item" type="button" href="/health/">Home</a>
 		<a id="about" class="nav-item" type="button" href="/health/about">About</a>
+		<a id="search" class="nav-item" type="button" href="/health/search">Search</a>
 
 <!-- log_check is TRUE when user is logged in -->
 		<?php

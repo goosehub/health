@@ -47,6 +47,7 @@ $route['dashboard/profile'] = 'dashboard/profile_form';
 $route['dashboard/password'] = 'dashboard/set_password';
 $route['dashboard'] = 'dashboard';
 $route['join'] = 'join';
+$route['search'] = 'pages/search';
 $route['dashboard/progress'] = 'progress/progress_form';
 $route['dashboard/requirements'] = 'dashboard/requirements';
 $route['users/(:any)'] = 'profile/view/$1';
