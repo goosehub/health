@@ -62,7 +62,7 @@ class Progress extends CI_Controller {
  {
 // Validation
    $this->load->library('form_validation');
-   $this->form_validation->set_rules('name', 'Name', 'trim|xss_clean|alpha_dash|max_length[24]');
+   $this->form_validation->set_rules('name', 'Name', 'trim|xss_clean|max_length[24]');
    $this->form_validation->set_rules('comment', 'Comment', 'trim|xss_clean|max_length[10000]');
    $this->form_validation->set_rules('weight', 'Weight', 'trim|xss_clean|integer');
    $this->form_validation->set_rules('height', 'Height', 'trim|xss_clean|integer');
@@ -96,7 +96,7 @@ class Progress extends CI_Controller {
 // Load view
       $data['title'] = 'Basic Info Settings';
       $this->load->view('templates/header', $data);
-      $this->load->view('user/set_profile', $data);
+      $this->load->view('progress/progress_form', $data);
       $this->load->view('templates/footer', $data);
    }
    else
@@ -122,15 +122,15 @@ class Progress extends CI_Controller {
        $picture_03_caption = $this->input->post('picture_03_caption');
        $picture_04_caption = $this->input->post('picture_04_caption');
        $picture_05_caption = $this->input->post('picture_05_caption');
-    // Get user id
+// Get user id
        $session_data = $this->session->userdata('logged_in');
        $users_id = $data['id'] = $session_data['id'];;
-    // Enter progress into progress tables
+// Enter progress into progress tables
          $result = $this->progress_model->set_progress($users_id, $name, $comment, 
           $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
            $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
            $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
-     //Go to dashboard
+//Go to dashboard
      redirect('dashboard', 'refresh');
    }
  }
