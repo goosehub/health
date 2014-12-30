@@ -2,7 +2,7 @@
 <hr/>
 <p>Username: <?php echo $profile['username']; ?></p>
 <p>Joined: <?php echo $joined; ?></p>
-<p>Last online: <?php echo $last_online; ?></p>
+<p>Last online: <?php echo $last_online; ?> ago</p>
 <p>Email: <?php echo $profile['email']; ?></p>
 <p>Name: <?php echo $profile['first_name'].' '.$profile['last_name']; ?></p>
 <p>Age: <?php echo $age; ?></p>

@@ -7,8 +7,28 @@
 <h2>Recent Users</h2>
 
 <!-- Start Logic for Each User Item -->
-<?php $i = 0;
-foreach ( array_reverse($users) as $user): ?>
+<?php $this->load->helper('date');
+$now = time();
+$i = 0;
+foreach ( array_reverse($users) as $user): 
+// Calculate age
+	$birthdate = $user->birthdate;
+	$birthdate = date('Ymd', strtotime($birthdate));
+	$diff = date('Ymd') - $birthdate;
+	$age = substr($diff, 0, -4);
+// Calculate last online
+	$last_online = $user->last_online;
+	$last_online = timespan($last_online, $now);
+// Format joined
+	$joined = $user->joined;
+	$joined = date("M j, g:i A T", $joined);
+// Translate gym_partner to phrase
+	if ($user->gym_partner === 'on') {
+		$gym_partner = 'Currently looking for a gym partner';
+	} else {
+		$gym_partner = 'Not looking for a gym partner';
+	}
+?>
 
 <!-- Start User Item -->
 

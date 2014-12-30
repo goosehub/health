@@ -49,8 +49,10 @@ class Profile extends CI_Controller {
 			$data['age'] = $data['years'] = substr($diff, 0, -4);
 		}
 // Calculate last online
+	  	$this->load->helper('date');
 		$data['last_online'] = $data['profile']['last_online'];
-		$data['last_online'] = date("M j, g:i A T", $data['last_online']);
+		$now = time();
+		$data['last_online'] = timespan($data['last_online'], $now);
 // Format joined
 		$data['joined'] = $data['profile']['joined'];
 		$data['joined'] = date("M j, g:i A T", $data['joined']);
