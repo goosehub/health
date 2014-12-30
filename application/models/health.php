@@ -77,7 +77,8 @@ Class health extends CI_Model
     'password' => $password,
     'email' => $email,
     'joined' => $now,
-    'last_online' => $now
+    'last_online' => $now,
+    'birthdate' => '1997-01-01'
     );
    $this->db->insert('users', $data);
 // Find user id
