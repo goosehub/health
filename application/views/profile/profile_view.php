@@ -12,6 +12,8 @@
 <p>goal: <?php echo $profile['goal']; ?></p>
 <p>about: <?php echo $profile['about']; ?></p>
 <hr/>
+<h2>Latest progress point</h2>
+<a class="dashboard-link" href="../dashboard/progress">See More Progress Points[Not fully functional]</a><br/>
 <p>weight measurement: <?php echo $progress->weight; ?>kg</p>
 <p>height measurement: <?php echo $progress->height; ?>cm</p>
 <p>arm measurement: <?php echo $progress->arm; ?>cm</p>
@@ -26,3 +28,31 @@
 <p>squats: <?php echo $progress->squats; ?>kg</p>
 <p>bench: <?php echo $progress->bench; ?>kg</p>
 <p>deadlift: <?php echo $progress->deadlift; ?>kg</p>
+<hr/>
+<h2>Wall Comments</h2>
+<!-- If user logged in, allow user to leave a comment. -->
+<?php if (isset($log_check)) { ?>
+<h3>Leave a Comment</h3>
+    <?php echo validation_errors();
+   	$slug = $this->uri->uri_string();
+	echo form_open($slug);
+    // echo form_open('profile/view'); 
+    ?>
+<textarea class="input-textarea" rows="4" cols="50" name="message">
+</textarea>
+<br/>
+<input type="submit" value="Submit"/>
+</form>
+<?php } ?>
+<hr/>
+<?php
+foreach (array_reverse($wall) as $row) {
+$row->timestamp = date("M j Y, g:i A T", $row->timestamp);
+?>
+
+<a href="<?php echo $row->friend_username; ?>"><?php echo $row->friend_username; ?></a>
+<p><?php echo $row->message; ?></p>
+<p><?php echo $row->timestamp; ?></p>
+<hr/>
+
+<?php } ?>

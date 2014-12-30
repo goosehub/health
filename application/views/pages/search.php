@@ -36,7 +36,7 @@ foreach ( array_reverse($users) as $user):
 <h4>Username: <?php echo $user->username; ?></h4>
 <p>Age: <?php echo $age; ?></p>
 <p>Joined on: <?php echo $joined; ?></p>
-<p>Last Online: <?php echo $last_online; ?></p>
+<p>Last Online: <?php echo $last_online; ?> ago</p>
 <p><?php echo $gym_partner; ?></p>
 <a href="users/<?php echo $user->username; ?>"> View profile </a>
 

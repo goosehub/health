@@ -38,6 +38,13 @@ function set_progress($users_id, $name, $comment, $weight, $height, $arm, $thigh
   ->get()
   ->row();
  }
+ function get_all_progress($users_id)
+ {
+  return $this->db->from('progress')
+  ->order_by("id", "DESC")
+  ->get()
+  ->result();
+ }
 
 }
 

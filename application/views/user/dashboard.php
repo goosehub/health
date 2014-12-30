@@ -5,5 +5,6 @@
 <a class="dashboard-link" href="dashboard/profile">Change/Add Basic Information</a><br/>
 <a class="dashboard-link" href="dashboard/password">Change Password</a><br/>
 <!-- <a class="dashboard-link" href="#">Change Profile Picture</a><br/> -->
-<a class="dashboard-link" href="dashboard/progress">Set New Progress Point</a><br/>
+<a class="dashboard-link" href="dashboard/progress">See Your Progress Points[Not fully functional]</a><br/>
+<a class="dashboard-link" href="dashboard/progress/new">Set New Progress Point</a><br/>
 <a class="dashboard-link" href="dashboard/requirements">Nutritional Requirements</a><br/>

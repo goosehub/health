@@ -9,6 +9,29 @@ class Progress extends CI_Controller {
    $this->load->model('health','',TRUE);
    $this->load->model('progress_model','',TRUE);
  }
+    function progress_list()
+   {
+     if($this->session->userdata('logged_in'))
+     {
+       $data['log_check'] = TRUE;
+ // Get data
+       $session_data = $this->session->userdata('logged_in');
+       $data['username'] = $session_data['username'];
+       $users_id = $data['id'] = $session_data['id'];
+       settype($users_id, "integer");
+       $data['progress'] = $this->progress_model->get_all_progress($users_id);
+ // Load view
+       $data['title'] = 'Progress Points';
+       $this->load->view('templates/header', $data);
+       $this->load->view('progress/progress_list', $data);
+       $this->load->view('templates/footer', $data);
+     }
+    else
+    {
+// If no session, redirect to login page
+      redirect('login', 'refresh');
+    }
+  }
    function progress_form()
   {
     if($this->session->userdata('logged_in'))
@@ -39,7 +62,7 @@ class Progress extends CI_Controller {
  {
 // Validation
    $this->load->library('form_validation');
-   $this->form_validation->set_rules('name', 'Name', 'trim|xss_clean');
+   $this->form_validation->set_rules('name', 'Name', 'trim|xss_clean|alpha_dash|max_length[24]');
    $this->form_validation->set_rules('comment', 'Comment', 'trim|xss_clean|max_length[10000]');
    $this->form_validation->set_rules('weight', 'Weight', 'trim|xss_clean|integer');
    $this->form_validation->set_rules('height', 'Height', 'trim|xss_clean|integer');
