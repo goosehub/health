@@ -4,6 +4,8 @@ Class conversation_model extends CI_Model
 {
  function conversation_list($user_key)
  {
+  $this->db->select('sender');
+  $this->db->distinct();
   $this->db->where('receiver', $user_key);
   $this->db->where_not_in('sender', $user_key);
   $this->db->order_by("timestamp", "desc");
