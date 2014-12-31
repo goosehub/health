@@ -36,7 +36,6 @@ class Progress extends CI_Controller {
     {
       $data['log_check'] = TRUE;
 // Set data to populate form
-      $time = time();
 	    $data['date'] = date("m-d-y");
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
@@ -78,7 +77,14 @@ class Progress extends CI_Controller {
       $data['progress']->neck = round($data['progress']->neck, 1, PHP_ROUND_HALF_UP);
       $data['progress']->hips = round($data['progress']->hips, 1, PHP_ROUND_HALF_UP);
       $data['progress']->bodyfat = round($data['progress']->bodyfat, 1, PHP_ROUND_HALF_UP);
-
+// Set unit type
+     if ($data['profile']['metric'] === '0') {
+       $data['cm'] = 'in';
+       $data['kg'] = 'lbs';
+     } else {
+       $data['cm'] = 'cm';
+       $data['kg'] = 'kg';
+     }
 // Load view
       $data['title'] = 'Set a Progress Point';
       $this->load->view('templates/header', $data);
@@ -174,14 +180,26 @@ class Progress extends CI_Controller {
        }
 // Get user id
        $session_data = $this->session->userdata('logged_in');
-       $users_id = $data['id'] = $session_data['id'];;
-// Enter progress into progress tables
-         $result = $this->progress_model->set_progress($users_id, $name, $comment, 
-          $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
-           $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
-           $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
+       $users_id = $data['id'] = $session_data['id'];
+// Check if progress point for today exists
+       $point_exists = $this->progress_model->get_progress($users_id);
+       $date = date("m-d-y");
+       if ($point_exists->date === $date) {
+// Update latest progress point
+        $result = $this->progress_model->update_progress($users_id, $name, $comment, 
+         $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
+          $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
+          $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
+       } else {
+// Enter new progress point
+       $result = $this->progress_model->set_progress($users_id, $name, $comment, 
+        $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
+         $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
+         $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
+     }
+
 //Go to dashboard
-     redirect('dashboard', 'refresh');
+       redirect('dashboard', 'refresh');
    }
  }
 

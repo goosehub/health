@@ -14,6 +14,16 @@
      <br/>
      <h4>Progress Point for <?php echo $date; ?></h4>
      <br/>
+     <h3>
+     <?php // Check if form is update
+     if ($progress->date === $date) {
+          echo "You already have a progress point for today, but feel free to update it below";
+     } ?>
+     </h3>
+     <label for="name">Progress Point Name: </label>
+     <input class="input-textarea"
+     type="text" size="20" id="name" name="name"/>
+     <br/>
      <label for="weight">Weight measurement in <?php echo $kg; ?>:</label>
      <input value="<?php echo $progress->weight; ?>" class="input-textarea"
      type="text" size="20" id="weight" name="weight"/>
