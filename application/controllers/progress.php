@@ -43,6 +43,42 @@ class Progress extends CI_Controller {
       $data['profile'] = $this->health->get_profile($users_id);
       $data['progress'] = $this->progress_model->get_progress($users_id);
       $data['username'] = $session_data['username'];
+// If not metric
+      if ($data['profile']['metric'] === '0') {
+// Set conversion ratios
+        $cm_conv = 0.39370079;
+        $kg_conv = 2.20462262;
+// Convert
+        $data['progress']->weight = $data['progress']->weight * $kg_conv;
+        $data['progress']->squats = $data['progress']->squats * $kg_conv;
+        $data['progress']->bench = $data['progress']->bench * $kg_conv;
+        $data['progress']->deadlift = $data['progress']->deadlift * $kg_conv;
+        $data['progress']->height = $data['progress']->height * $cm_conv;
+        $data['progress']->arm = $data['progress']->arm * $cm_conv;
+        $data['progress']->thigh = $data['progress']->thigh * $cm_conv;
+        $data['progress']->waist = $data['progress']->waist * $cm_conv;
+        $data['progress']->chest = $data['progress']->chest * $cm_conv;
+        $data['progress']->calves = $data['progress']->calves * $cm_conv;
+        $data['progress']->forearms = $data['progress']->forearms * $cm_conv;
+        $data['progress']->neck = $data['progress']->neck * $cm_conv;
+        $data['progress']->hips = $data['progress']->hips * $cm_conv;
+      }
+// Round
+      $data['progress']->weight = round($data['progress']->weight, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->squats = round($data['progress']->squats, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->bench = round($data['progress']->bench, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->deadlift = round($data['progress']->deadlift, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->height = round($data['progress']->height, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->arm = round($data['progress']->arm, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->thigh = round($data['progress']->thigh, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->waist = round($data['progress']->waist, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->chest = round($data['progress']->chest, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->calves = round($data['progress']->calves, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->forearms = round($data['progress']->forearms, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->neck = round($data['progress']->neck, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->hips = round($data['progress']->hips, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->bodyfat = round($data['progress']->bodyfat, 2, PHP_ROUND_HALF_UP);
+
 // Load view
       $data['title'] = 'Set a Progress Point';
       $this->load->view('templates/header', $data);
@@ -57,24 +93,27 @@ class Progress extends CI_Controller {
   }
   public function set_progress()
  {
+   $session_data = $this->session->userdata('logged_in');
+   $users_id = $data['id'] = $session_data['id'];
+   $data['profile'] = $this->health->get_profile($users_id);
 // Validation
    $this->load->library('form_validation');
    $this->form_validation->set_rules('name', 'Name', 'trim|xss_clean|max_length[24]');
    $this->form_validation->set_rules('comment', 'Comment', 'trim|xss_clean|max_length[10000]');
-   $this->form_validation->set_rules('weight', 'Weight', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('height', 'Height', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('arm', 'Arm', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('thigh', 'Thigh', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('waist', 'Waist', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('chest', 'Chest', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('calves', 'Calves', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('forearms', 'Forearms', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('neck', 'Neck', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('hips', 'Hips', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('bodyfat', 'Bodyfat', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('squats', 'Squats', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('bench', 'Bench', 'trim|xss_clean|integer');
-   $this->form_validation->set_rules('deadlift', 'Deadlift', 'trim|xss_clean|integer');
+   $this->form_validation->set_rules('weight', 'Weight', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('height', 'Height', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('arm', 'Arm', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('thigh', 'Thigh', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('waist', 'Waist', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('chest', 'Chest', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('calves', 'Calves', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('forearms', 'Forearms', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('neck', 'Neck', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('hips', 'Hips', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('bodyfat', 'Bodyfat', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('squats', 'Squats', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('bench', 'Bench', 'trim|xss_clean|numeric');
+   $this->form_validation->set_rules('deadlift', 'Deadlift', 'trim|xss_clean|numeric');
    $this->form_validation->set_rules('picture-01_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
    $this->form_validation->set_rules('picture-02_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
    $this->form_validation->set_rules('picture-03_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
@@ -83,10 +122,8 @@ class Progress extends CI_Controller {
 
    if($this->form_validation->run() == FALSE)
    {
-//Field validation failed.  User redirected to set_profile page
-      $session_data = $this->session->userdata('logged_in');
-      $users_id = $data['id'] = $session_data['id'];
-      $data['profile'] = $this->health->get_profile($users_id);
+// Field validation failed.  User redirected to set_profile page
+// Session and profile loaded before validation run
       $data['username'] = $session_data['username'];
       $data['log_check'] = TRUE;
 // Load view
@@ -118,6 +155,23 @@ class Progress extends CI_Controller {
        $picture_03_caption = $this->input->post('picture_03_caption');
        $picture_04_caption = $this->input->post('picture_04_caption');
        $picture_05_caption = $this->input->post('picture_05_caption');
+       if ($data['profile']['metric'] === '0') {
+          // Convert lbs to kg
+          $weight = $weight * 0.45359237;
+          $squats = $squats * 0.45359237;
+          $bench = $bench * 0.45359237;
+          $deadlift = $deadlift * 0.45359237;
+          // Convert in to cm
+          $height = $height * 2.54;
+          $arm = $arm * 2.54;
+          $thigh = $thigh * 2.54;
+          $waist = $waist * 2.54;
+          $chest = $chest * 2.54;
+          $calves = $calves * 2.54;
+          $forearms = $forearms * 2.54;
+          $neck = $neck * 2.54;
+          $hips = $hips * 2.54;
+       }
 // Get user id
        $session_data = $this->session->userdata('logged_in');
        $users_id = $data['id'] = $session_data['id'];;
