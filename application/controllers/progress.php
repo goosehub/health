@@ -68,16 +68,16 @@ class Progress extends CI_Controller {
       $data['progress']->squats = round($data['progress']->squats, 2, PHP_ROUND_HALF_UP);
       $data['progress']->bench = round($data['progress']->bench, 2, PHP_ROUND_HALF_UP);
       $data['progress']->deadlift = round($data['progress']->deadlift, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->height = round($data['progress']->height, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->arm = round($data['progress']->arm, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->thigh = round($data['progress']->thigh, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->waist = round($data['progress']->waist, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->chest = round($data['progress']->chest, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->calves = round($data['progress']->calves, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->forearms = round($data['progress']->forearms, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->neck = round($data['progress']->neck, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->hips = round($data['progress']->hips, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->bodyfat = round($data['progress']->bodyfat, 2, PHP_ROUND_HALF_UP);
+      $data['progress']->height = round($data['progress']->height, 1, PHP_ROUND_HALF_UP);
+      $data['progress']->arm = round($data['progress']->arm, 1, PHP_ROUND_HALF_UP);
+      $data['progress']->thigh = round($data['progress']->thigh, 1, PHP_ROUND_HALF_UP);
+      $data['progress']->waist = round($data['progress']->waist, 1, PHP_ROUND_HALF_UP);
+      $data['progress']->chest = round($data['progress']->chest, 1, PHP_ROUND_HALF_UP);
+      $data['progress']->calves = round($data['progress']->calves, 1, PHP_ROUND_HALF_UP);
+      $data['progress']->forearms = round($data['progress']->forearms, 1, PHP_ROUND_HALF_UP);
+      $data['progress']->neck = round($data['progress']->neck, 1, PHP_ROUND_HALF_UP);
+      $data['progress']->hips = round($data['progress']->hips, 1, PHP_ROUND_HALF_UP);
+      $data['progress']->bodyfat = round($data['progress']->bodyfat, 1, PHP_ROUND_HALF_UP);
 
 // Load view
       $data['title'] = 'Set a Progress Point';
