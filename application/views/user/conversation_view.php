@@ -9,7 +9,8 @@
 </form>
 
 <?php foreach (array_reverse($messages) as $row) {
-$timestamp = timespan($row->timestamp, $now); ?>
+$timestamp = timespan($row->timestamp, $now); 
+if ($row->sender != $row->receiver) { ?>
 <hr/>
 <h4>
 
@@ -33,4 +34,4 @@ said <?php echo $timestamp; ?> ago...
 <p><?php echo nl2br($row->message); ?></p>
 
 <!-- End for each -->
-<?php } ?>
+<?php } } ?>

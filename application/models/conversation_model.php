@@ -2,7 +2,15 @@
 
 Class conversation_model extends CI_Model
 {
-
+ function conversation_list($user_key)
+ {
+  $this->db->where('receiver', $user_key);
+  $this->db->where_not_in('sender', $user_key);
+  $this->db->order_by("timestamp", "desc");
+  $this->db->limit(100);
+  $query = $this->db->get('messages');
+  return $query->result();
+ }
  function load_messages($user_key, $friend_key)
  {
   $names = array($user_key, $friend_key);

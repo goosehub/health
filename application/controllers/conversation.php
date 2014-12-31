@@ -11,11 +11,28 @@ class Conversation extends CI_Controller {
    $this->load->model('conversation_model','',TRUE);
  }
 
-  function view($slug)
+  function index()
   {
-    $this->load->helper('date');
     if($this->session->userdata('logged_in'))
     {
+        $this->load->helper('date');
+        $data['log_check'] = TRUE;
+        $session_data = $this->session->userdata('logged_in');
+        $data['user_key'] = $user_key = $session_data['id'];
+        $data['convos'] = $this->conversation_model->conversation_list($user_key);
+        $data['now'] = time();
+// Load view
+        $data['title'] = "Your Conversations";
+        $this->load->view('templates/header', $data);
+        $this->load->view('user/conversations_list', $data);
+        $this->load->view('templates/footer', $data);
+    }
+  }
+  function view($slug)
+  {
+    if($this->session->userdata('logged_in'))
+    {
+      $this->load->helper('date');
       $data['log_check'] = TRUE;
 // Get information for both posting and viewing
       $data['friend'] = $friend_key = $this->health->get_profile_slug($slug);
