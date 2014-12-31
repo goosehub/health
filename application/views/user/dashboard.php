@@ -3,7 +3,7 @@
 
 <a class="dashboard-link" href="users/<?php echo $profile['username']; ?>">View your profile</a><br/>
 <a class="dashboard-link" href="dashboard/progress/new">Set New Progress Point</a><br/>
-<a class="dashboard-link" href="dashboard/progress">See Your Progress Points</a><br/>
+<a class="dashboard-link" href="users/<?php echo $profile['username']; ?>/progress">See Your Progress Points</a><br/>
 <a class="dashboard-link" href="dashboard/requirements">Nutritional Requirements</a><br/>
 <a class="dashboard-link" href="dashboard/profile">Change/Add Basic Information</a><br/>
 <!-- <a class="dashboard-link" href="#">Change Profile Picture</a><br/> -->

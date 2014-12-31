@@ -40,16 +40,16 @@
 
 $route['404_override'] = '';
 $route['default_controller'] = 'pages/view';
-$route['about'] = 'pages/view/about';
 $route['login'] = 'pages/view/login';
+$route['dashboard'] = 'dashboard';
+$route['about'] = 'pages/view/about';
+$route['join'] = 'join';
 $route['start'] = 'join/start';
 $route['dashboard/profile'] = 'dashboard/profile_form';
 $route['dashboard/password'] = 'dashboard/set_password';
-$route['dashboard'] = 'dashboard';
-$route['join'] = 'join';
 $route['search'] = 'pages/search';
 $route['dashboard/progress/new'] = 'progress/progress_form';
-$route['dashboard/progress'] = 'progress/progress_list';
+$route['users/(:any)/progress'] = 'progress/progress_list/$1';
 $route['dashboard/requirements'] = 'dashboard/requirements';
 $route['users/(:any)'] = 'profile/view/$1';
 

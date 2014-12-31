@@ -77,7 +77,10 @@ Class health extends CI_Model
     'password' => $password,
     'email' => $email,
     'joined' => $now,
-    'last_online' => $now
+    'last_online' => $now,
+    'gym_partner' => 0,
+    'private' => 0,
+    'metric' => 'on'
     );
    $this->db->insert('users', $data);
 // Find user id
@@ -118,7 +121,7 @@ Class health extends CI_Model
   }
  }
    function set_profile($users_id, $email, $first_name, $last_name, $birthdate, $gender,
-                        $location, $gym_partner, $private, $goal, $about, $username)
+                        $location, $metric, $gym_partner, $private, $goal, $about, $username)
  {
   $this->db->select('username');
   $this->db->from('users');
@@ -134,6 +137,7 @@ Class health extends CI_Model
   'birthdate' => $birthdate,
   'gender' => $gender,
   'location' => $location,
+  'metric' => $metric,
   'gym_partner' => $gym_partner,
   'private' => $private,
   'goal' => $goal,

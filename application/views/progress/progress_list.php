@@ -10,7 +10,7 @@ foreach ( array_reverse($progress) as $point):
 
 <p>Date:<?php echo date('m/d/Y_h:mA', $point_date); ?></p>
 <p>Name: <?php echo $point->name; ?></p>
-<a href="../users/<?php echo $username; ?>">[This link does not work yet]</a>
+<a href="../<?php echo $profile['username']; ?>">[This link does not work yet]</a>
 <hr/>
 
 <?php $i = $i + 1;

@@ -17,7 +17,6 @@ class Dashboard extends CI_Controller {
       $data['log_check'] = TRUE;
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
-      settype($users_id, "integer");
 // Logged in, go to dashboard
       $this->health->last_online($users_id);
       $data['profile'] = $this->health->get_profile($users_id);
@@ -42,7 +41,6 @@ class Dashboard extends CI_Controller {
       $session_data = $this->session->userdata('logged_in');
       $data['username'] = $session_data['username'];
       $users_id = $data['id'] = $session_data['id'];
-      settype($users_id, "integer");
       $data['profile'] = $this->health->get_profile($users_id);
       $data['progress'] = $this->progress_model->get_progress($users_id);
 // Define calorie requirement variables
@@ -85,7 +83,6 @@ class Dashboard extends CI_Controller {
       $data['log_check'] = TRUE;
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
-      settype($users_id, "integer");
       $data['profile'] = $this->health->get_profile($users_id);
       $data['username'] = $session_data['username'];
 // Load view
@@ -109,6 +106,7 @@ class Dashboard extends CI_Controller {
    $this->form_validation->set_rules('last_name', 'Last Name', 'trim|xss_clean|max_length[24]');
    $this->form_validation->set_rules('birthdate', 'Birthdate', 'trim|xss_clean');
    $this->form_validation->set_rules('location', 'Location', 'trim|xss_clean|max_length[100]');
+   $this->form_validation->set_rules('metric', 'Metric', 'trim|xss_clean');
    $this->form_validation->set_rules('gym_partner', 'Gym Partner', 'trim|xss_clean');
    // $this->form_validation->set_rules('profile_picture', 'Profile Picture', 'trim|xss_clean');
    $this->form_validation->set_rules('private', 'Private', 'trim|xss_clean');
@@ -121,7 +119,6 @@ class Dashboard extends CI_Controller {
 //Field validation failed.  User redirected to set_profile page
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
-      settype($users_id, "integer");
       $data['profile'] = $this->health->get_profile($users_id);
       $data['username'] = $session_data['username'];
       $data['log_check'] = TRUE;
@@ -149,6 +146,7 @@ class Dashboard extends CI_Controller {
    $gym_partner = $this->input->post('gym_partner');
    // $profile_picture = $this->input->post('profile_picture');
    $private = $this->input->post('private');
+   $metric = $this->input->post('metric');
    $goal = $this->input->post('goal');
    $about = $this->input->post('about');
    $username = $this->input->post('username');
@@ -169,7 +167,7 @@ class Dashboard extends CI_Controller {
    {
 // Enter user into users tables
      $result = $this->health->set_profile($users_id, $email, $first_name, $last_name, $birthdate,
-                                  $gender, $location, $gym_partner, $private, $goal, $about, $username);
+                                  $gender, $location, $metric, $gym_partner, $private, $goal, $about, $username);
 
      return TRUE;
    }
@@ -187,7 +185,6 @@ class Dashboard extends CI_Controller {
 //Field validation failed.  User redirected to set_profile page
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
-      settype($users_id, "integer");
       $data['profile'] = $this->health->get_profile($users_id);
       $data['username'] = $session_data['username'];
       $data['log_check'] = TRUE;

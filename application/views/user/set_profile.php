@@ -3,6 +3,9 @@
    <?php echo form_open('dashboard/set_profile'); ?>
    <?php
 // Translate result value into html value
+   if ($profile['metric'] === 'on') {
+     $profile['metric'] = 'checked';
+   }
    if ($profile['gym_partner'] === 'on') {
      $profile['gym_partner'] = 'checked';
    }
@@ -48,6 +51,10 @@
      <label for="profile_picture">Profile Picture:</label>
      <input disabled class="input-textarea"
      type="file" size="20" id="profile_picture" name="profile_picture"/>
+     <br/>
+     <label for="metric">Metric:</label>
+     <input class="input-textarea"
+     type="checkbox" size="20" id="metric" name="metric" <?php echo $profile['metric']; ?>/>
      <br/>
      <label for="gym_partner">Looking for a Gym Partner:</label>
      <input class="input-textarea"

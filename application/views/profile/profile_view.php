@@ -13,7 +13,7 @@
 <p>about: <?php echo $profile['about']; ?></p>
 <hr/>
 <h2>Latest progress point</h2>
-<a class="dashboard-link" href="../dashboard/progress">See More Progress Points[Not fully functional]</a><br/>
+<a class="dashboard-link" href="<?php echo $profile['username']; ?>/progress">See More Progress Points[Not fully functional]</a><br/>
 <p>weight measurement: <?php echo $progress->weight; ?>kg</p>
 <p>height measurement: <?php echo $progress->height; ?>cm</p>
 <p>arm measurement: <?php echo $progress->arm; ?>cm</p>

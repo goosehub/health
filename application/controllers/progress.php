@@ -9,16 +9,14 @@ class Progress extends CI_Controller {
    $this->load->model('health','',TRUE);
    $this->load->model('progress_model','',TRUE);
  }
-    function progress_list()
+    function progress_list($slug)
    {
      if($this->session->userdata('logged_in'))
      {
        $data['log_check'] = TRUE;
  // Get data
-       $session_data = $this->session->userdata('logged_in');
-       $data['username'] = $session_data['username'];
-       $users_id = $data['id'] = $session_data['id'];
-       settype($users_id, "integer");
+       $data['profile'] = $this->health->get_profile_slug($slug);
+       $users_id = $data['profile']['id'];
        $data['progress'] = $this->progress_model->get_all_progress($users_id);
  // Load view
        $data['title'] = 'Progress Points';
@@ -39,10 +37,9 @@ class Progress extends CI_Controller {
       $data['log_check'] = TRUE;
 // Set data to populate form
       $time = time();
-	    $data['date'] = date("m/d/y gA");
+	    $data['date'] = date("m-d-y");
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
-      settype($users_id, "integer");
       $data['profile'] = $this->health->get_profile($users_id);
       $data['progress'] = $this->progress_model->get_progress($users_id);
       $data['username'] = $session_data['username'];
@@ -89,7 +86,6 @@ class Progress extends CI_Controller {
 //Field validation failed.  User redirected to set_profile page
       $session_data = $this->session->userdata('logged_in');
       $users_id = $data['id'] = $session_data['id'];
-      settype($users_id, "integer");
       $data['profile'] = $this->health->get_profile($users_id);
       $data['username'] = $session_data['username'];
       $data['log_check'] = TRUE;
