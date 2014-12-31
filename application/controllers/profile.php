@@ -16,10 +16,10 @@ class Profile extends CI_Controller {
 	if($this->session->userdata('logged_in'))
 	{
 	  $data['log_check'] = TRUE;
+// Enter wall message
 // Validation
 	   $this->load->library('form_validation');
 	   $this->form_validation->set_rules('message', 'Message', 'trim|required|xss_clean|max_length[150]');
-
 		if($this->form_validation->run() == FALSE)
 		{
 //Field validation failed
@@ -39,6 +39,7 @@ class Profile extends CI_Controller {
 			$friend_username, $message, $timestamp);
 	    }
 	}
+// View Profile
 // Use url slug to get profile
 	$data['profile'] = $this->health->get_profile_slug($slug);
 // If not found, direct to error page

@@ -62,7 +62,7 @@ class Dashboard extends CI_Controller {
       else {
         $cal_req = 'Unknown';
       }
-      $data['cal_req'] = $cal_req;
+      $data['cal_req'] = round($cal_req);
       $data['testvar'] = $gender;
 // Load view
       $data['title'] = $session_data['username'];

@@ -1,4 +1,5 @@
 <h1><?php echo $profile['username']; ?>!</h1>
+<a href="../dashboard/conversations/<?php echo $profile['username']; ?>">Send this user a message</a>
 <hr/>
 <p>Username: <?php echo $profile['username']; ?></p>
 <p>Joined: <?php echo $joined; ?></p>

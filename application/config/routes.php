@@ -47,10 +47,11 @@ $route['join'] = 'join';
 $route['start'] = 'join/start';
 $route['dashboard/profile'] = 'dashboard/profile_form';
 $route['dashboard/password'] = 'dashboard/set_password';
-$route['search'] = 'pages/search';
 $route['dashboard/progress/new'] = 'progress/progress_form';
-$route['users/(:any)/progress'] = 'progress/progress_list/$1';
+$route['search'] = 'pages/search';
+$route['dashboard/conversations/(:any)'] = 'conversation/view/$1';
 $route['dashboard/requirements'] = 'dashboard/requirements';
+$route['users/(:any)/progress'] = 'progress/progress_list/$1';
 $route['users/(:any)'] = 'profile/view/$1';
 
 /* End of file routes.php */
