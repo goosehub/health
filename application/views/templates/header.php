@@ -28,7 +28,10 @@ $unread='';}}else{$unread = '';} ?>
 <header>
 	<h1>Health Web App</h1>
 	<div id="nav-bar">
+<!-- show profile picture if user is logged in -->
+		<?php if ( isset($log_check) ) { ?>
 		<img width="50px" height="50px" src="/health/uploads/<?php echo $self['image']; ?>"/>
+		<?php } ?>
 		<a id="home" class="nav-item" type="button" href="/health/">Home</a> |
 		<a id="about" class="nav-item" type="button" href="/health/about">About</a> |
 		<a id="search" class="nav-item" type="button" href="/health/search">Search</a> |
