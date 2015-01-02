@@ -248,6 +248,49 @@ class Dashboard extends CI_Controller {
       redirect('dashboard', 'refresh');
     }
  }
+ function friend($slug)
+ {
+  $friend = $this->health->get_profile_slug($slug);
+  $friend_key = $friend['id'];
+  $session_data = $this->session->userdata('logged_in');
+  $user_key = $session_data['id'];
+  $this->health->friend_request($user_key, $friend_key);
+//Go back to user page
+  redirect('users/'.$slug, 'refresh');
+ }
+ function friend_requests()
+ {
+    include 'global.php';
+    $this->load->helper('date');
+    $data['requests'] = $this->health->find_requests($user_key);
+    $data['title'] = 'Friend Requests';
+    $this->load->view('templates/header', $data);
+    $this->load->view('user/friend_requests', $data);
+    $this->load->view('templates/footer', $data);
+ }
+  function accept($friend_key)
+ {
+    include 'global.php';
+    $this->health->accept_request($user_key, $friend_key);
+//Go to dashboard
+    redirect('dashboard', 'refresh');
+ }
+ function reject($friend_key)
+ {
+    include 'global.php';
+    $this->health->delete_friend($user_key, $friend_key);
+//Go to dashboard
+    redirect('dashboard', 'refresh');
+ }
+ function friends()
+ {
+    include 'global.php';
+    $data['friends'] = $this->health->friends_list($user_key);
+    $data['title'] = 'Friend Requests';
+    $this->load->view('templates/header', $data);
+    $this->load->view('user/friend_list', $data);
+    $this->load->view('templates/footer', $data);
+ }
 
 }
 

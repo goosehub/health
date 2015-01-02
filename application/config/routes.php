@@ -45,6 +45,7 @@ $route['dashboard'] = 'dashboard';
 $route['about'] = 'pages/view/about';
 $route['join'] = 'join';
 $route['start'] = 'join/start';
+$route['dashboard/friends'] = 'dashboard/friends';
 $route['dashboard/profile'] = 'dashboard/profile_form';
 $route['dashboard/password'] = 'dashboard/set_password';
 $route['dashboard/progress/new'] = 'progress/progress_form';

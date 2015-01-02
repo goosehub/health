@@ -24,7 +24,9 @@
 <body>
 <?php if(isset($unread)){if($unread != false){
 $unread = '('.$unread.') unread'; }else{
-$unread='';}}else{$unread = '';} ?>
+$unread='';}}else{$unread = '';} 
+if (count($requests) === 0) {$requests = '';}
+else {$requests = '('.count($requests).')';} ?>
 <header>
 	<h1>Health Web App</h1>
 	<div id="nav-bar">
@@ -39,9 +41,11 @@ $unread='';}}else{$unread = '';} ?>
 <!-- User is logged in -->
 		<?php if ( isset($log_check) ) { ?>
 		<a id="dashboard" class="nav-item" type="button" href="/health/dashboard">Dashboard</a> | 
-		<a class="dashboard-link" href="/health/dashboard/progress/new">Progress</a> | 
-		<a class="dashboard-link" href="/health/dashboard/conversations">
+		<a class="nav-item" href="/health/dashboard/progress/new">Progress</a> | 
+		<a class="nav-item" href="/health/dashboard/conversations">
 		Conversations <?php echo $unread; ?></a> |
+		<a class="nav-item" href="/health/dashboard/friend_requests">
+		Friend Requests <?php echo $requests; ?></a> |
 		<a id="logout" class="nav-item" type="button" href="/health/login/logout">Logout</a> |
 <!-- User is NOT logged in -->
 		<?php } else { ?>

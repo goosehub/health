@@ -62,9 +62,11 @@ class Profile extends CI_Controller {
 // Else, load all data and serve page
 	else
 	{
-		$users_id = $data['profile']['id'];
-		$data['progress'] = $this->progress_model->get_progress($users_id);
-		$data['wall'] = $this->health->wall_get($users_id);
+        include 'global.php';
+		$friend_key = $data['profile']['id'];
+		$data['progress'] = $this->progress_model->get_progress($friend_key);
+		$data['wall'] = $this->health->wall_get($friend_key);
+	    $data['friend_status'] = $this->health->friend_status($user_key, $friend_key);
 // Calculate age
 		if ($data['profile']['birthdate'] === '') {
 			$data['age'] = 'Not entered';
@@ -89,7 +91,6 @@ class Profile extends CI_Controller {
 			$data['gym_partner'] = '';
 		}
 // Load view
-        include 'global.php';
 		$data['title'] = $slug;
 		$this->load->view('templates/header', $data);
 		$this->load->view('profile/profile_view', $data);

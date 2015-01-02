@@ -7,5 +7,7 @@ if($this->session->userdata('logged_in'))
 	    $data['username'] = $session_data['username'];
      	$data['self'] = $this->health->get_profile($users_id);
         $data['unread'] = $this->conversation_model->check_unread($user_key);
+        $data['requests'] = $this->health->find_requests($user_key);
+        $data['now'] = time();
     }
 ?>
