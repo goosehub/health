@@ -2,6 +2,9 @@
 
 <img width="150px" height="150px" src="../uploads/<?php echo $profile['image']; ?>"/>
 
+<!-- Start for logged in users only -->
+<?php if (isset($log_check)) { ?>
+
 <a href="../dashboard/conversations/<?php echo $profile['username']; ?>">Send this user a message</a> | 
 
 <!-- Not Friends, Not Requested -->
@@ -14,7 +17,8 @@
 <!-- Friends -->
 <?php } else { ?>
 <a href="../dashboard/friend/<?php echo $profile['username']; ?>">You are friends</a>
-<?php } ?>
+<?php } } ?>
+<!-- End for logged in users only -->
 
 <hr/>
 <p>Username: <?php echo $profile['username']; ?></p>

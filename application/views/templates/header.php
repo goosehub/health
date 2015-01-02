@@ -22,9 +22,9 @@
 	<link type="text/css" rel="stylesheet" href="resources/style.css">
 </head>
 <body>
-<?php if(isset($unread)){if($unread != false){
+<?php if(isset($unread) && isset($requests)){if($unread != false){
 $unread = '('.$unread.') unread'; }else{
-$unread='';}}else{$unread = '';} 
+$unread='';}}else{$unread = ''; $requests = '';} 
 if (count($requests) === 0) {$requests = '';}
 else {$requests = '('.count($requests).')';} ?>
 <header>

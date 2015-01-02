@@ -41,18 +41,31 @@ class Profile extends CI_Controller {
 	}
 // View Profile
 // Use url slug to get profile
+    include 'global.php';
 	$data['profile'] = $this->health->get_profile_slug($slug);
+	$friend_key = $data['profile']['id'];
+	$data['progress'] = $this->progress_model->get_progress($friend_key);
+	$data['wall'] = $this->health->wall_get($friend_key);
+	if($this->session->userdata('logged_in'))
+	{
+	    $data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key);
+	}
+    if (!empty($friend_status) && $friend_status[0]->status === 'accepted') 
+    {
+		$view_allowed = TRUE;
+    } else {
+    	$view_allowed = false;
+    }
 // If not found, direct to error page
 	if (! $data['profile']) {
-        include 'global.php';
 		$data['title'] = $slug;
 		$data['slug'] = $slug;
 		$this->load->view('templates/header', $data);
 		$this->load->view('profile/not_found', $data);
 		$this->load->view('templates/footer', $data);
 	} 
-	else if ($data['profile']['private'] === 'on') {
-        include 'global.php';
+	else if ($data['profile']['private'] === 'on'
+		&& $view_allowed != TRUE) {
 		$data['title'] = $slug;
 		$data['slug'] = $slug;
 		$this->load->view('templates/header', $data);
@@ -62,11 +75,6 @@ class Profile extends CI_Controller {
 // Else, load all data and serve page
 	else
 	{
-        include 'global.php';
-		$friend_key = $data['profile']['id'];
-		$data['progress'] = $this->progress_model->get_progress($friend_key);
-		$data['wall'] = $this->health->wall_get($friend_key);
-	    $data['friend_status'] = $this->health->friend_status($user_key, $friend_key);
 // Calculate age
 		if ($data['profile']['birthdate'] === '') {
 			$data['age'] = 'Not entered';

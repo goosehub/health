@@ -192,14 +192,30 @@ Class health extends CI_Model
  }
  function friend_request($user_key, $friend_key)
  {
-    $now = time();
-    $data = array(
-    'timestamp' => $now,
-    'send_request' => $user_key,
-    'receive_request' => $friend_key,
-    'status' => 'requested'
-    );
-   $this->db->insert('friends', $data);
+// Check if request already sent
+    $names = array($user_key, $friend_key);
+    $this->db->select('*');
+    $this->db->from('friends');
+    $this->db->where_in('send_request', $names);
+    $this->db->where_in('receive_request', $names);
+    $query = $this->db->get();
+
+    if($query -> num_rows() == 0)
+    {
+// Record Request
+      $now = time();
+      $data = array(
+      'timestamp' => $now,
+      'send_request' => $user_key,
+      'receive_request' => $friend_key,
+      'status' => 'requested'
+      );
+      $this->db->insert('friends', $data);
+    }
+    else
+    {
+     return false;
+    }
  }
   function find_requests($user_key)
  {
@@ -212,8 +228,10 @@ Class health extends CI_Model
  }
  function accept_request($user_key, $friend_key)
  {
+  $now = time();
   $data = array(
-  'status' => 'accepted'
+  'status' => 'accepted',
+  'timestamp' => $now
   );
  $this->db->where('send_request', $friend_key);
  $this->db->where('receive_request', $user_key);
@@ -221,8 +239,9 @@ Class health extends CI_Model
  }
  function delete_friend($user_key, $friend_key)
  {
- $this->db->where('send_request', $friend_key);
- $this->db->where('receive_request', $user_key);
+ $names = array($user_key, $friend_key);
+ $this->db->where_in('send_request', $names);
+ $this->db->where_in('receive_request', $names);
  $this->db->delete('friends');  
  }
   function friends_list($user_key)
@@ -230,7 +249,10 @@ Class health extends CI_Model
     $this->db->select('*');
     $this->db->from('friends');
     $this->db->where('send_request', $user_key);
+    $this->db->where('status', 'accepted');
     $this->db->or_where('receive_request', $user_key);
+    $this->db->where('status', 'accepted');
+    $this->db->order_by('timestamp', 'desc');
     $query = $this->db->get();
     return $query->result();
  }
