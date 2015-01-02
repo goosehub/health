@@ -17,7 +17,7 @@
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 <!-- Favicon Icon -->
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="/health/favicon.ico">
 <!-- CSS -->
 	<link type="text/css" rel="stylesheet" href="resources/style.css">
 </head>
