@@ -6,6 +6,7 @@ class Login extends CI_Controller {
  {
    parent::__construct();
    $this->load->model('health','',TRUE);
+   $this->load->model('conversation_model','',TRUE); 
  }
 
  function verifylogin()
@@ -19,6 +20,7 @@ class Login extends CI_Controller {
    if($this->form_validation->run() == FALSE)
    {
 //Field validation failed.  User redirected to login page
+     include 'global.php';
      $this->load->view('templates/header');
      $this->load->view('pages/login');
      $this->load->view('templates/footer');

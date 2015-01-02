@@ -7,9 +7,11 @@ class Join extends CI_Controller {
  {
    parent::__construct();
    $this->load->model('health','',TRUE);
+   $this->load->model('conversation_model','',TRUE); 
  }
   function index()
   {
+    include 'global.php';
     $data['title'] = 'Join';
     $this->load->view('templates/header', $data);
     $this->load->view('pages/join', $data);
@@ -27,6 +29,7 @@ class Join extends CI_Controller {
    if($this->form_validation->run() == FALSE)
    {
 //Field validation failed.  User redirected to join page
+      include 'global.php';
       $data['title'] = 'Join';
       $this->load->view('templates/header', $data);
       $this->load->view('pages/join', $data);
@@ -87,14 +90,10 @@ class Join extends CI_Controller {
   {
     if($this->session->userdata('logged_in'))
     {
-// Set data to populate form
-    $data['foo'] = "foo";
-    $session_data = $this->session->userdata('logged_in');
+    include 'global.php';
     $data['username'] = $session_data['username'];
     $users_id = $data['id'] = $session_data['id'];
-    settype($users_id, "integer");
     $data['profile'] = $this->health->get_profile($users_id);
-    $data['log_check'] = TRUE;
     $data['title'] = 'Getting Set Up';
     $this->load->view('templates/header', $data);
     $this->load->view('pages/start', $data);

@@ -34,6 +34,7 @@ foreach ( array_reverse($users) as $user):
 
 <hr/>
 <h4>Username: <?php echo $user->username; ?></h4>
+<img width="150px" height="150px" src="uploads/<?php echo $user->image; ?>"/>
 <p>Age: <?php echo $age; ?></p>
 <p>Joined on: <?php echo $joined; ?></p>
 <p>Last Online: <?php echo $last_online; ?> ago</p>
@@ -43,6 +44,7 @@ foreach ( array_reverse($users) as $user):
 <!-- End User Item -->
 
 <?php $i = $i + 1;
+// Set the number below to desired number of profiles to show
 if ($i == 10) break;
 endforeach ?>
 <!-- End Logic for Each User Item -->

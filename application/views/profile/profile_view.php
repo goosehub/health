@@ -1,4 +1,5 @@
 <h1><?php echo $profile['username']; ?>!</h1>
+<img width="150px" height="150px" src="../uploads/<?php echo $profile['image']; ?>"/>
 <a href="../dashboard/conversations/<?php echo $profile['username']; ?>">Send this user a message</a>
 <hr/>
 <p>Username: <?php echo $profile['username']; ?></p>

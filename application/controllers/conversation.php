@@ -15,11 +15,9 @@ class Conversation extends CI_Controller {
   {
     if($this->session->userdata('logged_in'))
     {
-        $this->load->helper('date');
-        $data['log_check'] = TRUE;
-        $session_data = $this->session->userdata('logged_in');
-        $data['user_key'] = $user_key = $session_data['id'];
+        include 'global.php';
         $data['convos'] = $this->conversation_model->conversation_list($user_key);
+        $this->load->helper('date');
         $data['now'] = time();
 // Load view
         $data['title'] = "Your Conversations";
@@ -32,13 +30,10 @@ class Conversation extends CI_Controller {
   {
     if($this->session->userdata('logged_in'))
     {
+      include 'global.php';
       $this->load->helper('date');
-      $data['log_check'] = TRUE;
 // Get information for both posting and viewing
       $data['friend'] = $friend_key = $this->health->get_profile_slug($slug);
-      $session_data = $this->session->userdata('logged_in');
-      $data['username'] = $session_data['username'];
-      $data['user_key'] = $user_key = $session_data['id'];
       $friend_key = $data['friend']['id'];
       $timestamp = $data['now'] = time();
 // Posting messages

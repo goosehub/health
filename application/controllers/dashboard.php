@@ -8,15 +8,14 @@ class Dashboard extends CI_Controller {
    parent::__construct();
    $this->load->model('health','',TRUE);
    $this->load->model('progress_model','',TRUE);
+   $this->load->model('conversation_model','',TRUE); 
  }
 
   function index()
   {
     if($this->session->userdata('logged_in'))
     {
-      $data['log_check'] = TRUE;
-      $session_data = $this->session->userdata('logged_in');
-      $users_id = $data['id'] = $session_data['id'];
+      include 'global.php';
 // Logged in, go to dashboard
       $this->health->last_online($users_id);
       $data['profile'] = $this->health->get_profile($users_id);
@@ -37,10 +36,7 @@ class Dashboard extends CI_Controller {
   {
     if($this->session->userdata('logged_in'))
     {
-      $data['log_check'] = TRUE;
-      $session_data = $this->session->userdata('logged_in');
-      $data['username'] = $session_data['username'];
-      $users_id = $data['id'] = $session_data['id'];
+      include 'global.php';
       $data['profile'] = $this->health->get_profile($users_id);
       $data['progress'] = $this->progress_model->get_progress($users_id);
 // Define calorie requirement variables
@@ -80,11 +76,8 @@ class Dashboard extends CI_Controller {
   {
     if($this->session->userdata('logged_in'))
     {
-      $data['log_check'] = TRUE;
-      $session_data = $this->session->userdata('logged_in');
-      $users_id = $data['id'] = $session_data['id'];
+      include 'global.php';
       $data['profile'] = $this->health->get_profile($users_id);
-      $data['username'] = $session_data['username'];
 // Load view
       $data['title'] = 'Basic Info Settings';
       $this->load->view('templates/header', $data);
@@ -117,11 +110,8 @@ class Dashboard extends CI_Controller {
    if($this->form_validation->run() == FALSE)
    {
 //Field validation failed.  User redirected to set_profile page
-      $session_data = $this->session->userdata('logged_in');
-      $users_id = $data['id'] = $session_data['id'];
+      include 'global.php';
       $data['profile'] = $this->health->get_profile($users_id);
-      $data['username'] = $session_data['username'];
-      $data['log_check'] = TRUE;
 // Load view
       $data['title'] = 'Basic Info Settings';
       $this->load->view('templates/header', $data);
@@ -183,11 +173,8 @@ class Dashboard extends CI_Controller {
    if($this->form_validation->run() == FALSE)
    {
 //Field validation failed.  User redirected to set_profile page
-      $session_data = $this->session->userdata('logged_in');
-      $users_id = $data['id'] = $session_data['id'];
+      include 'global.php';
       $data['profile'] = $this->health->get_profile($users_id);
-      $data['username'] = $session_data['username'];
-      $data['log_check'] = TRUE;
 // Load view
       $data['title'] = 'Changing Password';
       $this->load->view('templates/header', $data);
@@ -222,6 +209,46 @@ class Dashboard extends CI_Controller {
      return TRUE;
    }
  }
+ function picture()
+ {
+      include 'global.php';
+      $data['error'] = '';
+      $data['title'] = 'Upload New Profile Picture';
+      $this->load->view('templates/header', $data);
+      $this->load->view('user/new_picture', $data);
+      $this->load->view('templates/footer', $data);
+ }
+  function do_upload()
+ {
+    $config['upload_path'] = './uploads/';
+    $config['allowed_types'] = 'gif|jpg|png';
+    $config['max_size'] = '100000000';
+    $config['max_width']  = '10240';
+    $config['max_height']  = '7680';
+    $config['encrypt_name'] = TRUE;
+
+    $this->load->library('upload', $config);
+
+    if ( ! $this->upload->do_upload())
+    {
+      $data['error'] = $this->upload->display_errors();
+      include 'global.php';
+      $data['title'] = 'Upload New Profile Picture';
+      $this->load->view('templates/header', $data);
+      $this->load->view('user/new_picture', $data);
+      $this->load->view('templates/footer', $data);
+    }
+    else
+    {
+      include 'global.php';
+      $file = $this->upload->data();
+      $filename = $file['file_name'];
+      $this->health->set_profile_picture($users_id, $filename);
+      //Go to dashboard
+      redirect('dashboard', 'refresh');
+    }
+ }
+
 }
 
 ?>

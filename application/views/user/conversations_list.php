@@ -7,6 +7,7 @@ $friend = $this->health->get_profile($row->sender);
 
 <hr/>
 <h4>
+<img width="100px" height="100px" src="../uploads/<?php echo $friend['image']; ?>"/>
 <a href="conversations/<?php echo $friend['username']; ?>"><?php echo $friend['username']; ?></a>
 </h4>
 <?php echo ''; ?> <!-- ago... -->

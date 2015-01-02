@@ -3,7 +3,7 @@
    <?php echo form_open_multipart('progress/set_progress'); ?>
    <?php
    if ($profile['metric'] === '0') {
-     $cm = 'in';
+     $cm = 'inches';
      $kg = 'lbs';
    } else {
      $cm = 'cm';

@@ -8,17 +8,18 @@ class Progress extends CI_Controller {
    parent::__construct();
    $this->load->model('health','',TRUE);
    $this->load->model('progress_model','',TRUE);
+   $this->load->model('conversation_model','',TRUE); 
  }
     function progress_list($slug)
    {
      if($this->session->userdata('logged_in'))
      {
-       $data['log_check'] = TRUE;
  // Get data
        $data['profile'] = $this->health->get_profile_slug($slug);
-       $users_id = $data['profile']['id'];
-       $data['progress'] = $this->progress_model->get_all_progress($users_id);
+       $user_key = $data['profile']['id'];
+       $data['progress'] = $this->progress_model->get_all_progress($user_key);
  // Load view
+       include 'global.php';
        $data['title'] = 'Progress Points';
        $this->load->view('templates/header', $data);
        $this->load->view('progress/progress_list', $data);
@@ -34,14 +35,11 @@ class Progress extends CI_Controller {
   {
     if($this->session->userdata('logged_in'))
     {
-      $data['log_check'] = TRUE;
+      include 'global.php';
 // Set data to populate form
 	    $data['date'] = date("m-d-y");
-      $session_data = $this->session->userdata('logged_in');
-      $users_id = $data['id'] = $session_data['id'];
       $data['profile'] = $this->health->get_profile($users_id);
       $data['progress'] = $this->progress_model->get_progress($users_id);
-      $data['username'] = $session_data['username'];
 // If not metric
       if ($data['profile']['metric'] === '0') {
 // Set conversion ratios
@@ -99,8 +97,7 @@ class Progress extends CI_Controller {
   }
   public function set_progress()
  {
-   $session_data = $this->session->userdata('logged_in');
-   $users_id = $data['id'] = $session_data['id'];
+   include 'global.php';
    $data['profile'] = $this->health->get_profile($users_id);
 // Validation
    $this->load->library('form_validation');
@@ -129,9 +126,6 @@ class Progress extends CI_Controller {
    if($this->form_validation->run() == FALSE)
    {
 // Field validation failed.  User redirected to set_profile page
-// Session and profile loaded before validation run
-      $data['username'] = $session_data['username'];
-      $data['log_check'] = TRUE;
 // Load view
       $data['title'] = 'Basic Info Settings';
       $this->load->view('templates/header', $data);
@@ -178,9 +172,6 @@ class Progress extends CI_Controller {
           $neck = $neck * 2.54;
           $hips = $hips * 2.54;
        }
-// Get user id
-       $session_data = $this->session->userdata('logged_in');
-       $users_id = $data['id'] = $session_data['id'];
 // Check if progress point for today exists
        $point_exists = $this->progress_model->get_progress($users_id);
        $date = date("m-d-y");

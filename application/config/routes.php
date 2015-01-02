@@ -52,6 +52,7 @@ $route['search'] = 'pages/search';
 $route['dashboard/conversations'] = 'conversation';
 $route['dashboard/conversations/(:any)'] = 'conversation/view/$1';
 $route['dashboard/requirements'] = 'dashboard/requirements';
+$route['dashboard/picture'] = 'dashboard/picture';
 $route['users/(:any)/progress'] = 'progress/progress_list/$1';
 $route['users/(:any)'] = 'profile/view/$1';
 

@@ -16,11 +16,13 @@ if ($row->sender != $row->receiver) { ?>
 
 <!-- Message sent by friend -->
 <?php if ($row->sender != $user_key) { ?>
+<img width="50px" height="50px" src="../../uploads/<?php echo $friend['image']; ?>"/>
 <a href="../../users/<?php echo $friend['username']; ?>"><?php echo $friend['username']; ?></a>
 
 <!-- Message sent by user -->
 <?php } else { ?>
 
+<img width="50px" height="50px" src="../../uploads/<?php echo $self['image']; ?>"/>
 You
 
 <!-- end if statement -->

@@ -52,7 +52,7 @@ Class health extends CI_Model
   'last_online' => time()
   );
  $this->db->where('id', $users_id);
- $this ->db->update('users', $data);
+ $this->db->update('users', $data);
  return FALSE;
  }
   function join($username, $password, $email)
@@ -80,7 +80,8 @@ Class health extends CI_Model
     'last_online' => $now,
     'gym_partner' => 0,
     'private' => 0,
-    'metric' => 'on'
+    'metric' => 'on',
+    'image' => 'default.png'
     );
    $this->db->insert('users', $data);
 // Find user id
@@ -147,8 +148,15 @@ Class health extends CI_Model
  $this->db->where('id', $users_id);
  $this->db->update('users', $data);
  return FALSE;
-
  }
+    function set_profile_picture($users_id, $filename)
+    {
+  $data = array(
+  'image' => $filename
+  );
+ $this->db->where('id', $users_id);
+ $this->db->update('users', $data);      
+    }
     function set_password($users_id, $password)
  {
   $this->db->select('username');

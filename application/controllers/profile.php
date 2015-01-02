@@ -9,13 +9,13 @@ class Profile extends CI_Controller {
    parent::__construct();
    $this->load->model('health','',TRUE);
    $this->load->model('progress_model','',TRUE);
+   $this->load->model('conversation_model','',TRUE); 
  }
   function view($slug)
   {
 // Log check
 	if($this->session->userdata('logged_in'))
 	{
-	  $data['log_check'] = TRUE;
 // Enter wall message
 // Validation
 	   $this->load->library('form_validation');
@@ -44,6 +44,7 @@ class Profile extends CI_Controller {
 	$data['profile'] = $this->health->get_profile_slug($slug);
 // If not found, direct to error page
 	if (! $data['profile']) {
+        include 'global.php';
 		$data['title'] = $slug;
 		$data['slug'] = $slug;
 		$this->load->view('templates/header', $data);
@@ -51,6 +52,7 @@ class Profile extends CI_Controller {
 		$this->load->view('templates/footer', $data);
 	} 
 	else if ($data['profile']['private'] === 'on') {
+        include 'global.php';
 		$data['title'] = $slug;
 		$data['slug'] = $slug;
 		$this->load->view('templates/header', $data);
@@ -87,6 +89,7 @@ class Profile extends CI_Controller {
 			$data['gym_partner'] = '';
 		}
 // Load view
+        include 'global.php';
 		$data['title'] = $slug;
 		$this->load->view('templates/header', $data);
 		$this->load->view('profile/profile_view', $data);

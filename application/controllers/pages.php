@@ -8,6 +8,7 @@ class Pages extends CI_Controller {
  {
    parent::__construct();
    $this->load->model('health','',TRUE);
+   $this->load->model('conversation_model','',TRUE); 
  }
 
 // Utility function. Can be used for a variety of views
@@ -17,10 +18,7 @@ class Pages extends CI_Controller {
 			{
 				show_404();
 			}
-		if($this->session->userdata('logged_in'))
-	  {
-	    $data['log_check'] = TRUE;
-	  }
+	    include 'global.php';
 		$data['title'] = ucfirst($page); // Capitalize the first letter
 	    $this->load->helper(array('form'));
 		$this->load->view('templates/header', $data);
@@ -29,10 +27,7 @@ class Pages extends CI_Controller {
 	}
 	public function search()
 	{
-		if($this->session->userdata('logged_in'))
-		{
-		  $data['log_check'] = TRUE;
-		}
+	    include 'global.php';
 		$data['users'] = $this->health->get_all_users();
 	    $this->load->helper(array('form'));
 		$data['title'] = 'Search';
@@ -42,10 +37,7 @@ class Pages extends CI_Controller {
 	}
 	public function do_search()
 	{
-		if($this->session->userdata('logged_in'))
-		{
-			$data['log_check'] = TRUE;
-		}
+	    include 'global.php';
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('search', 'Search', 'trim|required|xss_clean|alpha_dash|max_length[24]');
 		if($this->form_validation->run() == FALSE)
