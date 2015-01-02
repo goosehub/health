@@ -21,6 +21,7 @@ class Login extends CI_Controller {
    {
 //Field validation failed.  User redirected to login page
      include 'global.php';
+     $data['title'] = 'Login';
      $this->load->view('templates/header');
      $this->load->view('pages/login');
      $this->load->view('templates/footer');

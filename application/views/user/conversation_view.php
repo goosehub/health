@@ -10,7 +10,8 @@
 
 <?php foreach (array_reverse($messages) as $row) {
 $timestamp = timespan($row->timestamp, $now); 
-if ($row->sender != $row->receiver) { ?>
+// If not a conversation with self unless keys match
+if ($row->sender != $row->receiver || $user_key === $friend['id']) { ?>
 <hr/>
 <h4>
 
@@ -25,7 +26,7 @@ if ($row->sender != $row->receiver) { ?>
 <img width="50px" height="50px" src="../../uploads/<?php echo $self['image']; ?>"/>
 You
 
-<!-- end if statement -->
+<!-- End if -->
 <?php } ?>
 
 <!-- Time -->
