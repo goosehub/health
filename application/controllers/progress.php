@@ -39,7 +39,7 @@ class Progress extends CI_Controller {
 // Set data to populate form
 	    $data['date'] = date("m-d-y");
       $data['profile'] = $this->health->get_profile($users_id);
-      $data['progress'] = $this->progress_model->get_progress($users_id);
+      $progress = $data['progress'] = $this->progress_model->get_progress($users_id);
 // If not metric
       if ($data['profile']['metric'] === '0') {
 // Set conversion ratios
@@ -49,62 +49,52 @@ class Progress extends CI_Controller {
 
 // Testing going on here
 
-        // $weights = array($data['progress']->weight, $data['progress']->squats, $data['progress']->bench,
-        //   $data['progress']->deadlift); 
-        // foreach ($weights as &$value) {
-        //     $value = $value * $kg_conv;
-        // }
-        // $lengths = array($data['progress']->height, $data['progress']->arm, $data['progress']->thigh,
-        //   $data['progress']->waist, $data['progress']->chest, $data['progress']->calves,
-        //   $data['progress']->forearms, $data['progress']->neck, $data['progress']->hips); 
-        // foreach ($lengths as &$value) {
-        //     $value = $value * $cm_conv;
-        // }
+        $weights = array('weight'=>$progress->weight, 'squats'=>$progress->squats, 'bench'=>$progress->bench,
+          'deadlift'=>$progress->deadlift); 
+        foreach ($weights as &$value) {
+            $value = $value * $kg_conv;
+        }
 
-        $data['progress']->weight = $data['progress']->weight * $kg_conv;
-        $data['progress']->squats = $data['progress']->squats * $kg_conv;
-        $data['progress']->bench = $data['progress']->bench * $kg_conv;
-        $data['progress']->deadlift = $data['progress']->deadlift * $kg_conv;
-        $data['progress']->height = $data['progress']->height * $cm_conv;
-        $data['progress']->arm = $data['progress']->arm * $cm_conv;
-        $data['progress']->thigh = $data['progress']->thigh * $cm_conv;
-        $data['progress']->waist = $data['progress']->waist * $cm_conv;
-        $data['progress']->chest = $data['progress']->chest * $cm_conv;
-        $data['progress']->calves = $data['progress']->calves * $cm_conv;
-        $data['progress']->forearms = $data['progress']->forearms * $cm_conv;
-        $data['progress']->neck = $data['progress']->neck * $cm_conv;
-        $data['progress']->hips = $data['progress']->hips * $cm_conv;
+        $data['weights'] = $weights;
+        $lengths = array('height'=>$progress->height, 'arm'=>$progress->arm, 'thigh'=>$progress->thigh,
+          'waist'=>$progress->waist, 'chest'=>$progress->chest, 'calves'=>$progress->calves,
+          'forearms'=>$progress->forearms, 'neck'=>$progress->neck, 'hips'=>$progress->hips); 
+        foreach ($lengths as &$value) {
+            $value = $value * $cm_conv;
+        }
+
+// Convert back to progress for consistency with metric users that don't convert
+        $data['progress']->weight = $weights['weight'];
+        $data['progress']->squats = $weights['squats'];
+        $data['progress']->bench = $weights['bench'];
+        $data['progress']->deadlift = $weights['deadlift'];
+        $data['progress']->height = $lengths['height'];
+        $data['progress']->arm = $lengths['arm'];
+        $data['progress']->thigh = $lengths['thigh'];
+        $data['progress']->waist = $lengths['waist'];
+        $data['progress']->chest = $lengths['chest'];
+        $data['progress']->calves = $lengths['calves'];
+        $data['progress']->forearms = $lengths['forearms'];
+        $data['progress']->neck = $lengths['neck'];
+        $data['progress']->hips = $lengths['hips'];
       }
 
 // Round
 
-      // $rounded = array($data['progress']->weight, $data['progress']->squats, $data['progress']->bench,
-      //   $data['progress']->deadlift, $data['progress']->height, $data['progress']->arm, $data['progress']->thigh,
-      //   $data['progress']->waist, $data['progress']->chest, $data['progress']->calves, $data['progress']->bodyfat,
-      //   $data['progress']->forearms, $data['progress']->neck, $data['progress']->hips); 
-      // foreach ($rounded as $value) {
-      //   $rounded = round($rounded, 2, PHP_ROUND_HALF_UP);
-      // }
+      $rounded = array('weight'=>$progress->weight, 'squats'=>$progress->squats, 'bench'=>$progress->bench,
+        'deadlift'=>$progress->deadlift, 'height'=>$progress->height, 'arm'=>$progress->arm,
+        'thigh'=>$progress->thigh, 'waist'=>$progress->waist, 'chest'=>$progress->chest, 
+        'calves'=>$progress->calves, 'forearms'=>$progress->forearms, 'neck'=>$progress->neck,
+        'hips'=>$progress->hips, 'bodyfat'=>$progress->bodyfat); 
+      foreach ($rounded as &$value) {
+        $value = round($value, 2, PHP_ROUND_HALF_UP);
+      }
+      $data['measurement'] = $rounded;
 
-
-      $data['progress']->weight = round($data['progress']->weight, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->squats = round($data['progress']->squats, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->bench = round($data['progress']->bench, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->deadlift = round($data['progress']->deadlift, 2, PHP_ROUND_HALF_UP);
-      $data['progress']->height = round($data['progress']->height, 1, PHP_ROUND_HALF_UP);
-      $data['progress']->arm = round($data['progress']->arm, 1, PHP_ROUND_HALF_UP);
-      $data['progress']->thigh = round($data['progress']->thigh, 1, PHP_ROUND_HALF_UP);
-      $data['progress']->waist = round($data['progress']->waist, 1, PHP_ROUND_HALF_UP);
-      $data['progress']->chest = round($data['progress']->chest, 1, PHP_ROUND_HALF_UP);
-      $data['progress']->calves = round($data['progress']->calves, 1, PHP_ROUND_HALF_UP);
-      $data['progress']->forearms = round($data['progress']->forearms, 1, PHP_ROUND_HALF_UP);
-      $data['progress']->neck = round($data['progress']->neck, 1, PHP_ROUND_HALF_UP);
-      $data['progress']->hips = round($data['progress']->hips, 1, PHP_ROUND_HALF_UP);
-      $data['progress']->bodyfat = round($data['progress']->bodyfat, 1, PHP_ROUND_HALF_UP);
 // Set unit type
      if ($data['profile']['metric'] === '0') {
-       $data['cm'] = 'in';
-       $data['kg'] = 'lbs';
+       $data['cm'] = 'inches';
+       $data['kg'] = 'pounds';
      } else {
        $data['cm'] = 'cm';
        $data['kg'] = 'kg';

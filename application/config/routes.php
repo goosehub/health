@@ -45,7 +45,6 @@ $route['dashboard'] = 'dashboard';
 $route['about'] = 'pages/view/about';
 $route['join'] = 'join';
 $route['start'] = 'join/start';
-$route['users/(:any)/friends'] = 'profile/friends/$1';
 $route['dashboard/profile'] = 'dashboard/profile_form';
 $route['dashboard/password'] = 'dashboard/set_password';
 $route['dashboard/progress/new'] = 'progress/progress_form';
@@ -54,6 +53,7 @@ $route['dashboard/conversations'] = 'conversation';
 $route['dashboard/conversations/(:any)'] = 'conversation/view/$1';
 $route['dashboard/requirements'] = 'dashboard/requirements';
 $route['dashboard/picture'] = 'dashboard/picture';
+$route['users/(:any)/friends'] = 'profile/friends/$1';
 $route['users/(:any)/progress'] = 'progress/progress_list/$1';
 $route['users/(:any)'] = 'profile/view/$1';
 
