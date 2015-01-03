@@ -22,35 +22,32 @@
 	<link type="text/css" rel="stylesheet" href="resources/style.css">
 </head>
 <body>
-<?php if(isset($unread) && isset($requests)){if($unread != false){
-$unread = '('.$unread.') unread'; }else{
-$unread='';}}else{$unread = ''; $requests = '';} 
-if (count($requests) === 0) {$requests = '';}
-else {$requests = '('.count($requests).')';} ?>
 <header>
 	<h1>Health Web App</h1>
-	<div id="nav-bar">
+	<div>
 <!-- show profile picture if user is logged in -->
 		<?php if ( isset($log_check) ) { ?>
+		<a href="/health/users/<?php echo $self['username']; ?>">
 		<img width="50px" height="50px" src="/health/uploads/<?php echo $self['image']; ?>"/>
+		</a>
 		<?php } ?>
-		<a id="home" class="nav-item" type="button" href="/health/">Home</a> |
-		<a id="about" class="nav-item" type="button" href="/health/about">About</a> |
-		<a id="search" class="nav-item" type="button" href="/health/search">Search</a> |
+		<a  type="button" href="/health/">Home</a> |
+		<a  type="button" href="/health/about">About</a> |
+		<a  type="button" href="/health/search">Search</a> |
 
 <!-- User is logged in -->
 		<?php if ( isset($log_check) ) { ?>
-		<a id="dashboard" class="nav-item" type="button" href="/health/dashboard">Dashboard</a> | 
-		<a class="nav-item" href="/health/dashboard/progress/new">Progress</a> | 
-		<a class="nav-item" href="/health/dashboard/conversations">
+		<a  type="button" href="/health/dashboard">Dashboard</a> | 
+		<a href="/health/dashboard/progress/new">Progress</a> | 
+		<a href="/health/dashboard/conversations">
 		Conversations <?php echo $unread; ?></a> |
-		<a class="nav-item" href="/health/dashboard/friend_requests">
-		Friend Requests <?php echo $requests; ?></a> |
-		<a id="logout" class="nav-item" type="button" href="/health/login/logout">Logout</a> |
+		<a href="/health/dashboard/friend_requests">
+		Friend Requests <?php echo $head_requests; ?></a> |
+		<a  type="button" href="/health/login/logout">Logout</a> |
 <!-- User is NOT logged in -->
 		<?php } else { ?>
-		<a id="login" class="nav-item" type="button" href="/health/dashboard">Login</a> |
-		<a id="join" class="nav-item" type="button" href="/health/join">Join</a> |
+		<a  type="button" href="/health/dashboard">Login</a> |
+		<a  type="button" href="/health/join">Join</a> |
 		<?php } ?>
 
 	</div>

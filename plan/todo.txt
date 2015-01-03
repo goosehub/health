@@ -16,25 +16,15 @@
 == routine suggestion logic
 
 == progress dashboard
-== progress listing
 == progress view
 	== progress comments
 == progress comparison
 
 == profile feed
-== profile view
-	== profile wall
 	== profile statuses
 	== progress statuses comments
-	== profile image page
-	== profile image view
-	== profile friend request
-	== profile friend accept
-== profile listing
-== profile search
-== profile message enter
-== profile message listing
-== profile message view
+== profile image page
+== profile image view
 
 
 

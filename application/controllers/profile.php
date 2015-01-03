@@ -76,19 +76,22 @@ class Profile extends CI_Controller {
 	else
 	{
 // Calculate age
-		if ($data['profile']['birthdate'] === '') {
-			$data['age'] = 'Not entered';
-		} else {
+		if (strlen($data['profile']['birthdate']) != 0) 
+		{
 			$birthdate = $data['birthdate'] = $data['profile']['birthdate'];
 			$birthdate = date('Ymd', strtotime($birthdate));
 			$diff = date('Ymd') - $birthdate;
 			$data['age'] = $data['years'] = substr($diff, 0, -4);
 		}
+		else
+		{
+			$data['age'] = $data['profile']['birthdate'];
+		}
 // Calculate last online
 	  	$this->load->helper('date');
 		$data['last_online'] = $data['profile']['last_online'];
 		$now = time();
-		$data['last_online'] = timespan($data['last_online'], $now);
+		$data['last_online'] = timespan($data['last_online']);
 // Format joined
 		$data['joined'] = $data['profile']['joined'];
 		$data['joined'] = date("M j, g:i A T", $data['joined']);

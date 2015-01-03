@@ -1,8 +1,7 @@
 <h2>Friends</h2>
 
-<?php if (! empty($friends)) {
-foreach ($friends as $row) { 
-if ($row->send_request === $user_key) {	
+<?php if (count($friends) > 1) {
+foreach ($friends as $row) { if ($row->send_request === $user_key) {	
 $friend = $this->health->get_profile($row->receive_request); } else {
 $friend = $this->health->get_profile($row->send_request); } ?>
 

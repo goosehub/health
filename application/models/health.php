@@ -55,52 +55,6 @@ Class health extends CI_Model
  $this->db->update('users', $data);
  return FALSE;
  }
-  function join($username, $password, $email)
- {
-  $this->db->select('username');
-  $this->db->from('users');
-  $this->db->where('username', $username);
-  $this->db->limit(1);
-  
-  $query = $this->db->get();
-  
-  if($query -> num_rows() == 1)
-  {
-    return $query->result();
-  }
-  else
-  {
-    // Insert user into users
-    $now = time();
-    $data = array(
-    'username' => $username,
-    'password' => $password,
-    'email' => $email,
-    'joined' => $now,
-    'last_online' => $now,
-    'gym_partner' => 0,
-    'private' => 0,
-    'metric' => 'on',
-    'image' => 'default.png'
-    );
-   $this->db->insert('users', $data);
-// Find user id
-   $this->db->select_max('id');
-   $this->db->from('users');
-   $this->db->limit(1);
-   $query = $this->db->get()->row();
-   // $query->result();
-   $users_id = $query->id;
-// Create blank tables
-   $now = time();
-   $data = array(
-    'timestamp' => $now,
-    'user_key' => $users_id
-   ); 
-   $this->db->insert('progress', $data);
-   return false;
-  }
- }
    function username($users_id, $username)
  {
 // Check if username is taken and not the current username
@@ -121,8 +75,8 @@ Class health extends CI_Model
    return FALSE;
   }
  }
-   function set_profile($users_id, $email, $first_name, $last_name, $birthdate, $gender,
-                        $location, $metric, $gym_partner, $private, $goal, $about, $username)
+ function set_profile($users_id, $email, $first_name, $last_name, $birthdate, $gender,
+                      $location, $metric, $gym_partner, $private, $goal, $about, $username)
  {
   $this->db->select('username');
   $this->db->from('users');
@@ -149,15 +103,15 @@ Class health extends CI_Model
  $this->db->update('users', $data);
  return FALSE;
  }
-    function set_profile_picture($users_id, $filename)
-    {
+  function set_profile_picture($users_id, $filename)
+  {
   $data = array(
   'image' => $filename
   );
  $this->db->where('id', $users_id);
  $this->db->update('users', $data);      
     }
-    function set_password($users_id, $password)
+  function set_password($users_id, $password)
  {
   $this->db->select('username');
   $this->db->from('users');
@@ -246,12 +200,16 @@ Class health extends CI_Model
  }
   function friends_list($user_key)
  {
+// Self is so user doesn't see himself on friends list
+    $self = array('on');
     $this->db->select('*');
     $this->db->from('friends');
     $this->db->where('send_request', $user_key);
     $this->db->where('status', 'accepted');
+    $this->db->where('self', '0');
     $this->db->or_where('receive_request', $user_key);
     $this->db->where('status', 'accepted');
+    $this->db->where('self', '0');
     $this->db->order_by('timestamp', 'desc');
     $query = $this->db->get();
     return $query->result();

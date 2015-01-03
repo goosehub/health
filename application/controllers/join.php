@@ -8,6 +8,7 @@ class Join extends CI_Controller {
    parent::__construct();
    $this->load->model('health','',TRUE);
    $this->load->model('conversation_model','',TRUE); 
+   $this->load->model('join_model','',TRUE); 
  }
   function index()
   {
@@ -21,10 +22,10 @@ class Join extends CI_Controller {
   {
 // Validation
    $this->load->library('form_validation');
+   $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|max_length[24]');
    $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean');
    $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|alpha_dash|max_length[24]');
    $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|alpha_dash|max_length[24]|matches[confirm_password]|callback_insert_database');
-   $this->form_validation->set_rules('email', 'Email', 'trim|xss_clean|valid_email');
 
    if($this->form_validation->run() == FALSE)
    {
@@ -64,25 +65,35 @@ class Join extends CI_Controller {
    $username = $this->input->post('username');
    $password = md5($password);
 
-//Submit to model to enter user into users table
-   $result = $this->health->join($username, $password, $email);
-
-   if($result)
+// Check if valid email
+   $this->load->helper('email');
+   if (!valid_email($email))
    {
-// Username already exists
-     $this->form_validation->set_message('insert_database', 'Username already exists');
-     return false;
+      $this->form_validation->set_message('insert_database', 'This is not a working email address');
+      return false;
    }
    else
    {
-// Success
-     $sess_array = array();
-     $sess_array = array(
-     'username' => $username
-     );
+  //Submit to model to enter user into users table
+     $result = $this->join_model->new_member($username, $password, $email);
 
-     $this->session->set_userdata('logged_in', $sess_array);
-     return TRUE;
+     if($result)
+     {
+  // Username already exists
+       $this->form_validation->set_message('insert_database', 'Username already exists');
+       return false;
+     }
+     else
+     {
+  // Success
+       $sess_array = array();
+       $sess_array = array(
+       'username' => $username
+       );
+
+       $this->session->set_userdata('logged_in', $sess_array);
+       return TRUE;
+     }
    }
  }
     function start()
