@@ -43,20 +43,7 @@ class Profile extends CI_Controller {
 // Use url slug to get profile
     include 'global.php';
 	$data['profile'] = $this->health->get_profile_slug($slug);
-	$friend_key = $data['profile']['id'];
-	$data['progress'] = $progress = $this->progress_model->get_progress($friend_key);
-	$data['wall'] = $this->health->wall_get($friend_key);
-	if($this->session->userdata('logged_in'))
-	{
-	    $data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key);
-	}
-    if (!empty($friend_status) && $friend_status[0]->status === 'accepted') 
-    {
-		$view_allowed = TRUE;
-    } else {
-    	$view_allowed = false;
-    }
-// If not found, direct to error page
+	// If not found, direct to error page
 	if (! $data['profile']) {
 		$data['title'] = $slug;
 		$data['slug'] = $slug;
@@ -75,6 +62,19 @@ class Profile extends CI_Controller {
 // Else, load all data and serve page
 	else
 	{
+		$friend_key = $data['profile']['id'];
+		$data['progress'] = $progress = $this->progress_model->get_progress($friend_key);
+		$data['wall'] = $this->health->wall_get($friend_key);
+		if($this->session->userdata('logged_in'))
+		{
+		    $data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key);
+		}
+	    if (!empty($friend_status) && $friend_status[0]->status === 'accepted') 
+	    {
+			$view_allowed = TRUE;
+	    } else {
+	    	$view_allowed = false;
+	    }
 // Imperial Conversions
 // Set conversion ratios
         $cm_conv = 0.39370079;
