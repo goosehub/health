@@ -162,7 +162,8 @@ Class health extends CI_Model
       'timestamp' => $now,
       'send_request' => $user_key,
       'receive_request' => $friend_key,
-      'status' => 'requested'
+      'status' => 'requested',
+      'self' => '0'
       );
       $this->db->insert('friends', $data);
     }
@@ -211,6 +212,7 @@ Class health extends CI_Model
     $this->db->where('status', 'accepted');
     $this->db->where('self', '0');
     $this->db->order_by('timestamp', 'desc');
+    $this->db->limit(9999);
     $query = $this->db->get();
     return $query->result();
  }

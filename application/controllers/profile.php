@@ -108,6 +108,17 @@ class Profile extends CI_Controller {
 		$this->load->view('templates/footer', $data);
 	}
   }
+ function friends($slug)
+ {
+    include 'global.php';
+    $data['profile'] = $profile = $this->health->get_profile_slug($slug);
+    $profile_id = $profile['id'];
+    $data['friends'] = $this->health->friends_list($profile_id);
+    $data['title'] = 'Friends';
+    $this->load->view('templates/header', $data);
+    $this->load->view('profile/friend_list', $data);
+    $this->load->view('templates/footer', $data);
+ }
 
 }
 ?>

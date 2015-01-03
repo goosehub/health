@@ -46,6 +46,21 @@ class Progress extends CI_Controller {
         $cm_conv = 0.39370079;
         $kg_conv = 2.20462262;
 // Convert
+
+// Testing going on here
+
+        // $weights = array($data['progress']->weight, $data['progress']->squats, $data['progress']->bench,
+        //   $data['progress']->deadlift); 
+        // foreach ($weights as &$value) {
+        //     $value = $value * $kg_conv;
+        // }
+        // $lengths = array($data['progress']->height, $data['progress']->arm, $data['progress']->thigh,
+        //   $data['progress']->waist, $data['progress']->chest, $data['progress']->calves,
+        //   $data['progress']->forearms, $data['progress']->neck, $data['progress']->hips); 
+        // foreach ($lengths as &$value) {
+        //     $value = $value * $cm_conv;
+        // }
+
         $data['progress']->weight = $data['progress']->weight * $kg_conv;
         $data['progress']->squats = $data['progress']->squats * $kg_conv;
         $data['progress']->bench = $data['progress']->bench * $kg_conv;
@@ -60,7 +75,18 @@ class Progress extends CI_Controller {
         $data['progress']->neck = $data['progress']->neck * $cm_conv;
         $data['progress']->hips = $data['progress']->hips * $cm_conv;
       }
+
 // Round
+
+      // $rounded = array($data['progress']->weight, $data['progress']->squats, $data['progress']->bench,
+      //   $data['progress']->deadlift, $data['progress']->height, $data['progress']->arm, $data['progress']->thigh,
+      //   $data['progress']->waist, $data['progress']->chest, $data['progress']->calves, $data['progress']->bodyfat,
+      //   $data['progress']->forearms, $data['progress']->neck, $data['progress']->hips); 
+      // foreach ($rounded as $value) {
+      //   $rounded = round($rounded, 2, PHP_ROUND_HALF_UP);
+      // }
+
+
       $data['progress']->weight = round($data['progress']->weight, 2, PHP_ROUND_HALF_UP);
       $data['progress']->squats = round($data['progress']->squats, 2, PHP_ROUND_HALF_UP);
       $data['progress']->bench = round($data['progress']->bench, 2, PHP_ROUND_HALF_UP);

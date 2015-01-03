@@ -20,6 +20,9 @@
 <?php } } ?>
 <!-- End for logged in users only -->
 
+<br/>
+<h4><a href="<?php echo $profile['username']; ?>/friends">View This Users Friends</a></h4>
+
 <hr/>
 <p>Username: <?php echo $profile['username']; ?></p>
 <p>Joined: <?php echo $joined; ?></p>

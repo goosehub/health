@@ -282,15 +282,6 @@ class Dashboard extends CI_Controller {
 //Go to dashboard
     redirect('dashboard', 'refresh');
  }
- function friends()
- {
-    include 'global.php';
-    $data['friends'] = $this->health->friends_list($user_key);
-    $data['title'] = 'Friend Requests';
-    $this->load->view('templates/header', $data);
-    $this->load->view('user/friend_list', $data);
-    $this->load->view('templates/footer', $data);
- }
 
 }
 
