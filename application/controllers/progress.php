@@ -46,16 +46,13 @@ class Progress extends CI_Controller {
         $cm_conv = 0.39370079;
         $kg_conv = 2.20462262;
 // Convert
-
-// Testing going on here
-
+        // Weights - kg
         $weights = array('weight'=>$progress->weight, 'squats'=>$progress->squats, 'bench'=>$progress->bench,
           'deadlift'=>$progress->deadlift); 
         foreach ($weights as &$value) {
             $value = $value * $kg_conv;
         }
-
-        $data['weights'] = $weights;
+        // Lengths - cm
         $lengths = array('height'=>$progress->height, 'arm'=>$progress->arm, 'thigh'=>$progress->thigh,
           'waist'=>$progress->waist, 'chest'=>$progress->chest, 'calves'=>$progress->calves,
           'forearms'=>$progress->forearms, 'neck'=>$progress->neck, 'hips'=>$progress->hips); 

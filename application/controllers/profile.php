@@ -44,7 +44,7 @@ class Profile extends CI_Controller {
     include 'global.php';
 	$data['profile'] = $this->health->get_profile_slug($slug);
 	$friend_key = $data['profile']['id'];
-	$data['progress'] = $this->progress_model->get_progress($friend_key);
+	$data['progress'] = $progress = $this->progress_model->get_progress($friend_key);
 	$data['wall'] = $this->health->wall_get($friend_key);
 	if($this->session->userdata('logged_in'))
 	{
@@ -75,6 +75,38 @@ class Profile extends CI_Controller {
 // Else, load all data and serve page
 	else
 	{
+// Imperial Conversions
+// Set conversion ratios
+        $cm_conv = 0.39370079;
+        $kg_conv = 2.20462262;
+// Weights Conversions - kg to lbs
+        $weights = array('weight'=>$progress->weight, 'squats'=>$progress->squats, 'bench'=>$progress->bench,
+          'deadlift'=>$progress->deadlift); 
+        foreach ($weights as &$value) {
+            $value = $value * $kg_conv;
+        }
+// Lengths Conversions - cm to inches
+        $lengths = array('height'=>$progress->height, 'arm'=>$progress->arm, 'thigh'=>$progress->thigh,
+          'waist'=>$progress->waist, 'chest'=>$progress->chest, 'calves'=>$progress->calves,
+          'forearms'=>$progress->forearms, 'neck'=>$progress->neck, 'hips'=>$progress->hips); 
+        foreach ($lengths as &$value) {
+            $value = $value * $cm_conv;
+        }
+// Rounding
+      $rounded = array('weight'=>$progress->weight, 'squats'=>$progress->squats, 'bench'=>$progress->bench,
+        'deadlift'=>$progress->deadlift, 'height'=>$progress->height, 'arm'=>$progress->arm,
+        'thigh'=>$progress->thigh, 'waist'=>$progress->waist, 'chest'=>$progress->chest, 
+        'calves'=>$progress->calves, 'forearms'=>$progress->forearms, 'neck'=>$progress->neck,
+        'hips'=>$progress->hips, 'i_weight'=>$weights['weight'], 'i_squats'=>$weights['squats'], 'i_bench'=>$weights['bench'],
+        'i_deadlift'=>$weights['deadlift'], 'i_height'=>$lengths['height'], 'i_arm'=>$lengths['arm'],
+        'i_thigh'=>$lengths['thigh'], 'i_waist'=>$lengths['waist'], 'i_chest'=>$lengths['chest'], 
+        'i_calves'=>$lengths['calves'], 'i_forearms'=>$lengths['forearms'], 'i_neck'=>$lengths['neck'],
+        'i_hips'=>$lengths['hips'], 'bodyfat'=>$progress->bodyfat); 
+      foreach ($rounded as &$value) {
+        $value = round($value, 2, PHP_ROUND_HALF_UP);
+      }
+      $data['measurement'] = $rounded;
+
 // Calculate age
 		if (strlen($data['profile']['birthdate']) != 0) 
 		{
