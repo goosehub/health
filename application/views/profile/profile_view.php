@@ -66,7 +66,7 @@
 
 <hr/>
 <h2>Latest progress point</h2>
-<a class="dashboard-link" href="<?php echo $profile['username']; ?>/progress">See More Progress Points</a>
+<a class="dashboard-link" href="<?php echo $profile['username']; ?>/progress">See All Progress Points</a>
 <br/>
 
 <!-- If exists, show -->
