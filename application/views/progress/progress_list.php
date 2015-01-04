@@ -3,14 +3,17 @@
 $this->load->helper('date');
 $now = time();
 $i = 0;
-foreach ( array_reverse($progress) as $point): 
-// Date timestamp
-	$point_date = $point->timestamp;
+foreach ($progress as $point): 
 ?>
 
-<p>Date:<?php echo date('m/d/Y_h:mA', $point_date); ?></p>
-<p>Name: <?php echo $point->name; ?></p>
-<a href="../<?php echo $profile['username']; ?>">[This link does not work yet]</a>
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $point->date; ?>">
+<p>Date:<?php echo $point->date; ?>
+</a> | 
+<!-- If name exists -->
+<?php if ($point->name != '') { ?>
+Name: <?php echo $point->name; ?>
+</p>
+<?php } ?>
 <hr/>
 
 <?php $i = $i + 1;

@@ -37,27 +37,22 @@ class Profile extends CI_Controller {
 			$user_key = $wall_user['id'];
 			$result = $this->health->wall_insert($user_key, $friend_key,
 			$friend_username, $message, $timestamp);
+// Redirect to page to prevent form resubmission
+		    // redirect('login', 'refresh');
 	    }
 	}
 // View Profile
 // Use url slug to get profile
     include 'global.php';
 	$data['profile'] = $this->health->get_profile_slug($slug);
-	if (isset($data['profile']['id'])) 
-	{
+	if (isset($data['profile']['id'])) {	
 		$friend_key = $data['profile']['id'];
 		if($this->session->userdata('logged_in'))
-		{
-		    $data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key);
-		}
+		{ $data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key); }
 	    if (!empty($friend_status) && $friend_status[0]->status === 'accepted') 
-	    {
-			$view_allowed = TRUE;
-	    } else {
-	    	$view_allowed = false;
-	    }
+	    { $view_allowed = TRUE; } else { $view_allowed = false; } 
 	}
-// If not found, direct to error page
+// If not found, direct to not found page
 	if (! $data['profile']) {
 		$data['title'] = $slug;
 		$data['slug'] = $slug;

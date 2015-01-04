@@ -70,10 +70,22 @@ function set_progress($users_id, $name, $comment, $weight, $height, $arm, $thigh
   ->get()
   ->row();
  }
+ function get_progress_point($user_key, $point)
+ {
+  return $this->db->from('progress')
+  ->where('user_key', $user_key)
+  ->where('date', $point)
+  ->order_by("id", "DESC")
+  ->get()
+  ->row();
+ }
  function get_all_progress($users_id)
  {
   return $this->db->from('progress')
+  ->where('user_key', $users_id)
+  ->where_not_in('extra', 'new_member_point')
   ->order_by("id", "DESC")
+  ->limit(9999)
   ->get()
   ->result();
  }

@@ -31,23 +31,23 @@
 		<img width="50px" height="50px" src="/health/uploads/<?php echo $self['image']; ?>"/>
 		</a>
 		<?php } ?>
-		<a  type="button" href="/health/">Home</a> |
-		<a  type="button" href="/health/about">About</a> |
-		<a  type="button" href="/health/search">Search</a> |
+		<a href="/health/">Home</a> |
+		<a href="/health/about">About</a> |
+		<a href="/health/search">Search</a> |
 
 <!-- User is logged in -->
 		<?php if ( isset($log_check) ) { ?>
-		<a  type="button" href="/health/dashboard">Dashboard</a> | 
+		<a  href="/health/dashboard">Dashboard</a> | 
 		<a href="/health/dashboard/progress/new">Progress</a> | 
 		<a href="/health/dashboard/conversations">
-		Conversations <?php echo $unread; ?></a> |
+		Conversations<?php echo $unread; ?></a> |
 		<a href="/health/dashboard/friend_requests">
-		Friend Requests <?php echo $head_requests; ?></a> |
-		<a  type="button" href="/health/login/logout">Logout</a> |
+		Friend Requests<?php echo $head_requests; ?></a> |
+		<a href="/health/login/logout">Logout</a> |
 <!-- User is NOT logged in -->
 		<?php } else { ?>
-		<a  type="button" href="/health/dashboard">Login</a> |
-		<a  type="button" href="/health/join">Join</a> |
+		<a  href="/health/dashboard">Login</a> |
+		<a  href="/health/join">Join</a> |
 		<?php } ?>
 
 	</div>

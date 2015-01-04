@@ -38,7 +38,7 @@
 |
 */
 
-$route['404_override'] = '';
+$route['404_override'] = 'pages/view';
 $route['default_controller'] = 'pages/view';
 $route['login'] = 'pages/view/login';
 $route['dashboard'] = 'dashboard';
@@ -50,11 +50,12 @@ $route['dashboard/password'] = 'dashboard/set_password';
 $route['dashboard/progress/new'] = 'progress/progress_form';
 $route['search'] = 'pages/search';
 $route['dashboard/conversations'] = 'conversation';
-$route['dashboard/conversations/(:any)'] = 'conversation/view/$1';
 $route['dashboard/requirements'] = 'dashboard/requirements';
 $route['dashboard/picture'] = 'dashboard/picture';
+$route['dashboard/conversations/(:any)'] = 'conversation/view/$1';
 $route['users/(:any)/friends'] = 'profile/friends/$1';
 $route['users/(:any)/progress'] = 'progress/progress_list/$1';
+$route['users/(:any)/progress/(:any)'] = 'progress/point/$1/$2';
 $route['users/(:any)'] = 'profile/view/$1';
 
 /* End of file routes.php */
