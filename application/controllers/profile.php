@@ -57,7 +57,7 @@ class Profile extends CI_Controller {
 	    	$view_allowed = false;
 	    }
 	}
-	// If not found, direct to error page
+// If not found, direct to error page
 	if (! $data['profile']) {
 		$data['title'] = $slug;
 		$data['slug'] = $slug;
@@ -65,6 +65,7 @@ class Profile extends CI_Controller {
 		$this->load->view('profile/not_found', $data);
 		$this->load->view('templates/footer', $data);
 	} 
+// If private and not friends, direct to private page
 	else if ($data['profile']['private'] === 'on'
 		&& $view_allowed != TRUE) {
 		$data['title'] = $slug;
@@ -111,7 +112,7 @@ class Profile extends CI_Controller {
       $data['measurement'] = $rounded;
 
 // Calculate age
-		if (strlen($data['profile']['birthdate']) != 0) 
+		if ($data['profile']['birthdate'] != '') 
 		{
 			$birthdate = $data['birthdate'] = $data['profile']['birthdate'];
 			$birthdate = date('Ymd', strtotime($birthdate));

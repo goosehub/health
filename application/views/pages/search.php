@@ -12,10 +12,13 @@ $now = time();
 $i = 0;
 foreach ( array_reverse($users) as $user): 
 // Calculate age
-	$birthdate = $user->birthdate;
-	$birthdate = date('Ymd', strtotime($birthdate));
-	$diff = date('Ymd') - $birthdate;
-	$age = substr($diff, 0, -4);
+	if ($user->birthdate != '') 
+	{
+		$birthdate = $user->birthdate;
+		$birthdate = date('Ymd', strtotime($birthdate));
+		$diff = date('Ymd') - $birthdate;
+		$age = substr($diff, 0, -4);
+	} else { $age = ''; }
 // Calculate last online
 	$last_online = $user->last_online;
 	$last_online = timespan($last_online, $now);

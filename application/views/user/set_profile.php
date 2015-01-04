@@ -52,7 +52,7 @@
      <input disabled class="input-textarea"
      type="file" size="20" id="profile_picture" name="profile_picture"/>
      <br/>
-     <label for="metric">Metric:</label>
+     <label for="metric">Enter Progress in Metric:</label>
      <input class="input-textarea"
      type="checkbox" size="20" id="metric" name="metric" <?php echo $profile['metric']; ?>/>
      <br/>
@@ -60,7 +60,7 @@
      <input class="input-textarea"
      type="checkbox" size="20" id="gym_partner" name="gym_partner" <?php echo $profile['gym_partner']; ?>/>
      <br/>
-     <label for="private">Private:</label>
+     <label for="private">Only show profile to friends:</label>
      <input class="input-textarea"
      type="checkbox" size="20" id="private" name="private" <?php echo $profile['private']; ?>/>
      <br/>

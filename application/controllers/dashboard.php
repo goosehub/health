@@ -41,10 +41,13 @@ class Dashboard extends CI_Controller {
       $data['progress'] = $this->progress_model->get_progress($users_id);
 // Define calorie requirement variables
 // Calculate age
-      $birthdate = $data['birthdate'] = $data['profile']['birthdate'];
-      $birthdate = date('Ymd', strtotime($birthdate));
-      $diff = date('Ymd') - $birthdate;
-      $years = $data['years'] = substr($diff, 0, -4);
+      if ($data['profile']['birthdate'] != '') 
+      {
+        $birthdate = $data['birthdate'] = $data['profile']['birthdate'];
+        $birthdate = date('Ymd', strtotime($birthdate));
+        $diff = date('Ymd') - $birthdate;
+        $years = $data['years'] = substr($diff, 0, -4);
+      }
 // Set other variables
       $weight = $data['weight'] = $data['progress']->weight;
       $height = $data['height'] = $data['progress']->height;
