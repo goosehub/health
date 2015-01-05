@@ -163,7 +163,7 @@ class Progress extends CI_Controller {
     if($this->session->userdata('logged_in'))
     {
       include 'global.php';
-// Set data to populate form
+      $data['file_errors'] = '';
 	    $data['date'] = date("m-d-y");
       $data['profile'] = $this->health->get_profile($users_id);
       $progress = $data['progress'] = $this->progress_model->get_progress($users_id);
@@ -237,9 +237,12 @@ class Progress extends CI_Controller {
   }
   public function set_progress()
  {
+  // Set some basic info
    include 'global.php';
    $data['profile'] = $this->health->get_profile($users_id);
+
 // Validation
+
 // Progress Table
    $this->load->library('form_validation');
    $this->form_validation->set_rules('name', 'Name', 'trim|xss_clean|max_length[24]');
@@ -273,10 +276,6 @@ class Progress extends CI_Controller {
     $config['max_height']  = '7680';
     $config['encrypt_name'] = TRUE;
     $this->load->library('upload', $config);
-    // $this->upload->initialize(array(
-    //   "upload_path"   => "/uploads/"
-    // ));
-
 
    if($this->form_validation->run() == FALSE)
    {
@@ -312,13 +311,13 @@ class Progress extends CI_Controller {
        $picture_04_caption = $this->input->post('picture_04_caption');
        $picture_05_caption = $this->input->post('picture_05_caption');
        $picture_05_caption = $this->input->post('picture_06_caption');
-// Picture image inputs
        $file01 = $this->input->post('picture_01');
        $file02 = $this->input->post('picture_02');
        $file03 = $this->input->post('picture_03');
        $file04 = $this->input->post('picture_04');
        $file05 = $this->input->post('picture_05');
        $file06 = $this->input->post('picture_06');
+
 // If user settings are imperial, do conversions
        if ($data['profile']['metric'] === '0') {
           // Convert lbs to kg
@@ -338,30 +337,27 @@ class Progress extends CI_Controller {
           $hips = $hips * 2.54;
        }
 
-// // If image upload not successful
-//     if ( ! $this->upload->do_upload($file01, $file02, $file03, $file04, $file05, $file06))
-//     {
-//       // $data['error'] = $this->upload->display_errors();
-//       // $data['title'] = 'Upload New Profile Picture';
-//       // $this->load->view('templates/header', $data);
-//       // $this->load->view('progress/progress_form', $data);
-//       // $this->load->view('templates/footer', $data);
-//     }
-// // If image upload successful
-//     else
-//     {
-//       $file = $this->upload->data();
-//       $filename = $file['file_name'];
-//       $filesize = "off";
-//       $this->progress_model->upload_images($progress_point, $user_key, $filename, $filesize);
-// //Go to dashboard
-//       redirect('dashboard/progress/new', 'refresh');
-//     }
-
-        //Perform upload.
-        if($this->upload->do_multi_upload("files")) {
-            //Code to run upon successful upload.
-        }
+//Perform file uploads
+      if($this->upload->do_multi_upload("files")) {
+        $result = $this->progress_model->upload_images($progress_key, $user_key, $filename01, $caption01);
+        $result = $this->progress_model->upload_images($progress_key, $user_key, $filename02, $caption02);
+        $result = $this->progress_model->upload_images($progress_key, $user_key, $filename03, $caption03);
+        $result = $this->progress_model->upload_images($progress_key, $user_key, $filename04, $caption04);
+        $result = $this->progress_model->upload_images($progress_key, $user_key, $filename05, $caption05);
+        $result = $this->progress_model->upload_images($progress_key, $user_key, $filename06, $caption06);
+        $files = $data['test'] = $this->upload->data();
+        $filename = $files['file_name'];
+        $filesize = "off";
+        $this->load->view('templates/test', $data);
+      }
+      else
+      {
+        $data['file_errors'] = $this->upload->display_errors();
+        $data['title'] = 'Basic Info Settings';
+        $this->load->view('templates/header', $data);
+        $this->load->view('progress/progress_form', $data);
+        $this->load->view('templates/footer', $data);
+      }
 
 // Check if progress point for today exists
        $point_exists = $this->progress_model->get_progress($users_id);
@@ -372,14 +368,6 @@ class Progress extends CI_Controller {
            $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
             $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
             $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
-
-// Enter pictures seperate
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename01, $caption01);
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename02, $caption02);
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename03, $caption03);
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename04, $caption04);
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename05, $caption05);
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename06, $caption06);
        } 
        else
        {
@@ -388,14 +376,6 @@ class Progress extends CI_Controller {
           $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
            $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
            $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
-
-// Enter pictures seperate
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename01, $caption);
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename02, $caption);
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename03, $caption);
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename04, $caption);
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename05, $caption);
-         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename06, $caption);
      }
 
 //Go to dashboard

@@ -1,4 +1,5 @@
-     <h3>Create a new progress point</h3> 
+     <h1>New progress point for <?php echo $date; ?></h1> 
+   <?php echo $file_errors; ?>
    <?php echo validation_errors(); ?>
    <?php echo form_open_multipart('progress/set_progress'); ?>
    <?php
@@ -10,7 +11,6 @@
      $kg = 'kg';
    }
  ?>
-     <h2>Progress Point for <?php echo $date; ?></h2>
      <!-- If user already has a progress point for today -->
      <?php if ($progress->date === $date) { ?>
           <h4>You already have a progress point for today, but feel free to update it below</h4>
