@@ -17,5 +17,5 @@ Name: <?php echo $point->name; ?>
 <hr/>
 
 <?php $i = $i + 1;
-if ($i == 50) break;
+if ($i == 1000) break;
 endforeach ?>

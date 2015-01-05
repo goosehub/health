@@ -156,14 +156,16 @@
 </form>
 <?php } ?>
 <hr/>
-<?php
-foreach (array_reverse($wall) as $row) {
-$row->timestamp = date("M j Y, g:i A T", $row->timestamp);
-?>
+<!-- Start wall comments -->
+<?php foreach (array_reverse($wall) as $row) {
+$row->timestamp = date("M j Y, g:i A T", $row->timestamp); 
+$comment_profile = $this->health->get_profile($row->friend_key); ?>
 
-<a href="<?php echo $row->friend_username; ?>"><?php echo $row->friend_username; ?></a>
+<img src="../uploads/<?php echo $comment_profile['image']; ?>" width="50px" height="50px" />
+<a href="<?php echo $comment_profile['username']; ?>"><?php echo $comment_profile['username']; ?></a>
 <p><?php echo $row->message; ?></p>
 <p><?php echo $row->timestamp; ?></p>
 <hr/>
 
+<!-- End wall comments -->
 <?php } ?>

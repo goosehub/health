@@ -128,12 +128,11 @@ Class health extends CI_Model
  return FALSE;
 
  }
- function wall_insert($user_key, $friend_key, $friend_username, $message, $timestamp)
+ function wall_insert($user_key, $friend_key, $message, $timestamp)
  {
     $data = array(
     'user_key' => $user_key,
     'friend_key' => $friend_key,
-    'friend_username' => $friend_username,
     'message' => $message,
     'timestamp' => $timestamp
     );

@@ -89,6 +89,23 @@ function set_progress($users_id, $name, $comment, $weight, $height, $arm, $thigh
   ->get()
   ->result();
  }
+ function comment_insert($user_key, $friend_key, $point,
+        $message, $timestamp)
+ {
+ 	$data = array(
+ 	'user_key' => $user_key,
+ 	'friend_key' => $friend_key,
+ 	'progress_key' => $point,
+ 	'message' => $message,
+ 	'timestamp' => $timestamp
+ 	 );
+ 	$this->db->insert('progress_comments', $data);
+ }
+ function progress_comments_get($user_key, $point)
+ {
+  $query = $this->db->get_where('progress_comments', array('user_key' => $user_key, 'progress_key' => $point));
+  return $query->result();
+ }
 
 }
 

@@ -14,7 +14,7 @@ class Profile extends CI_Controller {
   function view($slug)
   {
 // Log check
-	if($this->session->userdata('logged_in'))
+	if ($this->session->userdata('logged_in'))
 	{
 // Enter wall message
 // Validation
@@ -36,7 +36,7 @@ class Profile extends CI_Controller {
 			$wall_user = $this->health->get_profile_slug($slug);
 			$user_key = $wall_user['id'];
 			$result = $this->health->wall_insert($user_key, $friend_key,
-			$friend_username, $message, $timestamp);
+			$message, $timestamp);
 // Redirect to page to prevent form resubmission
 		    // redirect('login', 'refresh');
 	    }

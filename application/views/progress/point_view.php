@@ -1,6 +1,11 @@
 <h2>Progress Point for <?php echo $point; ?></h2>
 <h3><a href=".">Return to progress point index</a></h3>
 
+<?php
+// var_dump($slug);
+// var_dump($point);
+?>
+
 <!-- If exists, show -->
 <?php if ($progress->name != '') { ?>
 <h4><?php echo $progress->name; ?></h4>
@@ -91,9 +96,34 @@
 <p>deadlift: <?php echo $measurement['deadlift']; ?> kg | <?php echo $measurement['i_deadlift']; ?> lbs</p>
 <?php } ?>
 
-<?php
-// var_dump($profile);
-// var_dump($progress);
-// var_dump($measurement);
-// var_dump($age);
-?>
+<hr/>
+<h2>Progress Point Comments</h2>
+<!-- If user logged in, allow user to leave a comment. -->
+<?php if (isset($log_check)) { ?>
+<h3>Leave a Comment</h3>
+    <?php echo validation_errors();
+   	$slug = $this->uri->segment(2);
+   	$point = $this->uri->segment(4);
+	echo form_open('users/'.$slug.'/progress/'.$point.'', '', $point);
+    // echo form_open('profile/view'); 
+    ?>
+<textarea class="input-textarea" rows="4" cols="50" name="message">
+</textarea>
+<br/>
+<input type="submit" value="Submit"/>
+</form>
+<?php } ?>
+<hr/>
+<!-- Start Progress Comments -->
+<?php foreach (array_reverse($progress_comments) as $row) { 
+$timestamp = date("M j Y, g:i A T", $row->timestamp); 
+$comment_profile = $this->health->get_profile_slug($slug); ?>
+
+<img src="../../../uploads/<?php echo $comment_profile['image']; ?>" width="50px" height="50px" />
+<a href="<?php echo $comment_profile['username']; ?>"><?php echo $comment_profile['username']; ?></a>
+<p><?php echo $row->message; ?></p>
+<p><?php echo $timestamp; ?></p>
+<hr/>
+
+<!-- End Progress Comments -->
+<?php } ?>

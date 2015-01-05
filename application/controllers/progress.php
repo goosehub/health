@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('America/New_York');
 
 class Progress extends CI_Controller {
 
@@ -33,6 +34,33 @@ class Progress extends CI_Controller {
   }
   function point($slug, $point)
   {
+// Log check
+    if($this->session->userdata('logged_in'))
+    {
+// Enter progress comment
+// Validation
+       $this->load->library('form_validation');
+       $this->form_validation->set_rules('message', 'Message', 'trim|required|xss_clean|max_length[500]');
+      if ($this->form_validation->run() == FALSE)
+      {
+//Field validation failed
+      }
+      else
+      {
+// Get information
+        $message = $this->input->post('message');
+        $session_data = $this->session->userdata('logged_in');
+        $friend_key = $session_data['id'];
+        $timestamp = time();
+// Enter into progress_comments table
+        $progress_user = $this->health->get_profile_slug($slug);
+        $user_key = $progress_user['id'];
+        $result = $this->progress_model->comment_insert($user_key, $friend_key, $point,
+        $message, $timestamp);
+// Redirect to page to prevent form resubmission
+          // redirect('login', 'refresh');
+        }
+    }
     include 'global.php';
     $data['user_username'] = $slug;
     $data['point'] = $point;
@@ -74,6 +102,9 @@ class Progress extends CI_Controller {
       }
       else
       {
+// Get progress comments
+        $this->load->helper('date');
+        $data['progress_comments'] = $this->progress_model->progress_comments_get($user_key, $point);
 // Imperial Conversions
 // Set conversion ratios
         $cm_conv = 0.39370079;
@@ -118,7 +149,8 @@ class Progress extends CI_Controller {
         $data['age'] = $data['profile']['birthdate'];
       }
   // Load view
-        $data['title'] = 'Progress Points';
+        $this->load->helper('form');
+        $data['title'] = 'Progress point for '.$point;
         $this->load->view('templates/header', $data);
         $this->load->view('progress/point_view', $data);
         $this->load->view('templates/footer', $data);
