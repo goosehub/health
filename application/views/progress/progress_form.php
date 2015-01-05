@@ -1,5 +1,4 @@
      <h1>New progress point for <?php echo $date; ?></h1> 
-   <?php echo $file_errors; ?>
    <?php echo validation_errors(); ?>
    <?php echo form_open_multipart('progress/set_progress'); ?>
    <?php
