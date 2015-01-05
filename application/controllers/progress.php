@@ -18,8 +18,8 @@ class Progress extends CI_Controller {
      {
  // Get data
        $data['profile'] = $this->health->get_profile_slug($slug);
-       $user_key = $data['profile']['id'];
-       $data['progress'] = $this->progress_model->get_all_progress($user_key);
+       $profile_id = $data['profile']['id'];
+       $data['progress'] = $this->progress_model->get_all_progress($profile_id);
  // Load view
        include 'global.php';
        $data['title'] = 'Progress Points';
@@ -55,8 +55,8 @@ class Progress extends CI_Controller {
         $timestamp = time();
 // Enter into progress_comments table
         $progress_user = $this->health->get_profile_slug($slug);
-        $user_key = $progress_user['id'];
-        $result = $this->progress_model->comment_insert($user_key, $friend_key, $point,
+        $profile_id = $progress_user['id'];
+        $result = $this->progress_model->comment_insert($profile_id, $friend_key, $point,
         $message, $timestamp);
 // Redirect to page to prevent form resubmission
           redirect('users/'.$slug.'/progress/'.$point.'', 'refresh');
@@ -92,8 +92,9 @@ class Progress extends CI_Controller {
     }
     else
     {
-      $user_key = $data['profile']['id'];
-      $progress = $data['progress'] = $this->progress_model->get_progress_point($user_key, $point);
+      $profile_id = $data['profile']['id'];
+      $progress = $data['progress'] = $this->progress_model->get_progress_point($profile_id, $point);
+      $data['images'] = $this->progress_model->get_images($profile_id, $point);
 // If point not found, direct to point not found page
       if (! $data['progress']) {
         $data['title'] = 'Progress Points';
@@ -105,7 +106,7 @@ class Progress extends CI_Controller {
       {
 // Get progress comments
         $this->load->helper('date');
-        $data['progress_comments'] = $this->progress_model->progress_comments_get($user_key, $point);
+        $data['progress_comments'] = $this->progress_model->progress_comments_get($profile_id, $point);
 // Imperial Conversions
 // Set conversion ratios
         $cm_conv = 0.39370079;
@@ -236,11 +237,18 @@ class Progress extends CI_Controller {
   }
   public function set_progress()
  {
-  // Set some basic info
+// Set some basic info
    include 'global.php';
    $data['profile'] = $this->health->get_profile($users_id);
 
 // Set Rules
+   $config['upload_path'] = './uploads/';
+   $config['allowed_types'] = 'gif|jpg|png';
+   $config['max_size'] = '100000000';
+   $config['max_width']  = '10240';
+   $config['max_height']  = '7680';
+   $config['encrypt_name'] = TRUE;
+   $this->load->library('upload', $config);
    $this->load->library('form_validation');
    $this->form_validation->set_rules('name', 'Name', 'trim|xss_clean|max_length[24]');
    $this->form_validation->set_rules('comment', 'Comment', 'trim|xss_clean|max_length[10000]');
@@ -264,14 +272,6 @@ class Progress extends CI_Controller {
    $this->form_validation->set_rules('picture-04_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
    $this->form_validation->set_rules('picture-05_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
    $this->form_validation->set_rules('picture-06_caption', 'Image Caption', 'trim|xss_clean|max_length[500]|callback_file_upload');
-   $config['upload_path'] = './uploads/';
-   $config['allowed_types'] = 'gif|jpg|png';
-   $config['max_size'] = '100000000';
-   $config['max_width']  = '10240';
-   $config['max_height']  = '7680';
-   $config['encrypt_name'] = TRUE;
-   $this->load->library('upload', $config);
-
 
 // Store Inputs
    $name = $this->input->post('name');
@@ -290,12 +290,12 @@ class Progress extends CI_Controller {
    $squats = $this->input->post('squats');
    $bench = $this->input->post('bench');
    $deadlift = $this->input->post('deadlift');
-   $picture_01_caption = $this->input->post('picture_01_caption');
-   $picture_02_caption = $this->input->post('picture_02_caption');
-   $picture_03_caption = $this->input->post('picture_03_caption');
-   $picture_04_caption = $this->input->post('picture_04_caption');
-   $picture_05_caption = $this->input->post('picture_05_caption');
-   $picture_05_caption = $this->input->post('picture_06_caption');
+   $caption_01 = $this->input->post('picture_01_caption');
+   $caption_02 = $this->input->post('picture_02_caption');
+   $caption_03 = $this->input->post('picture_03_caption');
+   $caption_04 = $this->input->post('picture_04_caption');
+   $caption_05 = $this->input->post('picture_05_caption');
+   $caption_06 = $this->input->post('picture_06_caption');
    $file01 = $this->input->post('picture_01');
    $file02 = $this->input->post('picture_02');
    $file03 = $this->input->post('picture_03');
@@ -314,17 +314,46 @@ class Progress extends CI_Controller {
    {
 // Store Data
 
-//Perform file uploads
-        $files = $this->upload->get_multi_upload_data();
-        // $files = $data['test'] = $this->upload->data();
-        // $filename = $files['file_name'];
-        // $filesize = "off";
-        // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename01, $caption01);
-        // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename02, $caption02);
-        // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename03, $caption03);
-        // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename04, $caption04);
-        // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename05, $caption05);
-        // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename06, $caption06);
+// Get File Data
+        $files = $data['test'] = $this->upload->get_multi_upload_data();
+        if (isset($files[0]['file_name'])) 
+          {
+            $filename_01 = $files[0]['file_name'];
+            $filesize_01 = $files[0]['file_size'];
+            $result = $this->progress_model->upload_images($user_key, $filename_01, $caption_01, $filesize_01);
+          }
+        if (isset($files[1]['file_name'])) 
+          {
+            $filename_02 = $files[1]['file_name'];
+            $filesize_02 = $files[1]['file_size'];
+            $result = $this->progress_model->upload_images($user_key, $filename_02, $caption_02, $filesize_02);
+          }
+        if (isset($files[2]['file_name'])) 
+          {
+            $filename_03 = $files[2]['file_name'];
+            $filesize_03 = $files[2]['file_size'];
+            $result = $this->progress_model->upload_images($user_key, $filename_03, $caption_03, $filesize_03);
+          }
+        if (isset($files[3]['file_name'])) 
+          {
+            $filename_04 = $files[3]['file_name'];
+            $filesize_04 = $files[3]['file_size'];
+            $result = $this->progress_model->upload_images($user_key, $filename_04, $caption_04, $filesize_04);
+          }
+        if (isset($files[4]['file_name'])) 
+          {
+            $filename_05 = $files[4]['file_name'];
+            $filesize_05 = $files[4]['file_size'];
+            $result = $this->progress_model->upload_images($user_key, $filename_05, $caption_05, $filesize_05);
+          }
+        if (isset($files[5]['file_name'])) 
+          {
+            $filename_06 = $files[5]['file_name'];
+            $filesize_06 = $files[5]['file_size'];
+            $result = $this->progress_model->upload_images($user_key, $filename_06, $caption_06, $filesize_06);
+          }
+        // $filesize = $files['file_size'];
+        // $result = $this->progressfilename_05, $caption_05);
 
 // If user settings are imperial, do conversions
        if ($data['profile']['metric'] === '0') {
@@ -352,25 +381,26 @@ class Progress extends CI_Controller {
 // Update latest progress point
           $result = $this->progress_model->update_progress($users_id, $name, $comment, 
            $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
-            $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
-            $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
+            $hips, $bodyfat, $squats, $bench, $deadlift);
        } 
        else
        {
 // Enter new progress point
          $result = $this->progress_model->set_progress($users_id, $name, $comment, 
           $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
-           $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
-           $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
+           $hips, $bodyfat, $squats, $bench, $deadlift);
      }
 
 //Go to dashboard
        redirect('dashboard', 'refresh');
+        // $this->load->view('templates/test', $data);
+
    }
  }
  function file_upload($foo)
  {
-    if(! $this->upload->do_multi_upload("files"))
+    if(! $this->upload->do_multi_upload("files")
+      && $_FILES['files']['size'] == 0)
        {
           $this->form_validation->set_message('file_upload', 'Your file was not uploaded successfully');
           return false;

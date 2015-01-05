@@ -1,10 +1,35 @@
 <h2>Progress Point for <?php echo $point; ?></h2>
 <h3><a href=".">Return to progress point index</a></h3>
 
-<?php
-// var_dump($slug);
-// var_dump($point);
-?>
+<!-- If exists, show -->
+<?php if (isset($images[0]->filename)) { ?>
+<img width="200px" height="200px" src="../../../uploads/<?php echo $images[0]->filename; ?>"/>
+<?php } ?>
+
+<!-- If exists, show -->
+<?php if (isset($images[1]->filename)) { ?>
+<img width="200px" height="200px" src="../../../uploads/<?php echo $images[1]->filename; ?>"/>
+<?php } ?>
+
+<!-- If exists, show -->
+<?php if (isset($images[2]->filename)) { ?>
+<img width="200px" height="200px" src="../../../uploads/<?php echo $images[2]->filename; ?>"/>
+<?php } ?>
+
+<!-- If exists, show -->
+<?php if (isset($images[3]->filename)) { ?>
+<img width="200px" height="200px" src="../../../uploads/<?php echo $images[3]->filename; ?>"/>
+<?php } ?>
+
+<!-- If exists, show -->
+<?php if (isset($images[4]->filename)) { ?>
+<img width="200px" height="200px" src="../../../uploads/<?php echo $images[4]->filename; ?>"/>
+<?php } ?>
+
+<!-- If exists, show -->
+<?php if (isset($images[5]->filename)) { ?>
+<img width="200px" height="200px" src="../../../uploads/<?php echo $images[5]->filename; ?>"/>
+<?php } ?>
 
 <!-- If exists, show -->
 <?php if ($progress->name != '') { ?>
@@ -107,7 +132,6 @@
    	$slug = $this->uri->segment(2);
    	$point = $this->uri->segment(4);
 	echo form_open('users/'.$slug.'/progress/'.$point.'', '', $point);
-    // echo form_open('profile/view'); 
     ?>
 <textarea class="input-textarea" rows="4" cols="50" name="message">
 </textarea>
@@ -123,10 +147,10 @@
 <!-- Start Progress Comments -->
 <?php foreach (array_reverse($progress_comments) as $row) { 
 $timestamp = date("M j Y, g:i A T", $row->timestamp); 
-$comment_profile = $this->health->get_profile_slug($slug); ?>
+$comment_profile = $this->health->get_profile($row->friend_key); ?>
 
 <img src="../../../uploads/<?php echo $comment_profile['image']; ?>" width="50px" height="50px" />
-<a href="<?php echo $comment_profile['username']; ?>"><?php echo $comment_profile['username']; ?></a>
+<a href="../../<?php echo $comment_profile['username']; ?>"><?php echo $comment_profile['username']; ?></a>
 <p><?php echo $row->message; ?></p>
 <p><?php echo $timestamp; ?></p>
 <hr/>

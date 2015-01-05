@@ -82,53 +82,53 @@
      <br/>
      <hr/>
      <h3>Upload Images</h3>
-     <label for="picture-01">Upload Picture:</label>
+     <label for="picture_01">Upload Picture:</label>
      <input class="input-textarea"
-     type="file" size="20" id="picture-01" name="files[]"/>
+     type="file" size="20" id="picture_01" name="files[]"/>
      <br/>
-     <label for="picture-01_caption">Caption:</label>
+     <label for="picture_01_caption">Caption:</label>
      <input class="input-textarea"
-     type="text" size="20" id="picture-01_caption" name="picture-01_caption"/>
+     type="text" size="20" id="picture_01_caption" name="picture_01_caption"/>
      <br/>
-     <label for="picture-02">Upload Picture:</label>
+     <label for="picture_02">Upload Picture:</label>
      <input class="input-textarea"
-     type="file" size="20" id="picture-02" name="files[]"/>
+     type="file" size="20" id="picture_02" name="files[]"/>
      <br/>
-     <label for="picture-02_caption">Caption:</label>
+     <label for="picture_02_caption">Caption:</label>
      <input class="input-textarea"
-     type="text" size="20" id="picture-02_caption" name="picture-02_caption"/>
+     type="text" size="20" id="picture_02_caption" name="picture_02_caption"/>
      <br/>
-     <label for="picture-03">Upload Picture:</label>
+     <label for="picture_03">Upload Picture:</label>
      <input class="input-textarea"
-     type="file" size="20" id="picture-03" name="files[]"/>
+     type="file" size="20" id="picture_03" name="files[]"/>
      <br/>
-     <label for="picture-03_caption">Caption:</label>
+     <label for="picture_03_caption">Caption:</label>
      <input class="input-textarea"
-     type="text" size="20" id="picture-03_caption" name="picture-03_caption"/>
+     type="text" size="20" id="picture_03_caption" name="picture_03_caption"/>
      <br/>
-     <label for="picture-04">Upload Picture:</label>
+     <label for="picture_04">Upload Picture:</label>
      <input class="input-textarea"
-     type="file" size="20" id="picture-04" name="files[]"/>
+     type="file" size="20" id="picture_04" name="files[]"/>
      <br/>
-     <label for="picture-04_caption">Caption:</label>
+     <label for="picture_04_caption">Caption:</label>
      <input class="input-textarea"
-     type="text" size="20" id="picture-04_caption" name="picture-04_caption"/>
+     type="text" size="20" id="picture_04_caption" name="picture_04_caption"/>
      <br/>
-     <label for="picture-05">Upload Picture:</label>
+     <label for="picture_05">Upload Picture:</label>
      <input class="input-textarea"
-     type="file" size="20" id="picture-05" name="files[]"/>
+     type="file" size="20" id="picture_05" name="files[]"/>
      <br/>
-     <label for="picture-05_caption">Caption:</label>
+     <label for="picture_05_caption">Caption:</label>
      <input class="input-textarea"
-     type="text" size="20" id="picture-05_caption" name="picture-05_caption"/>
+     type="text" size="20" id="picture_05_caption" name="picture_05_caption"/>
      <br/>
-     <label for="picture-06">Upload Picture:</label>
+     <label for="picture_06">Upload Picture:</label>
      <input class="input-textarea"
-     type="file" size="20" id="picture-06" name="files[]"/>
+     type="file" size="20" id="picture_06" name="files[]"/>
      <br/>
-     <label for="picture-05_caption">Caption:</label>
+     <label for="picture_05_caption">Caption:</label>
      <input class="input-textarea"
-     type="text" size="20" id="picture-06_caption" name="picture-06_caption"/>
+     type="text" size="20" id="picture_06_caption" name="picture_06_caption"/>
      <br/>
      
      <input class="input-textarea"
