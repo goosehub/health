@@ -58,7 +58,7 @@ class Progress extends CI_Controller {
         $result = $this->progress_model->comment_insert($user_key, $friend_key, $point,
         $message, $timestamp);
 // Redirect to page to prevent form resubmission
-          // redirect('login', 'refresh');
+          redirect('users/'.$slug.'/progress/'.$point.'', 'refresh');
         }
     }
     include 'global.php';

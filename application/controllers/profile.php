@@ -38,7 +38,7 @@ class Profile extends CI_Controller {
 			$result = $this->health->wall_insert($user_key, $friend_key,
 			$message, $timestamp);
 // Redirect to page to prevent form resubmission
-		    // redirect('login', 'refresh');
+          redirect('users/'.$slug.'', 'refresh');
 	    }
 	}
 // View Profile
