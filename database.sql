@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2014 at 11:45 AM
+-- Generation Time: Jan 05, 2015 at 09:12 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -70,9 +70,11 @@ CREATE TABLE IF NOT EXISTS `foods` (
 
 CREATE TABLE IF NOT EXISTS `friends` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
-  `user_key` varchar(100) COLLATE utf8_bin NOT NULL COMMENT 'users FK',
-  `friend_key` varchar(100) COLLATE utf8_bin NOT NULL COMMENT 'users FK',
+  `timestamp` int(12) NOT NULL,
+  `send_request` varchar(100) COLLATE utf8_bin NOT NULL COMMENT 'users FK',
+  `receive_request` varchar(100) COLLATE utf8_bin NOT NULL COMMENT 'users FK',
   `status` varchar(100) COLLATE utf8_bin NOT NULL COMMENT 'request/requested/accepted',
+  `self` varchar(12) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
@@ -85,12 +87,12 @@ CREATE TABLE IF NOT EXISTS `friends` (
 CREATE TABLE IF NOT EXISTS `images` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `timestamp` int(12) NOT NULL COMMENT 'unix',
-  `progress_key` int(12) NOT NULL COMMENT 'progress FK',
+  `progress_key` varchar(12) COLLATE utf8_bin NOT NULL COMMENT 'progress FK',
   `user_key` int(12) NOT NULL COMMENT 'users FK',
   `filename` varchar(200) COLLATE utf8_bin NOT NULL,
-  `name` varchar(100) COLLATE utf8_bin NOT NULL,
-  `caption` text COLLATE utf8_bin NOT NULL,
-  `filesize` int(24) NOT NULL,
+  `category` varchar(100) COLLATE utf8_bin NOT NULL,
+  `caption` varchar(150) COLLATE utf8_bin NOT NULL,
+  `filesize` varchar(24) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
@@ -143,10 +145,10 @@ CREATE TABLE IF NOT EXISTS `meals` (
 CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `timestamp` int(12) NOT NULL COMMENT 'unix',
-  `user_key` int(12) NOT NULL COMMENT 'users FK',
-  `friend_key` int(12) NOT NULL COMMENT 'users FK',
+  `sender` varchar(12) COLLATE utf8_bin NOT NULL COMMENT 'users FK',
+  `receiver` varchar(12) COLLATE utf8_bin NOT NULL COMMENT 'users FK',
   `message` text COLLATE utf8_bin NOT NULL,
-  `subject` varchar(200) COLLATE utf8_bin NOT NULL,
+  `status` varchar(12) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
@@ -159,24 +161,25 @@ CREATE TABLE IF NOT EXISTS `messages` (
 CREATE TABLE IF NOT EXISTS `progress` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `timestamp` int(12) NOT NULL COMMENT 'timestamp',
+  `date` varchar(12) COLLATE utf8_bin NOT NULL,
   `user_key` int(12) NOT NULL COMMENT 'users FK',
   `name` varchar(100) COLLATE utf8_bin NOT NULL,
-  `user_comment` text COLLATE utf8_bin NOT NULL,
+  `comment` text COLLATE utf8_bin NOT NULL,
   `images_exist` int(12) NOT NULL COMMENT 'true / false',
-  `weight` int(12) NOT NULL,
-  `height` int(12) NOT NULL,
-  `arm` int(12) NOT NULL,
-  `thigh` int(12) NOT NULL,
-  `waist` int(12) NOT NULL,
-  `chest` int(12) NOT NULL,
-  `calves` int(12) NOT NULL,
-  `forearms` int(12) NOT NULL,
-  `neck` int(12) NOT NULL,
-  `hips` int(12) NOT NULL,
-  `bodyfat` int(12) NOT NULL,
-  `squats` int(12) NOT NULL,
-  `bench` int(12) NOT NULL,
-  `deadlift` int(12) NOT NULL,
+  `weight` varchar(12) COLLATE utf8_bin NOT NULL,
+  `height` varchar(12) COLLATE utf8_bin NOT NULL,
+  `arm` varchar(12) COLLATE utf8_bin NOT NULL,
+  `thigh` varchar(12) COLLATE utf8_bin NOT NULL,
+  `waist` varchar(12) COLLATE utf8_bin NOT NULL,
+  `chest` varchar(12) COLLATE utf8_bin NOT NULL,
+  `calves` varchar(12) COLLATE utf8_bin NOT NULL,
+  `forearms` varchar(12) COLLATE utf8_bin NOT NULL,
+  `neck` varchar(12) COLLATE utf8_bin NOT NULL,
+  `hips` varchar(12) COLLATE utf8_bin NOT NULL,
+  `bodyfat` varchar(12) COLLATE utf8_bin NOT NULL,
+  `squats` varchar(12) COLLATE utf8_bin NOT NULL,
+  `bench` varchar(12) COLLATE utf8_bin NOT NULL,
+  `deadlift` varchar(12) COLLATE utf8_bin NOT NULL,
   `extra` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
@@ -190,10 +193,10 @@ CREATE TABLE IF NOT EXISTS `progress` (
 CREATE TABLE IF NOT EXISTS `progress_comments` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `timestamp` int(12) NOT NULL COMMENT 'unix',
-  `progress_key` int(12) NOT NULL COMMENT 'progress FK',
+  `progress_key` varchar(12) COLLATE utf8_bin NOT NULL COMMENT 'progress FK',
   `user_key` int(12) NOT NULL COMMENT 'users FK / owner of progress',
   `friend_key` int(12) NOT NULL COMMENT 'users FK / commenting on progress',
-  `comment` text COLLATE utf8_bin NOT NULL,
+  `message` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
@@ -314,25 +317,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` varchar(100) COLLATE utf8_bin NOT NULL,
   `last_name` varchar(100) COLLATE utf8_bin NOT NULL,
   `location` varchar(200) COLLATE utf8_bin NOT NULL,
-  `birthdate` int(12) NOT NULL COMMENT 'unix',
+  `birthdate` varchar(12) COLLATE utf8_bin NOT NULL COMMENT 'unix',
   `gender` varchar(100) COLLATE utf8_bin NOT NULL,
-  `profile_picture_key` int(12) NOT NULL COMMENT 'images FK',
+  `image` varchar(64) COLLATE utf8_bin NOT NULL COMMENT 'images FK',
   `joined` int(12) NOT NULL COMMENT 'unix',
   `last_online` int(12) NOT NULL COMMENT 'unix',
-  `private` int(12) NOT NULL COMMENT 'true/false',
+  `private` varchar(12) COLLATE utf8_bin NOT NULL COMMENT 'true/false',
+  `metric` varchar(12) COLLATE utf8_bin NOT NULL,
   `goal` text COLLATE utf8_bin NOT NULL,
   `about` text COLLATE utf8_bin NOT NULL,
-  `gym_partner` int(12) NOT NULL COMMENT 'true/false',
+  `gym_partner` varchar(12) COLLATE utf8_bin NOT NULL COMMENT 'true/false',
   `extra` text COLLATE utf8_bin NOT NULL COMMENT 'for admin notes',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `location`, `birthdate`, `gender`, `profile_picture_key`, `joined`, `last_online`, `public_profile`, `goal`, `about`, `gym_partner`, `extra`) VALUES
-(1, 'bob', '9a618248b64db62d15b300a07b00580b', '', '', '', '', 0, '', 0, 0, 0, 0, '', '', 0, '');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -344,7 +341,8 @@ CREATE TABLE IF NOT EXISTS `wall` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `timestamp` int(12) NOT NULL,
   `user_key` int(12) NOT NULL COMMENT 'users FK / owns wall',
-  `friend_key` int(12) NOT NULL COMMENT 'users FK / comments wall',
+  `friend_key` int(12) NOT NULL,
+  `friend_username` varchar(24) COLLATE utf8_bin NOT NULL COMMENT 'users FK / comments wall',
   `message` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
