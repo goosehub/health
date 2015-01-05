@@ -98,8 +98,10 @@
 
 <hr/>
 <h2>Progress Point Comments</h2>
-<!-- If user logged in, allow user to leave a comment. -->
+
+<!-- Comment Form -->
 <?php if (isset($log_check)) { ?>
+
 <h3>Leave a Comment</h3>
     <?php echo validation_errors();
    	$slug = $this->uri->segment(2);
@@ -112,8 +114,12 @@
 <br/>
 <input type="submit" value="Submit"/>
 </form>
+
+<!-- End comment form -->
 <?php } ?>
+
 <hr/>
+
 <!-- Start Progress Comments -->
 <?php foreach (array_reverse($progress_comments) as $row) { 
 $timestamp = date("M j Y, g:i A T", $row->timestamp); 

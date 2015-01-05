@@ -10,6 +10,7 @@ class Progress extends CI_Controller {
    $this->load->model('health','',TRUE);
    $this->load->model('progress_model','',TRUE);
    $this->load->model('conversation_model','',TRUE); 
+   $this->load->helper(array('form', 'url', 'date'));
  }
     function progress_list($slug)
    {
@@ -239,6 +240,7 @@ class Progress extends CI_Controller {
    include 'global.php';
    $data['profile'] = $this->health->get_profile($users_id);
 // Validation
+// Progress Table
    $this->load->library('form_validation');
    $this->form_validation->set_rules('name', 'Name', 'trim|xss_clean|max_length[24]');
    $this->form_validation->set_rules('comment', 'Comment', 'trim|xss_clean|max_length[10000]');
@@ -256,11 +258,25 @@ class Progress extends CI_Controller {
    $this->form_validation->set_rules('squats', 'Squats', 'trim|xss_clean|numeric');
    $this->form_validation->set_rules('bench', 'Bench', 'trim|xss_clean|numeric');
    $this->form_validation->set_rules('deadlift', 'Deadlift', 'trim|xss_clean|numeric');
+// Images caption rules
    $this->form_validation->set_rules('picture-01_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
    $this->form_validation->set_rules('picture-02_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
    $this->form_validation->set_rules('picture-03_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
    $this->form_validation->set_rules('picture-04_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
    $this->form_validation->set_rules('picture-05_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
+   $this->form_validation->set_rules('picture-06_caption', 'Image Caption', 'trim|xss_clean|max_length[500]');
+// Image rules
+    $config['upload_path'] = './uploads/';
+    $config['allowed_types'] = 'gif|jpg|png';
+    $config['max_size'] = '100000000';
+    $config['max_width']  = '10240';
+    $config['max_height']  = '7680';
+    $config['encrypt_name'] = TRUE;
+    $this->load->library('upload', $config);
+    // $this->upload->initialize(array(
+    //   "upload_path"   => "/uploads/"
+    // ));
+
 
    if($this->form_validation->run() == FALSE)
    {
@@ -295,6 +311,14 @@ class Progress extends CI_Controller {
        $picture_03_caption = $this->input->post('picture_03_caption');
        $picture_04_caption = $this->input->post('picture_04_caption');
        $picture_05_caption = $this->input->post('picture_05_caption');
+       $picture_05_caption = $this->input->post('picture_06_caption');
+// Picture image inputs
+       $file01 = $this->input->post('picture_01');
+       $file02 = $this->input->post('picture_02');
+       $file03 = $this->input->post('picture_03');
+       $file04 = $this->input->post('picture_04');
+       $file05 = $this->input->post('picture_05');
+       $file06 = $this->input->post('picture_06');
 // If user settings are imperial, do conversions
        if ($data['profile']['metric'] === '0') {
           // Convert lbs to kg
@@ -313,21 +337,65 @@ class Progress extends CI_Controller {
           $neck = $neck * 2.54;
           $hips = $hips * 2.54;
        }
+
+// // If image upload not successful
+//     if ( ! $this->upload->do_upload($file01, $file02, $file03, $file04, $file05, $file06))
+//     {
+//       // $data['error'] = $this->upload->display_errors();
+//       // $data['title'] = 'Upload New Profile Picture';
+//       // $this->load->view('templates/header', $data);
+//       // $this->load->view('progress/progress_form', $data);
+//       // $this->load->view('templates/footer', $data);
+//     }
+// // If image upload successful
+//     else
+//     {
+//       $file = $this->upload->data();
+//       $filename = $file['file_name'];
+//       $filesize = "off";
+//       $this->progress_model->upload_images($progress_point, $user_key, $filename, $filesize);
+// //Go to dashboard
+//       redirect('dashboard/progress/new', 'refresh');
+//     }
+
+        //Perform upload.
+        if($this->upload->do_multi_upload("files")) {
+            //Code to run upon successful upload.
+        }
+
 // Check if progress point for today exists
        $point_exists = $this->progress_model->get_progress($users_id);
        $date = date("m-d-y");
        if ($point_exists->date === $date) {
 // Update latest progress point
-        $result = $this->progress_model->update_progress($users_id, $name, $comment, 
-         $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
-          $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
-          $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
-       } else {
+          $result = $this->progress_model->update_progress($users_id, $name, $comment, 
+           $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
+            $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
+            $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
+
+// Enter pictures seperate
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename01, $caption01);
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename02, $caption02);
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename03, $caption03);
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename04, $caption04);
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename05, $caption05);
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename06, $caption06);
+       } 
+       else
+       {
 // Enter new progress point
-       $result = $this->progress_model->set_progress($users_id, $name, $comment, 
-        $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
-         $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
-         $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
+         $result = $this->progress_model->set_progress($users_id, $name, $comment, 
+          $weight, $height, $arm, $thigh, $waist, $chest, $calves, $forearms, $neck,
+           $hips, $bodyfat, $squats, $bench, $deadlift, $picture_01_caption, 
+           $picture_02_caption, $picture_03_caption, $picture_04_caption, $picture_05_caption);
+
+// Enter pictures seperate
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename01, $caption);
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename02, $caption);
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename03, $caption);
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename04, $caption);
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename05, $caption);
+         // $result = $this->progress_model->upload_images($progress_key, $user_key, $filename06, $caption);
      }
 
 //Go to dashboard

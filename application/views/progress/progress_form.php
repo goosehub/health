@@ -75,50 +75,63 @@
      <input value="<?php echo $measurement['deadlift']; ?>" class="input-textarea"
      type="text" size="20" id="deadlift" name="deadlift"/>
      <br/>
+     <hr/>
+     <h3>Leave a comment</h3>
      <label for="comment">Comment:</label>
      <textarea class="input-textarea"
      rows="4" cols="50" id="comment" name="comment"/></textarea>
      <br/>
+     <hr/>
+     <h3>Upload Images</h3>
      <label for="picture-01">Upload Picture:</label>
-     <input disabled class="input-textarea"
-     type="file" size="20" id="picture-01" name="picture-01"/>
+     <input class="input-textarea"
+     type="file" size="20" id="picture-01" name="files[]"/>
      <br/>
      <label for="picture-01_caption">Caption:</label>
      <input class="input-textarea"
      type="text" size="20" id="picture-01_caption" name="picture-01_caption"/>
      <br/>
      <label for="picture-02">Upload Picture:</label>
-     <input disabled class="input-textarea"
-     type="file" size="20" id="picture-02" name="picture-02"/>
+     <input class="input-textarea"
+     type="file" size="20" id="picture-02" name="files[]"/>
      <br/>
      <label for="picture-02_caption">Caption:</label>
      <input class="input-textarea"
      type="text" size="20" id="picture-02_caption" name="picture-02_caption"/>
      <br/>
      <label for="picture-03">Upload Picture:</label>
-     <input disabled class="input-textarea"
-     type="file" size="20" id="picture-03" name="picture-03"/>
+     <input class="input-textarea"
+     type="file" size="20" id="picture-03" name="files[]"/>
      <br/>
      <label for="picture-03_caption">Caption:</label>
      <input class="input-textarea"
      type="text" size="20" id="picture-03_caption" name="picture-03_caption"/>
      <br/>
      <label for="picture-04">Upload Picture:</label>
-     <input disabled class="input-textarea"
-     type="file" size="20" id="picture-04" name="picture-04"/>
+     <input class="input-textarea"
+     type="file" size="20" id="picture-04" name="files[]"/>
      <br/>
      <label for="picture-04_caption">Caption:</label>
      <input class="input-textarea"
      type="text" size="20" id="picture-04_caption" name="picture-04_caption"/>
      <br/>
      <label for="picture-05">Upload Picture:</label>
-     <input disabled class="input-textarea"
-     type="file" size="20" id="picture-05" name="picture-05"/>
+     <input class="input-textarea"
+     type="file" size="20" id="picture-05" name="files[]"/>
      <br/>
      <label for="picture-05_caption">Caption:</label>
      <input class="input-textarea"
      type="text" size="20" id="picture-05_caption" name="picture-05_caption"/>
      <br/>
+     <label for="picture-06">Upload Picture:</label>
+     <input class="input-textarea"
+     type="file" size="20" id="picture-06" name="files[]"/>
+     <br/>
+     <label for="picture-05_caption">Caption:</label>
+     <input class="input-textarea"
+     type="text" size="20" id="picture-06_caption" name="picture-06_caption"/>
+     <br/>
+     
      <input class="input-textarea"
      type="submit" value="Submit Changes"/>
    </form>

@@ -62,6 +62,20 @@ function set_progress($users_id, $name, $comment, $weight, $height, $arm, $thigh
  $this ->db->update('progress', $data);
  return FALSE;
  }
+ function upload_images($user_key, $filename, $caption, $filesize)
+ {
+  $now = time();
+  $data = array(
+  	'timestamp' => $now,
+	'user_key' => $user_key, 
+	'filename' => $filename,
+	'caption' => $caption, 
+	'filesize' => $filesize
+  ); 
+  $this->db->insert('progress', $data);
+ return FALSE;
+
+ }
  function get_progress($users_id)
  {
   return $this->db->from('progress')
