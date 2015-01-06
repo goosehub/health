@@ -48,10 +48,6 @@
      <input value="<?php echo $profile['location']; ?>" class="input-textarea"
      type="location" size="20" id="location" name="location"/>
      <br/>
-     <label for="profile_picture">Profile Picture:</label>
-     <input disabled class="input-textarea"
-     type="file" size="20" id="profile_picture" name="profile_picture"/>
-     <br/>
      <label for="metric">Enter Progress in Metric:</label>
      <input class="input-textarea"
      type="checkbox" size="20" id="metric" name="metric" <?php echo $profile['metric']; ?>/>

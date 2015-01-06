@@ -16,8 +16,6 @@
 == routine suggestion logic
 
 == progress dashboard
-== progress view
-	== progress comments
 == progress comparison
 
 == profile feed

@@ -22,13 +22,16 @@ class Join extends CI_Controller {
   {
 // Validation
    $this->load->library('form_validation');
-   $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|max_length[24]');
+   $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|max_length[100]');
    $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean');
-   $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|alpha_dash|max_length[24]');
-   $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|alpha_dash|max_length[24]|matches[confirm_password]|callback_insert_database');
+   $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|alpha_dash|max_length[100]');
+   $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|alpha_dash|max_length[100]|matches[confirm_password]|callback_insert_database');
 
    if($this->form_validation->run() == FALSE)
    {
+// Clear session data
+      $this->session->unset_userdata('logged_in');
+      session_destroy();
 //Field validation failed.  User redirected to join page
       include 'global.php';
       $data['title'] = 'Join';
