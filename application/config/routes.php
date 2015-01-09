@@ -44,11 +44,17 @@ $route['login'] = 'pages/view/login';
 $route['dashboard'] = 'dashboard';
 $route['about'] = 'pages/view/about';
 $route['join'] = 'join';
+$route['help'] = 'pages/view/help';
 $route['start'] = 'join/start';
+$route['search'] = 'pages/search';
 $route['dashboard/profile'] = 'dashboard/profile_form';
 $route['dashboard/password'] = 'dashboard/set_password';
+
+$route['dashboard/progress'] = 'progress';
+$route['dashboard/meals'] = 'meals';
+$route['dashboard/routines'] = 'routines';
+
 $route['dashboard/progress/new'] = 'progress/progress_form';
-$route['search'] = 'pages/search';
 $route['dashboard/conversations'] = 'conversation';
 $route['dashboard/requirements'] = 'dashboard/requirements';
 $route['dashboard/picture'] = 'dashboard/picture';

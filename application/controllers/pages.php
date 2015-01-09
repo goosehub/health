@@ -20,21 +20,19 @@ class Pages extends CI_Controller {
 			}
 	    include 'global.php';
 		$data['title'] = ucfirst($page); // Capitalize the first letter
-	    $this->load->helper(array('form'));
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/'.$page, $data);
 		$this->load->view('templates/footer', $data);
 	}
-	public function search()
-	{
-	    include 'global.php';
-		$data['users'] = $this->health->get_all_users();
-	    $this->load->helper(array('form'));
-		$data['title'] = 'Search';
-		$this->load->view('templates/header', $data);
-		$this->load->view('pages/search', $data);
-		$this->load->view('templates/footer', $data);
-	}
+	// public function search()
+	// {
+	//     include 'global.php';
+	// 	$data['users'] = $this->health->get_all_users();
+	// 	$data['title'] = 'Search';
+	// 	$this->load->view('templates/header', $data);
+	// 	$this->load->view('pages/search', $data);
+	// 	$this->load->view('templates/footer', $data);
+	// }
 	public function do_search()
 	{
 	    include 'global.php';

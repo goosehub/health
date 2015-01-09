@@ -1,8 +1,23 @@
+<!--  -->
+
+
+
+
+
+
+<!-- This page is disabled, because search has been moved to the navbar -->
+
+
+
+
+
+
+<!--  -->
 <h1>Search Members</h1>
 <h2>Search by username</h2>
    <?php echo validation_errors(); ?>
    <?php echo form_open('pages/do_search'); ?>
-	<input type="search" id="search_input" name="search"></inupt>
+	<input type="search" name="search"></input>
 	</fonm>
 <h2>Recent Users</h2>
 
@@ -50,4 +65,4 @@ foreach ( array_reverse($users) as $user):
 // Set the number below to desired number of profiles to show
 if ($i == 10) break;
 endforeach ?>
-<!-- End Logic for Each User Item -->
+<!-- End Logic for Each User Item

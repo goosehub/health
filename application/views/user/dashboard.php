@@ -1,5 +1,5 @@
 <h1>Dashboard - Private Area</h1>
-<h2>Welcome <?php echo $profile['username']; ?>!</h2>
+<h2>Welcome <?php echo $name; ?>!</h2>
 
 <h4><a href="users/<?php echo $profile['username']; ?>">View your profile</a></h4>
 <h4><a href="users/<?php echo $profile['username']; ?>/friends">View your Friends</a></h4>

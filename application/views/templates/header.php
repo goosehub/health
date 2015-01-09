@@ -17,38 +17,67 @@
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 <!-- Favicon Icon -->
-    <link rel="shortcut icon" href="/health/favicon.ico">
+    <link rel="shortcut icon" href="<?=base_url()?>favicon.ico">
 <!-- CSS -->
-	<link type="text/css" rel="stylesheet" href="resources/style.css">
+	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/style.css">
 </head>
 <body>
 <header>
-	<h1>Health Web App</h1>
-	<div>
+	<!-- <h1>Health Web App</h1> -->
+	<div class="top-header">
 <!-- show profile picture if user is logged in -->
 		<?php if ( isset($log_check) ) { ?>
-		<a href="/health/users/<?php echo $self['username']; ?>">
-		<img width="50px" height="50px" src="/health/uploads/<?php echo $self['image']; ?>"/>
-		</a>
+<!-- Search -->
+		<div class="search-bar">
+		    <?php echo validation_errors(); ?>
+		    <?php echo form_open('pages/do_search'); ?>
+			<input class="search-input" type="search" name="search" placeholder="search"></input>
+			</fonm>
+		</div>
+<!-- Dropdown -->
+		<div class="select-cnt">
+			<select class="nav-select" onChange="window.location.href=this.value">
+			  <option><?php echo $name; ?></option>
+			  <option value="<?=base_url()?>users/<?php echo $self['username']; ?>">Your Profile</option>
+			  <option value="<?=base_url()?>users/<?php echo $self['username']; ?>/friends">Your Friends</a></option>
+			  <option value="<?=base_url()?>dashboard/friend_requests">
+			Friend Requests<?php echo $head_requests; ?></a></option>
+			  <option value="<?=base_url()?>login/logout">Logout</a></option>
+			</select>
+		</div>
+<!-- Profile Image -->
+		<div class="profile-img-cnt">
+			<a href="<?=base_url()?>users/<?php echo $self['username']; ?>">
+			<img class="nav-img" src="<?=base_url()?>uploads/<?php echo $self['image']; ?>"/>
+			</a>
+		</div>
 		<?php } ?>
-		<a href="/health/">Home</a> |
-		<a href="/health/about">About</a> |
-		<a href="/health/search">Search</a> |
+	</div>
 
 <!-- User is logged in -->
 		<?php if ( isset($log_check) ) { ?>
-		<a  href="/health/dashboard">Dashboard</a> | 
-		<a href="/health/dashboard/progress/new">Progress</a> | 
-		<a href="/health/dashboard/conversations">
-		Conversations<?php echo $unread; ?></a> |
-		<a href="/health/dashboard/friend_requests">
-		Friend Requests<?php echo $head_requests; ?></a> |
-		<a href="/health/login/logout">Logout</a> |
+		<div class="sidebar">
+<!-- Sidebar -->
+		<a class="sidebar-item" href="<?=base_url()?>dashboard">Dashboard</a> 
+		<a class="sidebar-item" href="<?=base_url()?>dashboard/meals">Meal Tracking</a> 
+		<a class="sidebar-item" href="<?=base_url()?>dashboard/routines">My Routines</a> 
+		<a class="sidebar-item" href="<?=base_url()?>dashboard/progress">My Progress</a> 
+		<a class="sidebar-item" href="<?=base_url()?>dashboard/conversations">
+		Conversations<?php echo $unread; ?></a>
+		<a class="sidebar-item" href="<?=base_url()?>help">FAQ/Help</a>
+		
 <!-- User is NOT logged in -->
 		<?php } else { ?>
-		<a  href="/health/dashboard">Login</a> |
-		<a  href="/health/join">Join</a> |
+<!-- Unlogged in navbar -->
+		<a href="<?=base_url()?>">Home</a> |
+		<a href="<?=base_url()?>about">About</a> |
+		<a href="<?=base_url()?>search">Search</a> |
+		<a href="<?=base_url()?>dashboard">Login</a> |
+		<a href="<?=base_url()?>join">Join</a> |
+		</div>
 		<?php } ?>
 
 	</div>
 </header>
+
+<div class="page-wrap">

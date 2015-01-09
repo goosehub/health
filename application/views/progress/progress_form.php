@@ -75,7 +75,7 @@
      type="text" size="20" id="deadlift" name="deadlift"/>
      <br/>
      <hr/>
-     <h3>Leave a comment</h3>
+     <h3>Include a comment</h3>
      <label for="comment">Comment:</label>
      <textarea class="input-textarea"
      rows="4" cols="50" id="comment" name="comment"/></textarea>

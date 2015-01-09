@@ -27,13 +27,6 @@
 
 <p>Username: <?php echo $profile['username']; ?></p>
 
-<p>Joined: <?php echo $joined; ?></p>
-
-<p>Last online: <?php echo $last_online; ?> ago</p>
-
-<!-- You may want to disable showing this for privacy reasons -->
-<p>Email: <?php echo $profile['email']; ?></p>
-
 <!-- If name exists, show name -->
 <?php if ($profile['first_name'] != '' && $profile['last_name'] != '') { ?>
 <p>Name: <?php echo $profile['first_name'].' '.$profile['last_name']; } ?></p>
@@ -52,6 +45,13 @@
 <?php if ($profile['location'] != '') { ?>
 <p>location: <?php echo $profile['location']; ?></p>
 <?php } ?>
+
+<p>Joined: <?php echo $joined; ?></p>
+
+<p>Last online: <?php echo $last_online; ?> ago</p>
+
+<!-- You may want to disable showing this for privacy reasons -->
+<p>Email: <?php echo $profile['email']; ?></p>
 
 <p><?php echo $gym_partner; ?></p>
 

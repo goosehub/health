@@ -12,6 +12,14 @@ class Progress extends CI_Controller {
    $this->load->model('conversation_model','',TRUE); 
    $this->load->helper(array('form', 'url', 'date'));
  }
+  function index()
+  {
+       include 'global.php';
+       $data['title'] = 'My Progress';
+       $this->load->view('templates/header', $data);
+       $this->load->view('progress/progress_dash', $data);
+       $this->load->view('templates/footer', $data);   
+  }
     function progress_list($slug)
    {
      if($this->session->userdata('logged_in'))

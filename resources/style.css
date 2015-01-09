@@ -1,0 +1,61 @@
+/*	Global */
+
+body {
+	
+}
+
+/*	Header */
+
+.top-header {
+	background-color: #ccc;
+}
+.search-bar {
+	float: left;
+}
+.search-input {
+	display: inline;
+	width: 400px;
+}
+.search-header {
+	display: inline;
+}
+.nav-img {
+	border: 0;
+	border-radius: 1000px;
+	height: 4em;
+	width: 4em;
+}
+.profile-img-cnt {
+    float: right;
+}
+.select-cnt {
+	float: right;
+}
+.nav-select {
+	height: 4em;
+}
+.sidebar {
+	float: left;
+	clear: both;
+	background-color: #888;
+	padding: 0.5em;
+	margin: 1em;
+	height: 100vh;
+}
+.sidebar-item {
+	display:block;
+	margin: 0.5em;
+	font-size: 1.6em;
+	text-decoration: none;
+	color: #fff;
+}
+.page-wrap {
+	clear: right;
+}
+
+
+/*	Footer */
+
+footer {
+	clear:both;
+}

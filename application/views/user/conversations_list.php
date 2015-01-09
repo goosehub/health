@@ -1,4 +1,4 @@
-<h1>Your conversations</h1>
+<h1>Your Conversations</h1>
 
 <?php foreach ($convos as $row) { 
 $friend = $this->health->get_profile($row->sender);
