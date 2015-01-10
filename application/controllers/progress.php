@@ -172,11 +172,127 @@ class Progress extends CI_Controller {
       include 'global.php';
       $data['user_username'] = $slug;
       $data['profile'] = $this->health->get_profile_slug($slug);
-      $data['point'] = $point;
-      $data['title'] = 'Progress Comparison | ';
-      $this->load->view('templates/header', $data);
-      $this->load->view('progress/compare', $data);
-      $this->load->view('templates/footer', $data);
+      $data['before'] = $before;
+      $data['after'] = $after;
+
+      if (isset($data['profile']['id'])) {  
+      $friend_key = $data['profile']['id'];
+      if($this->session->userdata('logged_in'))
+      { $data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key); }
+        if (!empty($friend_status) && $friend_status[0]->status === 'accepted') 
+        { $view_allowed = TRUE; } else { $view_allowed = false; } 
+      }
+// If not found, direct to not found page
+      if (! $data['profile']) {
+        $data['title'] = $slug;
+        $data['slug'] = $slug;
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile/not_found', $data);
+        $this->load->view('templates/footer', $data);
+      } 
+// If private and not friends, direct to private page
+      else if ($data['profile']['private'] === 'on'
+        && $view_allowed != TRUE) {
+        $data['title'] = $slug;
+        $data['slug'] = $slug;
+        $this->load->view('templates/header', $data);
+        $this->load->view('profile/private', $data);
+        $this->load->view('templates/footer', $data);
+      }
+      else
+      {
+        $profile_id = $data['profile']['id'];
+        $before_data = $data['before_data'] = $this->progress_model->get_progress_point($profile_id, $before);
+        $data['b_images'] = $this->progress_model->get_images($profile_id, $before);
+        $after_data = $data['after_data'] = $this->progress_model->get_progress_point($profile_id, $after);
+        $data['a_images'] = $this->progress_model->get_images($profile_id, $after);
+// If either point not found, direct to point not found page
+        if (! $data['before_data'] || ! $data['after_data']) {
+          $data['point'] = $before.' and '.$after.'';
+          $data['title'] = 'Progress Points';
+          $this->load->view('templates/header', $data);
+          $this->load->view('progress/point_not_found', $data);
+          $this->load->view('templates/footer', $data);
+        }
+        else
+        {
+// Imperial Conversions
+// Set conversion ratios
+        $cm_conv = 0.39370079;
+        $kg_conv = 2.20462262;
+// Weights Conversions - kg to lbs
+        $weights = array('b_weight'=>$before_data->weight, 'b_squats'=>$before_data->squats, 'b_bench'=>$before_data->bench,
+          'b_deadlift'=>$before_data->deadlift,
+          'a_weight'=>$after_data->weight, 'a_squats'=>$after_data->squats, 'a_bench'=>$after_data->bench,
+          'a_deadlift'=>$after_data->deadlift); 
+        foreach ($weights as &$value) {
+            $value = $value * $kg_conv;
+        }
+// Lengths Conversions - cm to inches
+        $lengths = array('b_height'=>$before_data->height, 'b_arm'=>$before_data->arm, 'b_thigh'=>$before_data->thigh,
+          'b_waist'=>$before_data->waist, 'b_chest'=>$before_data->chest, 'b_calves'=>$before_data->calves,
+          'b_forearms'=>$before_data->forearms, 'b_neck'=>$before_data->neck, 'b_hips'=>$before_data->hips,
+          'a_height'=>$after_data->height, 'a_arm'=>$after_data->arm, 'a_thigh'=>$after_data->thigh,
+          'a_waist'=>$after_data->waist, 'a_chest'=>$after_data->chest, 'a_calves'=>$after_data->calves,
+          'a_forearms'=>$after_data->forearms, 'a_neck'=>$after_data->neck, 'a_hips'=>$after_data->hips); 
+        foreach ($lengths as &$value) {
+            $value = $value * $cm_conv;
+        }
+// Rounding
+      $rounded = array('b_weight'=>$before_data->weight, 'b_squats'=>$before_data->squats, 'b_bench'=>$before_data->bench,
+        'b_deadlift'=>$before_data->deadlift, 'b_height'=>$before_data->height, 'b_arm'=>$before_data->arm,
+        'b_thigh'=>$before_data->thigh, 'b_waist'=>$before_data->waist, 'b_chest'=>$before_data->chest, 
+        'b_calves'=>$before_data->calves, 'b_forearms'=>$before_data->forearms, 'b_neck'=>$before_data->neck,
+        'b_hips'=>$before_data->hips, 'b_i_weight'=>$weights['b_weight'], 'b_i_squats'=>$weights['b_squats'], 'b_i_bench'=>$weights['b_bench'],
+        'b_i_deadlift'=>$weights['b_deadlift'], 'b_i_height'=>$lengths['b_height'], 'b_i_arm'=>$lengths['b_arm'],
+        'b_i_thigh'=>$lengths['b_thigh'], 'b_i_waist'=>$lengths['b_waist'], 'b_i_chest'=>$lengths['b_chest'], 
+        'b_i_calves'=>$lengths['b_calves'], 'b_i_forearms'=>$lengths['b_forearms'], 'b_i_neck'=>$lengths['b_neck'],
+        'b_i_hips'=>$lengths['b_hips'], 'b_bodyfat'=>$before_data->bodyfat,
+        'a_weight'=>$after_data->weight, 'a_squats'=>$after_data->squats, 'a_bench'=>$after_data->bench,
+        'a_deadlift'=>$after_data->deadlift, 'a_height'=>$after_data->height, 'a_arm'=>$after_data->arm,
+        'a_thigh'=>$after_data->thigh, 'a_waist'=>$after_data->waist, 'a_chest'=>$after_data->chest, 
+        'a_calves'=>$after_data->calves, 'a_forearms'=>$after_data->forearms, 'a_neck'=>$after_data->neck,
+        'a_hips'=>$after_data->hips, 'a_i_weight'=>$weights['a_weight'], 'a_i_squats'=>$weights['a_squats'], 'a_i_bench'=>$weights['a_bench'],
+        'a_i_deadlift'=>$weights['a_deadlift'], 'a_i_height'=>$lengths['a_height'], 'a_i_arm'=>$lengths['a_arm'],
+        'a_i_thigh'=>$lengths['a_thigh'], 'a_i_waist'=>$lengths['a_waist'], 'a_i_chest'=>$lengths['a_chest'], 
+        'a_i_calves'=>$lengths['a_calves'], 'a_i_forearms'=>$lengths['a_forearms'], 'a_i_neck'=>$lengths['a_neck'],
+        'a_i_hips'=>$lengths['a_hips'], 'a_bodyfat'=>$after_data->bodyfat
+        ); 
+      foreach ($rounded as &$value) {
+        $value = round($value, 2, PHP_ROUND_HALF_UP);
+      }
+      $data['measurement'] = $rounded;
+// Calculate age
+      if ($data['profile']['birthdate'] != '') 
+      {
+        $birthdate = $data['birthdate'] = $data['profile']['birthdate'];
+        $birthdate = date('Ymd', strtotime($birthdate));
+        $diff = date('Ymd', $before_data->timestamp) - $birthdate;
+        $data['age'] = $data['years'] = substr($diff, 0, -4);
+      }
+      else
+      {
+        $data['age'] = $data['profile']['birthdate'];
+      }
+  // Load view
+        $data['title'] = 'Progress Comparison | '.$before.' | '.$after.'';
+        $this->load->view('templates/header', $data);
+        $this->load->view('progress/compare', $data);
+        $this->load->view('templates/footer', $data);
+        }
+      }
+  }
+  public function find_compare()
+  {
+    $before = $this->input->post('before');
+    $before = strtotime($before);
+    $before = date('m-d-y',$before);
+    $after = $this->input->post('after');
+    $after = strtotime($after);
+    $after = date('m-d-y',$after);
+    $session_data = $this->session->userdata('logged_in');
+    $slug = $session_data['username'];
+    redirect('users/'.$slug.'/progress/'.$before.'/'.$after.'', 'refresh');
   }
   public function progress_form()
   {
