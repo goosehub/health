@@ -129,6 +129,33 @@ function set_progress($users_id, $name, $comment, $weight, $height, $arm, $thigh
   $query = $this->db->get_where('progress_comments', array('user_key' => $profile_id, 'progress_key' => $point));
   return $query->result();
  }
+ function compare_search($user_key, $time, $point)
+ {
+   $this->db->select('date');
+   $this->db->from('progress');
+   $this->db->where('user_key', $user_key);
+   $this->db->where('date', $point);
+   $this->db->limit(1);
+ 
+   $query = $this->db->get();
+ 
+   if($query -> num_rows() == 1)
+   {
+     return $query->row();
+   }
+   else
+   {
+    // $names = array('Frank', 'Todd', 'James');
+    return $this->db->from('progress')
+    ->where('user_key', $user_key)
+    ->where('timestamp >', $time)
+    ->where('extra', '')
+    ->order_by("timestamp", "ASC")
+    ->limit(1)
+    ->get()
+    ->row();
+   }
+ }
 
 }
 

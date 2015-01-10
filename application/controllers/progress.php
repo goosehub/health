@@ -284,15 +284,45 @@ class Progress extends CI_Controller {
   }
   public function find_compare()
   {
-    $before = $this->input->post('before');
-    $before = strtotime($before);
-    $before = date('m-d-y',$before);
-    $after = $this->input->post('after');
-    $after = strtotime($after);
-    $after = date('m-d-y',$after);
+// Validation
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('before', 'Before', 'trim|xss_clean|alpha_numeric|max_length[24]');
+    $this->form_validation->set_rules('after', 'After', 'trim|xss_clean|alpha_numeric|max_length[24]');
+// Get User Info
     $session_data = $this->session->userdata('logged_in');
-    $slug = $session_data['username'];
+    $user_key = $session_data['id'];
+// Format
+    $before = $this->input->post('before');
+    $after = $this->input->post('after');
+    $before = strtotime($before);
+    $after = strtotime($after);
+    $before_point = date('m-d-y',$before);
+    $after_point = date('m-d-y',$after);
+// Find closest point
+    $before = $this->progress_model->compare_search($user_key, $before, $before_point);
+    $after = $this->progress_model->compare_search($user_key, $after, $after_point);
+    $before = $before->date;
+    $after = $after->date;
+// Redirect
     redirect('users/'.$slug.'/progress/'.$before.'/'.$after.'', 'refresh');
+  }
+  public function find_point($slug)
+  {
+// Validation
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('date', 'Date', 'trim|xss_clean|alpha_numeric|max_length[24]');
+// Get User Info
+    $data['profile'] = $this->health->get_profile_slug($slug);
+    $user_key = $data['profile']['id'];
+// Format
+    $date = $this->input->post('date');
+    $date = strtotime($date);
+    $date_point = date('m-d-y',$date);
+// Find closest point
+    $date = $this->progress_model->compare_search($user_key, $date, $date_point);
+    $date = $date->date;
+// Redirect
+    redirect('users/'.$slug.'/progress/'.$date.'', 'refresh');
   }
   public function progress_form()
   {

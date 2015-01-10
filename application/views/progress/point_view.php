@@ -128,8 +128,8 @@
 <?php if (isset($log_check)) { ?>
 
 <h3>Leave a Comment</h3>
-    <?php echo validation_errors();
-   	$slug = $this->uri->segment(2);
+    <?php echo validation_errors(); ?>
+   	<?php $slug = $this->uri->segment(2);
    	$point = $this->uri->segment(4);
 	echo form_open('users/'.$slug.'/progress/'.$point.'', '', $point);
     ?>

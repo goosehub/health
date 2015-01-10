@@ -1,4 +1,19 @@
 <h1>Progress Points</h1>
+
+<h2>Search for a point</h2>
+   <?php echo validation_errors(); ?>
+
+      	<?php $slug = $this->uri->segment(2);
+   		echo form_open('progress/find_point/'.$slug.'', '', $slug); ?>
+		<input class="input-textarea"
+		type="date" size="20" name="date"/>
+
+		<input class="input-textarea"
+		type="submit" value="Submit Changes"/>
+
+		<p>NOTE: If you select a day without a progress point entered, it will find the next existing point</p>
+	</form>
+
 <?php
 $this->load->helper('date');
 $now = time();

@@ -7,14 +7,14 @@
    <?php echo form_open('progress/find_compare'); ?>
    		<h3>Before</h3>
 		<input class="input-textarea"
-		type="date" size="20" id="before" name="before"/>
+		type="date" size="20" name="before"/>
    		<h3>After</h3>
 		<input class="input-textarea"
-		type="date" size="20" id="after" name="after"/>
+		type="date" size="20" name="after"/>
 
 		<input class="input-textarea"
 		type="submit" value="Submit Changes"/>
 
-		<!-- <p>NOTE: If you select a day without a progress point entered, it will find the closest point</p> -->
+		<p>NOTE: If you select a day without a progress point entered, it will find the next existing point</p>
 
    </form>
