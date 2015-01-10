@@ -7,14 +7,15 @@ body {
 /*	Header */
 
 .top-header {
-	background-color: #ccc;
+	background-color: #888;
 }
 .search-bar {
 	float: left;
 }
 .search-input {
 	display: inline;
-	width: 400px;
+	width: 50vw;
+	height: 3.5em;
 }
 .search-header {
 	display: inline;
@@ -22,8 +23,8 @@ body {
 .nav-img {
 	border: 0;
 	border-radius: 1000px;
-	height: 4em;
-	width: 4em;
+	height: 3.5em;
+	width: 3.5em;
 }
 .profile-img-cnt {
     float: right;
@@ -40,7 +41,7 @@ body {
 	background-color: #888;
 	padding: 0.5em;
 	margin: 1em;
-	height: 100vh;
+	min-height: 50vh;
 }
 .sidebar-item {
 	display:block;
@@ -51,6 +52,7 @@ body {
 }
 .page-wrap {
 	clear: right;
+	padding-top: 1em;
 }
 
 
@@ -59,3 +61,25 @@ body {
 footer {
 	clear:both;
 }
+
+
+/*	Conversation List */
+
+/*	For fade */
+ .message-preview {
+  font-size: 1.2em;
+  position: relative;
+  height: 1.2em;
+  overflow: hidden;
+  margin-bottom: 0.5em;
+}
+.message-preview:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 33%;
+  height: 1.2em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 33%);
+} 

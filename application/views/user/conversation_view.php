@@ -10,6 +10,7 @@
 
 <?php foreach (array_reverse($messages) as $row) {
 $timestamp = timespan($row->timestamp, $now); 
+$friend_name = set_name($friend['username'], $friend['first_name'], $friend['last_name']);
 // If not a conversation with self unless keys match
 if ($row->sender != $row->receiver || $user_key === $friend['id']) { ?>
 <hr/>
@@ -18,7 +19,7 @@ if ($row->sender != $row->receiver || $user_key === $friend['id']) { ?>
 <!-- Message sent by friend -->
 <?php if ($row->sender != $user_key) { ?>
 <img width="50px" height="50px" src="../../uploads/<?php echo $friend['image']; ?>"/>
-<a href="../../users/<?php echo $friend['username']; ?>"><?php echo $friend['username']; ?></a>
+<a href="../../users/<?php echo $friend['username']; ?>"><?php echo $friend_name; ?></a>
 
 <!-- Message sent by user -->
 <?php } else { ?>

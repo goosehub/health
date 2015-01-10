@@ -1,24 +1,9 @@
-<!--  -->
-
-
-
-
-
-
-<!-- This page is disabled, because search has been moved to the navbar -->
-
-
-
-
-
-
-<!--  -->
-<h1>Search Members</h1>
-<h2>Search by username</h2>
+<!-- <h1>User not found</h1> -->
+<!-- <h2>Search by username</h2>
    <?php echo validation_errors(); ?>
    <?php echo form_open('pages/do_search'); ?>
 	<input type="search" name="search"></input>
-	</fonm>
+	</form> -->
 <h2>Recent Users</h2>
 
 <!-- Start Logic for Each User Item -->

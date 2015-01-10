@@ -3,8 +3,8 @@
 == meal/recipie listing
 == meal/recipie view
 == food enter
+	== food view
 == food listing
-== food view
 == possibly combine meals and recipies into one table
 
 == routine dashboard

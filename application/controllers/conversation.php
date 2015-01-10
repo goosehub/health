@@ -9,6 +9,7 @@ class Conversation extends CI_Controller {
    parent::__construct();
    $this->load->model('health','',TRUE);
    $this->load->model('conversation_model','',TRUE);
+   $this->load->helper('date');
  }
 
   function index()
@@ -17,8 +18,22 @@ class Conversation extends CI_Controller {
     {
         include 'global.php';
         $data['convos'] = $this->conversation_model->conversation_list($user_key);
-        $this->load->helper('date');
-        $data['now'] = time();
+        function get_day_name($timestamp) {
+            $date = date('d/m/Y', $timestamp);
+            if($date == date('d/m/Y')) {
+              $day_name = 'Today at';
+            } 
+            else if($date == date('d/m/Y',now() - (24 * 60 * 60))) 
+            {
+              $day_name = 'Yesterday at';
+            }
+            else
+            {
+              $day_name = date('M d Y', $timestamp);
+            }
+            $hours_mins = date('H:m a', $timestamp);
+            return $day_name.' '.$hours_mins;
+        }
 // Load view
         $data['title'] = "Your Conversations";
         $this->load->view('templates/header', $data);

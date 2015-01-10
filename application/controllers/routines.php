@@ -19,6 +19,22 @@ class Routines extends CI_Controller {
        $this->load->view('routines/routines_dash', $data);
        $this->load->view('templates/footer', $data);   
   }
+  public function routines_new()
+  {
+    include 'global.php';
+    $data['title'] = 'New Routine';
+    $this->load->view('templates/header', $data);
+    $this->load->view('routines/routines_new', $data);
+    $this->load->view('templates/footer', $data);   
+  }
+  public function routines_list()
+  {
+    include 'global.php';
+    $data['title'] = 'Routine History';
+    $this->load->view('templates/header', $data);
+    $this->load->view('routines/routines_list', $data);
+    $this->load->view('templates/footer', $data);     
+  }
 
 }
 

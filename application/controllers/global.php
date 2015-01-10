@@ -1,4 +1,19 @@
 <?php
+
+// Logic to decide to use username or real name
+function set_name($username, $first, $last)
+{
+    if ($first != '')
+    {
+        $name = $first.' '.$last;
+    }
+    else
+    {
+        $name = $username;
+    }
+    return $name;
+}
+
     if($this->session->userdata('logged_in'))
     {
         $data['log_check'] = TRUE;
@@ -10,18 +25,11 @@
         $data['head_requests'] = $head_requests = $this->health->find_requests($user_key);
         $data['now'] = time();
 // Name to use
-        if ($data['self']['first_name'] != '')
-        {
-            $data['name'] = $data['self']['first_name'].' '.$data['self']['last_name'];
-        }
-        else
-        {
-            $data['name'] = $data['username'];
-        }
+        $data['name'] = set_name($data['username'], $data['self']['first_name'], $data['self']['last_name']);
 // Unread
         if($unread != false)
         {
-            $data['unread'] = '('.$unread.') unread'; 
+            $data['unread'] = ' ('.$unread.')'; 
         } else {
             $data['unread'] ='';
         }
@@ -30,7 +38,7 @@
         {
             $data['head_requests'] = '';
         } else {
-        $data['head_requests'] = '('.count($head_requests).')';
+        $data['head_requests'] = ' ('.count($head_requests).')';
         }
     } else {
     $data['unread'] = '';

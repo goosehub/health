@@ -153,7 +153,8 @@ Class health extends CI_Model
     $this->db->where_in('receive_request', $names);
     $query = $this->db->get();
 
-    if($query -> num_rows() == 0)
+// Check for 2 because users are friends with self
+    if($query -> num_rows() < 2)
     {
 // Record Request
       $now = time();
@@ -218,12 +219,23 @@ Class health extends CI_Model
  function friend_status($user_key, $friend_key)
  {
     $names = array($user_key, $friend_key);
+
     $this->db->select('status');
     $this->db->from('friends');
     $this->db->where_in('send_request', $names);
     $this->db->where_in('receive_request', $names);
     $query = $this->db->get();
-    return $query->result();
+    
+// Check for 2 because users are friends with self
+    if($query -> num_rows() == 2)
+    {
+      return $query->result();
+    }
+    else
+    {
+      return false;
+    }
+
  }
 
 }

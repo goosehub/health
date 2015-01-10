@@ -30,9 +30,11 @@
 <!-- Search -->
 		<div class="search-bar">
 		    <?php echo validation_errors(); ?>
-		    <?php echo form_open('pages/do_search'); ?>
+		    <?php $attributes = array('name' => 'search_form');
+		    echo form_open('pages/do_search', $attributes); ?>
 			<input class="search-input" type="search" name="search" placeholder="search"></input>
-			</fonm>
+		    <input name="search-submit" type="submit" value="foo" style="position: absolute; left: -9999px">
+			</form>
 		</div>
 <!-- Dropdown -->
 		<div class="select-cnt">
@@ -59,11 +61,16 @@
 		<div class="sidebar">
 <!-- Sidebar -->
 		<a class="sidebar-item" href="<?=base_url()?>dashboard">Dashboard</a> 
+		<hr/>
 		<a class="sidebar-item" href="<?=base_url()?>dashboard/meals">Meal Tracking</a> 
+		<hr/>
 		<a class="sidebar-item" href="<?=base_url()?>dashboard/routines">My Routines</a> 
+		<hr/>
 		<a class="sidebar-item" href="<?=base_url()?>dashboard/progress">My Progress</a> 
+		<hr/>
 		<a class="sidebar-item" href="<?=base_url()?>dashboard/conversations">
 		Conversations<?php echo $unread; ?></a>
+		<hr/>
 		<a class="sidebar-item" href="<?=base_url()?>help">FAQ/Help</a>
 		
 <!-- User is NOT logged in -->
@@ -71,12 +78,11 @@
 <!-- Unlogged in navbar -->
 		<a href="<?=base_url()?>">Home</a> |
 		<a href="<?=base_url()?>about">About</a> |
-		<a href="<?=base_url()?>search">Search</a> |
 		<a href="<?=base_url()?>dashboard">Login</a> |
 		<a href="<?=base_url()?>join">Join</a> |
-		</div>
 		<?php } ?>
 
+		</div>
 	</div>
 </header>
 

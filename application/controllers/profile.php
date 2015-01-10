@@ -48,9 +48,13 @@ class Profile extends CI_Controller {
 	if (isset($data['profile']['id'])) {	
 		$friend_key = $data['profile']['id'];
 		if($this->session->userdata('logged_in'))
-		{ $data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key); }
+		{ 
+			$data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key); 
+		}
 	    if (!empty($friend_status) && $friend_status[0]->status === 'accepted') 
-	    { $view_allowed = TRUE; } else { $view_allowed = false; } 
+	    { 
+	    	$view_allowed = TRUE; } else { $view_allowed = false; 
+    	} 
 	}
 // If not found, direct to not found page
 	if (! $data['profile']) {
@@ -72,6 +76,7 @@ class Profile extends CI_Controller {
 // Else, load all data and serve page
 	else
 	{
+        $data['profile_name'] = set_name($data['profile']['username'], $data['profile']['first_name'], $data['profile']['last_name']);
 		$data['progress'] = $progress = $this->progress_model->get_progress($friend_key);
 		$data['wall'] = $this->health->wall_get($friend_key);
 // Imperial Conversions

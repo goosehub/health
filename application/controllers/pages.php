@@ -24,34 +24,40 @@ class Pages extends CI_Controller {
 		$this->load->view('pages/'.$page, $data);
 		$this->load->view('templates/footer', $data);
 	}
-	// public function search()
-	// {
-	//     include 'global.php';
-	// 	$data['users'] = $this->health->get_all_users();
-	// 	$data['title'] = 'Search';
-	// 	$this->load->view('templates/header', $data);
-	// 	$this->load->view('pages/search', $data);
-	// 	$this->load->view('templates/footer', $data);
-	// }
+	public function browse()
+	{
+	    include 'global.php';
+		$data['users'] = $this->health->get_all_users();
+		$data['title'] = 'Browse';
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/browse', $data);
+		$this->load->view('templates/footer', $data);
+	}
 	public function do_search()
 	{
 	    include 'global.php';
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('search', 'Search', 'trim|required|xss_clean|alpha_dash|max_length[24]');
+		$this->form_validation->set_rules('search', 'Search', 'trim|required|xss_clean');
 		if($this->form_validation->run() == FALSE)
 		{
 //Field validation failed.  User redirected to search page
-			$data['users'] = $this->health->get_all_users();
-			$data['title'] = 'Search';
-			$this->load->view('templates/header', $data);
-			$this->load->view('pages/search', $data);
-			$this->load->view('templates/footer', $data);
+			// $data['users'] = $this->health->get_all_users();
+			// $data['title'] = 'Search';
+			// $this->load->view('templates/header', $data);
+			// $this->load->view('pages/search', $data);
+			// $this->load->view('templates/footer', $data);
+			// redirect('/');
+
 		}
 		else
 		{
 			$slug = $this->input->post('search');
 			redirect('users/'.$slug, 'refresh');
 		}
+	}
+	public function redirect()
+	{
+		redirect('/', 'refresh');
 	}
 
 }

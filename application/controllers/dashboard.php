@@ -67,7 +67,7 @@ class Dashboard extends CI_Controller {
       $data['title'] = $session_data['username'];
       $this->load->view('templates/header', $data);
       $this->load->view('user/requirements', $data);
-     $this->load->view('templates/footer', $data);
+      $this->load->view('templates/footer', $data);
     }
     else
     {

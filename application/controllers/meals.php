@@ -13,11 +13,27 @@ class Meals extends CI_Controller {
  }
   function index()
   {
-       include 'global.php';
-       $data['title'] = 'Meal Tracker';
-       $this->load->view('templates/header', $data);
-       $this->load->view('meals/meals_dash', $data);
-       $this->load->view('templates/footer', $data);   
+    include 'global.php';
+    $data['title'] = 'Meal Tracker';
+    $this->load->view('templates/header', $data);
+    $this->load->view('meals/meals_dash', $data);
+    $this->load->view('templates/footer', $data);   
+  }
+  public function meals_new()
+  {
+    include 'global.php';
+    $data['title'] = 'New Meal';
+    $this->load->view('templates/header', $data);
+    $this->load->view('meals/meals_new', $data);
+    $this->load->view('templates/footer', $data);   
+  }
+  public function meals_list()
+  {
+    include 'global.php';
+    $data['title'] = 'Meal History';
+    $this->load->view('templates/header', $data);
+    $this->load->view('meals/meals_list', $data);
+    $this->load->view('templates/footer', $data);     
   }
 
 }

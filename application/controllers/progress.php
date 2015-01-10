@@ -72,8 +72,8 @@ class Progress extends CI_Controller {
     }
     include 'global.php';
     $data['user_username'] = $slug;
-    $data['point'] = $point;
     $data['profile'] = $this->health->get_profile_slug($slug);
+    $data['point'] = $point;
     if (isset($data['profile']['id'])) {  
       $friend_key = $data['profile']['id'];
       if($this->session->userdata('logged_in'))
@@ -166,6 +166,17 @@ class Progress extends CI_Controller {
         $this->load->view('templates/footer', $data);
       }
     }
+  }
+  public function compare($slug, $before, $after)
+  {
+      include 'global.php';
+      $data['user_username'] = $slug;
+      $data['profile'] = $this->health->get_profile_slug($slug);
+      $data['point'] = $point;
+      $data['title'] = 'Progress Comparison | ';
+      $this->load->view('templates/header', $data);
+      $this->load->view('progress/compare', $data);
+      $this->load->view('templates/footer', $data);
   }
   public function progress_form()
   {

@@ -41,28 +41,38 @@
 $route['404_override'] = 'pages/view';
 $route['default_controller'] = 'pages/view';
 $route['login'] = 'pages/view/login';
-$route['dashboard'] = 'dashboard';
 $route['about'] = 'pages/view/about';
 $route['join'] = 'join';
 $route['help'] = 'pages/view/help';
 $route['start'] = 'join/start';
-$route['search'] = 'pages/search';
+$route['browse'] = 'pages/browse';
+
+$route['dashboard'] = 'dashboard';
+$route['dashboard/progress'] = 'progress';
+$route['dashboard/progress/new'] = 'progress/progress_form';
+$route['users/(:any)/progress'] = 'progress/progress_list/$1';
+$route['users/(:any)/progress/(:any)(:any)'] = 'progress/compare/$1/$2/$3';
+$route['users/(:any)/progress/(:any)'] = 'progress/point/$1/$2';
+
+$route['dashboard/meals'] = 'meals';
+$route['dashboard/meals/new'] = 'meals/meals_new';
+$route['users/(:any)/meals'] = 'meals/meals_list';
+
+$route['dashboard/routines'] = 'routines';
+$route['dashboard/routines/new'] = 'routines/routines_new';
+$route['users/(:any)/routines'] = 'routines/routines_list';
+
+$route['dashboard/conversations'] = 'conversation';
+$route['dashboard/conversations/(:any)'] = 'conversation/view/$1';
+
 $route['dashboard/profile'] = 'dashboard/profile_form';
 $route['dashboard/password'] = 'dashboard/set_password';
-
-$route['dashboard/progress'] = 'progress';
-$route['dashboard/meals'] = 'meals';
-$route['dashboard/routines'] = 'routines';
-
-$route['dashboard/progress/new'] = 'progress/progress_form';
-$route['dashboard/conversations'] = 'conversation';
 $route['dashboard/requirements'] = 'dashboard/requirements';
 $route['dashboard/picture'] = 'dashboard/picture';
-$route['dashboard/conversations/(:any)'] = 'conversation/view/$1';
+
 $route['users/(:any)/friends'] = 'profile/friends/$1';
-$route['users/(:any)/progress'] = 'progress/progress_list/$1';
-$route['users/(:any)/progress/(:any)'] = 'progress/point/$1/$2';
 $route['users/(:any)'] = 'profile/view/$1';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

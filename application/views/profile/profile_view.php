@@ -1,4 +1,4 @@
-<h1><?php echo $profile['username']; ?>!</h1>
+<h1><?php echo $profile_name; ?>!</h1>
 
 <img width="150px" height="150px" src="../uploads/<?php echo $profile['image']; ?>"/>
 
@@ -28,7 +28,7 @@
 <p>Username: <?php echo $profile['username']; ?></p>
 
 <!-- If name exists, show name -->
-<?php if ($profile['first_name'] != '' && $profile['last_name'] != '') { ?>
+<?php if ($profile['first_name'] != '') { ?>
 <p>Name: <?php echo $profile['first_name'].' '.$profile['last_name']; } ?></p>
 
 <!-- If age exists, show age -->
