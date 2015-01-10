@@ -51,7 +51,7 @@ class Profile extends CI_Controller {
 		{ 
 			$data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key); 
 		}
-	    if (!empty($friend_status) && $friend_status[0]->status === 'accepted') 
+	    if (!empty($friend_status) && $friend_status['status'] === 'accepted') 
 	    { 
 	    	$view_allowed = TRUE; } else { $view_allowed = false; 
     	} 

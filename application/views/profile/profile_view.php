@@ -12,7 +12,7 @@
 <a href="../dashboard/friend/<?php echo $profile['username']; ?>">Send Friend Request</a>
 
 <!-- Friend Request Sent -->
-<?php } else if ($friend_status[0]->status === 'requested') { ?>
+<?php } else if ($friend_status['status'] === 'requested') { ?>
 <a href="../dashboard/friend/<?php echo $profile['username']; ?>">Request Sent</a>
 <!-- Friends -->
 <?php } else { ?>
@@ -20,7 +20,7 @@
 <?php } } ?>
 <!-- End for logged in users only -->
 
-<br/>
+<hr/>
 <h4><a href="<?php echo $profile['username']; ?>/friends">View This Users Friends</a></h4>
 <h4><a class="dashboard-link" href="<?php echo $profile['username']; ?>/progress">See History of Progress</a></h4>
 <hr/>

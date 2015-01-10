@@ -218,16 +218,38 @@ Class health extends CI_Model
  }
  function friend_status($user_key, $friend_key)
  {
-    $names = array($user_key, $friend_key);
-
     $this->db->select('status');
     $this->db->from('friends');
-    $this->db->where_in('send_request', $names);
-    $this->db->where_in('receive_request', $names);
+    $this->db->where_in('send_request', $user_key);
+    $this->db->where_in('receive_request', $friend_key);
     $query = $this->db->get();
+
+// If not found, check the inverse
+    if($query -> num_rows() === 0)
+    {
+      $this->db->select('status');
+      $this->db->from('friends');
+      $this->db->where_in('send_request', $friend_key);
+      $this->db->where_in('receive_request', $user_key);
+      $second_query = $this->db->get();
+// If still not found, no records exists,
+        if($second_query -> num_rows() === 0)
+        {
+            return false;
+        }
+// Else, return the result
+        else
+        {
+            return $second_query->row_array();
+        }
+    }
+    else
+    {
+      return $query->row_array();
+    }
     
 // Check for 2 because users are friends with self
-    if($query -> num_rows() == 2)
+    if($query -> num_rows() > 0)
     {
       return $query->result();
     }
