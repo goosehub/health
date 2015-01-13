@@ -2,7 +2,7 @@
 
 Class join_model extends CI_Model
 {
- function new_member($username, $password, $email)
+ function new_member($username, $password, $email, $facebook_id)
  {
   $this->db->select('username');
   $this->db->from('users');
@@ -24,6 +24,7 @@ Class join_model extends CI_Model
     'username' => $username,
     'password' => $password,
     'email' => $email,
+    'facebook_id' => $facebook_id,
     'first_name' => $user_default,
     'last_name' => $user_default,
     'location' => $user_default,
@@ -33,7 +34,7 @@ Class join_model extends CI_Model
     'last_online' => $now,
     'gym_partner' => 0,
     'private' => 0,
-    'metric' => 'on',
+    'metric' => 0,
     'image' => 'default.png'
     );
    $this->db->insert('users', $data);

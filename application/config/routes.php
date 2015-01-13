@@ -45,6 +45,8 @@ $route['about'] = 'pages/view/about';
 $route['join'] = 'join';
 $route['help'] = 'pages/view/help';
 $route['start'] = 'join/start';
+$route['facebook_join/(:any)/(:any)/(:any)'] = 'join/facebook_join/$1/$2/$3';
+$route['facebook_login/(:any)/(:any)/(:any)'] = 'join/facebook_login/$1/$2/$3';
 $route['browse'] = 'pages/browse';
 
 $route['dashboard'] = 'dashboard';

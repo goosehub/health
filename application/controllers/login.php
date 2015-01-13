@@ -41,7 +41,16 @@ class Login extends CI_Controller {
 //query the database
    $result = $this->health->login($username, $password);
 
-   if($result)
+// Advanced Validation
+
+// Prevent user from accessing facebook accounts without being logged into to the facebook
+   if ($password === 'facebook')
+   {
+     $this->form_validation->set_message('check_database', 'Invalid username or password');
+     return false;
+   }
+// Login if successful
+   else if ($result)
    {
      $sess_array = array();
      foreach($result as $row)
@@ -54,6 +63,7 @@ class Login extends CI_Controller {
      }
      return TRUE;
    }
+// Invalid username or password
    else
    {
      $this->form_validation->set_message('check_database', 'Invalid username or password');
@@ -67,7 +77,7 @@ class Login extends CI_Controller {
     $this->session->unset_userdata('logged_in');
     session_destroy();
 // Send to login page
-    redirect('pages/view/login', 'refresh');
+    redirect('', 'refresh');
   }
 
 }

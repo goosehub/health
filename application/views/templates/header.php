@@ -23,16 +23,28 @@
 </head>
 <body>
 
-<!-- Facebook Like Button Logic -->
+<!-- Facebook App Init -->
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '691232867658713',
+      xfbml      : true,
+      version    : 'v2.1'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+</script>
+
+<!-- End Facebook Code -->
 
 <header>
 	<!-- <h1>Health Web App</h1> -->
@@ -91,7 +103,13 @@
 <?php $hide_like = $this->uri->segment(1, 0);
 	if ($hide_like != 'dashboard')
 		{ ?>
-		<div class="fb-like" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true"></div>
+			<div
+			  class="fb-like"
+			  data-layout="box_count"
+			  data-send="true"
+			  data-width="450"
+			  data-show-faces="true">
+			</div>
 		<?php } ?>
 
 <!-- User is NOT logged in -->

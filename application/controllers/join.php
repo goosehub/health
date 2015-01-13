@@ -78,7 +78,8 @@ class Join extends CI_Controller {
    else
    {
   //Submit to model to enter user into users table
-     $result = $this->join_model->new_member($username, $password, $email);
+    $facebook_id = '';
+     $result = $this->join_model->new_member($username, $password, $email, $facebook_id);
 
      if($result)
      {
@@ -93,7 +94,6 @@ class Join extends CI_Controller {
        $sess_array = array(
        'username' => $username
        );
-
        $this->session->set_userdata('logged_in', $sess_array);
        return TRUE;
      }
@@ -119,6 +119,46 @@ class Join extends CI_Controller {
 //If no session, redirect to login page
       redirect('login', 'refresh');
     }
+  }
+  function facebook_join($username, $email, $facebook_id)
+  {   
+// Set Variables
+    $username = str_replace('%20', '_', $username);
+    $password = 'facebook';
+
+// do Model Work
+$result = $this->join_model->new_member($username, $password, $email, $facebook_id);
+
+$result = $this->health->get_profile_slug($username);
+
+// Create Session
+    $sess_array = array();
+    $sess_array = array(
+    'username' => $username,
+    'id' => $result['id']
+    );
+    $this->session->set_userdata('logged_in', $sess_array);
+
+// Redirect
+   redirect('join/start', 'refresh');
+
+  }
+  function facebook_login($username, $email, $facebook_id)
+  {
+// Set Variables
+    $username = str_replace('%20', '_', $username);
+    $result = $this->health->get_profile_slug($username);
+
+// Create Session
+    $sess_array = array();
+    $sess_array = array(
+    'username' => $username,
+    'id' => $result['id']
+    );
+    $this->session->set_userdata('logged_in', $sess_array);
+    
+// Redirect to dashboard
+    redirect('dashboard', 'refresh');
   }
 
 }
