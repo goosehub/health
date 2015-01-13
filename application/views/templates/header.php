@@ -22,9 +22,22 @@
 	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/style.css">
 </head>
 <body>
+
+<!-- Facebook Like Button Logic -->
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <header>
 	<!-- <h1>Health Web App</h1> -->
 	<div class="top-header">
+
 <!-- show profile picture if user is logged in -->
 		<?php if ( isset($log_check) ) { ?>
 <!-- Search -->
@@ -51,6 +64,7 @@
 		<div class="profile-img-cnt">
 			<a href="<?=base_url()?>users/<?php echo $self['username']; ?>">
 			<img class="nav-img" src="<?=base_url()?>uploads/<?php echo $self['image']; ?>"/>
+
 			</a>
 		</div>
 		<?php } ?>
@@ -72,7 +86,14 @@
 		Conversations<?php echo $unread; ?></a>
 		<hr/>
 		<a class="sidebar-item" href="<?=base_url()?>help">FAQ/Help</a>
-		
+		<hr/>
+<!-- Facebook Like Button -->
+<?php $hide_like = $this->uri->segment(1, 0);
+	if ($hide_like != 'dashboard')
+		{ ?>
+		<div class="fb-like" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true"></div>
+		<?php } ?>
+
 <!-- User is NOT logged in -->
 		<?php } else { ?>
 <!-- Unlogged in navbar -->
