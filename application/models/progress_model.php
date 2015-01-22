@@ -129,7 +129,7 @@ function set_progress($users_id, $name, $comment, $weight, $height, $arm, $thigh
   $query = $this->db->get_where('progress_comments', array('user_key' => $profile_id, 'progress_key' => $point));
   return $query->result();
  }
- function compare_search($user_key, $time, $point)
+ function compare_search($user_key, $time, $point, $type)
  {
    $this->db->select('date');
    $this->db->from('progress');
@@ -139,18 +139,28 @@ function set_progress($users_id, $name, $comment, $weight, $height, $arm, $thigh
  
    $query = $this->db->get();
  
+ // If query exists, return row
    if($query -> num_rows() == 1)
    {
      return $query->row();
    }
    else
    {
-    // $names = array('Frank', 'Todd', 'James');
+// If point is before type, we'll search for point after this date
+// If point is after type, we'll search for point before this date
+    if ($type === 'before') {
+      $search_direction = 'timestamp >';
+      $result_given = 'ASC';
+    } else {
+      $search_direction = 'timestamp <';
+      $result_given = 'DESC';
+    }
+// Use these variables in query
     return $this->db->from('progress')
     ->where('user_key', $user_key)
-    ->where('timestamp >', $time)
+    ->where($search_direction, $time)
     ->where('extra', '')
-    ->order_by("timestamp", "ASC")
+    ->order_by("timestamp", $result_given)
     ->limit(1)
     ->get()
     ->row();

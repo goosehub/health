@@ -1,5 +1,6 @@
 <h2>Progress Point for <?php echo $point; ?></h2>
-<h3><a href=".">Return to progress point index</a></h3>
+
+<h3><a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress">Return to Progress History</a></h3>
 
 <!-- If exists, show -->
 <?php if (isset($images[0]->filename)) { ?>
