@@ -179,7 +179,7 @@ class Progress extends CI_Controller {
       $friend_key = $data['profile']['id'];
       if($this->session->userdata('logged_in'))
       { $data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key); }
-        if (!empty($friend_status) && $friend_status[0]->status === 'accepted') 
+        if (!empty($friend_status) && $friend_status['status'] === 'accepted') 
         { $view_allowed = TRUE; } else { $view_allowed = false; } 
       }
 // If not found, direct to not found page
@@ -261,6 +261,105 @@ class Progress extends CI_Controller {
       foreach ($rounded as &$value) {
         $value = round($value, 2, PHP_ROUND_HALF_UP);
       }
+// Find difference between before and after
+      $rounded['d_weight'] = $rounded['a_weight'] - $rounded['b_weight'];
+      if ($rounded['d_weight'] < 0) {
+        $rounded['pre_d_weight'] = 'Loss of';
+      } else {
+        $rounded['pre_d_weight'] = 'Gain of';
+      }
+      $rounded['d_i_weight'] = $rounded['a_i_weight'] - $rounded['b_i_weight'];
+      $rounded['d_squats'] = $rounded['a_squats'] - $rounded['b_squats'];
+    if ($rounded['d_squats'] < 0) {
+      $rounded['pre_d_squats'] = 'Loss of';
+    } else {
+      $rounded['pre_d_squats'] = 'Gain of';
+    }
+      $rounded['d_i_squats'] = $rounded['a_i_squats'] - $rounded['b_i_squats'];
+      $rounded['d_bench'] = $rounded['a_bench'] - $rounded['b_bench'];
+    if ($rounded['d_bench'] < 0) {
+      $rounded['pre_d_bench'] = 'Loss of';
+    } else {
+      $rounded['pre_d_bench'] = 'Gain of';
+    }
+      $rounded['d_i_bench'] = $rounded['a_i_bench'] - $rounded['b_i_bench'];
+      $rounded['d_deadlift'] = $rounded['a_deadlift'] - $rounded['b_deadlift'];
+    if ($rounded['d_deadlift'] < 0) {
+      $rounded['pre_d_deadlift'] = 'Loss of';
+    } else {
+      $rounded['pre_d_deadlift'] = 'Gain of';
+    }
+      $rounded['d_i_deadlift'] = $rounded['a_i_deadlift'] - $rounded['b_i_deadlift'];
+      $rounded['d_height'] = $rounded['a_height'] - $rounded['b_height'];
+    if ($rounded['d_height'] < 0) {
+      $rounded['pre_d_height'] = 'Loss of';
+    } else {
+      $rounded['pre_d_height'] = 'Gain of';
+    }
+      $rounded['d_i_height'] = $rounded['a_i_height'] - $rounded['b_i_height'];
+      $rounded['d_arm'] = $rounded['a_arm'] - $rounded['b_arm'];
+    if ($rounded['d_arm'] < 0) {
+      $rounded['pre_d_arm'] = 'Loss of';
+    } else {
+      $rounded['pre_d_arm'] = 'Gain of';
+    }
+      $rounded['d_i_arm'] = $rounded['a_i_arm'] - $rounded['b_i_arm'];
+      $rounded['d_calves'] = $rounded['a_calves'] - $rounded['b_calves'];
+    if ($rounded['d_calves'] < 0) {
+      $rounded['pre_d_calves'] = 'Loss of';
+    } else {
+      $rounded['pre_d_calves'] = 'Gain of';
+    }
+      $rounded['d_i_calves'] = $rounded['a_i_calves'] - $rounded['b_i_calves'];
+      $rounded['d_thigh'] = $rounded['a_thigh'] - $rounded['b_thigh'];
+    if ($rounded['d_thigh'] < 0) {
+      $rounded['pre_d_thigh'] = 'Loss of';
+    } else {
+      $rounded['pre_d_thigh'] = 'Gain of';
+    }
+      $rounded['d_i_thigh'] = $rounded['a_i_thigh'] - $rounded['b_i_thigh'];
+      $rounded['d_waist'] = $rounded['a_waist'] - $rounded['b_waist'];
+    if ($rounded['d_waist'] < 0) {
+      $rounded['pre_d_waist'] = 'Loss of';
+    } else {
+      $rounded['pre_d_waist'] = 'Gain of';
+    }
+      $rounded['d_i_waist'] = $rounded['a_i_waist'] - $rounded['b_i_waist'];
+      $rounded['d_chest'] = $rounded['a_chest'] - $rounded['b_chest'];
+    if ($rounded['d_chest'] < 0) {
+      $rounded['pre_d_chest'] = 'Loss of';
+    } else {
+      $rounded['pre_d_chest'] = 'Gain of';
+    }
+      $rounded['d_i_chest'] = $rounded['a_i_chest'] - $rounded['b_i_chest'];
+      $rounded['d_forearms'] = $rounded['a_forearms'] - $rounded['b_forearms'];
+    if ($rounded['d_forearms'] < 0) {
+      $rounded['pre_d_forearms'] = 'Loss of';
+    } else {
+      $rounded['pre_d_forearms'] = 'Gain of';
+    }
+      $rounded['d_i_forearms'] = $rounded['a_i_forearms'] - $rounded['b_i_forearms'];
+      $rounded['d_neck'] = $rounded['a_neck'] - $rounded['b_neck'];
+    if ($rounded['d_neck'] < 0) {
+      $rounded['pre_d_neck'] = 'Loss of';
+    } else {
+      $rounded['pre_d_neck'] = 'Gain of';
+    }
+      $rounded['d_i_neck'] = $rounded['a_i_neck'] - $rounded['b_i_neck'];
+      $rounded['d_hips'] = $rounded['a_hips'] - $rounded['b_hips'];
+    if ($rounded['d_hips'] < 0) {
+      $rounded['pre_d_hips'] = 'Loss of';
+    } else {
+      $rounded['pre_d_hips'] = 'Gain of';
+    }
+      $rounded['d_i_hips'] = $rounded['a_i_hips'] - $rounded['b_i_hips'];
+      $rounded['d_bodyfat'] = $rounded['a_bodyfat'] - $rounded['b_bodyfat'];
+    if ($rounded['d_bodyfat'] < 0) {
+      $rounded['pre_d_bodyfat'] = 'Loss of';
+    } else {
+      $rounded['pre_d_bodyfat'] = 'Gain of';
+    }
+// Record all the result into measurement
       $data['measurement'] = $rounded;
 // Calculate age
       if ($data['profile']['birthdate'] != '') 
@@ -291,6 +390,7 @@ class Progress extends CI_Controller {
 // Get User Info
     $session_data = $this->session->userdata('logged_in');
     $user_key = $session_data['id'];
+    $slug = $session_data['username'];
 // Format
     $before = $this->input->post('before');
     $after = $this->input->post('after');
