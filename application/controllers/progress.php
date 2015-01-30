@@ -27,22 +27,16 @@ class Progress extends CI_Controller {
     }
 // The progress history
     public function progress_list($slug) {
-// If logged in
-        if ($this->session->userdata('logged_in')) {
 // Get data
-            $data['profile']  = $this->health->get_profile_slug($slug);
-            $profile_id       = $data['profile']['id'];
-            $data['progress'] = $this->progress_model->get_all_progress($profile_id);
+        $data['profile']  = $this->health->get_profile_slug($slug);
+        $profile_id       = $data['profile']['id'];
+        $data['progress'] = $this->progress_model->get_all_progress($profile_id);
 // Load view
-            include 'global.php';
-            $data['title'] = 'Progress Points';
-            $this->load->view('templates/header', $data);
-            $this->load->view('progress/progress_list', $data);
-            $this->load->view('templates/footer', $data);
-        } else {
-// If not logged in, redirect to login page
-            redirect('login', 'refresh');
-        }
+        include 'global.php';
+        $data['title'] = 'Progress Points';
+        $this->load->view('templates/header', $data);
+        $this->load->view('progress/progress_list', $data);
+        $this->load->view('templates/footer', $data);
     }
 // Progress point view
     public function point($slug, $point) {
@@ -207,8 +201,7 @@ class Progress extends CI_Controller {
         $data['user_username'] = $slug;
         $data['profile']       = $this->health->get_profile_slug($slug);
         $data['before']        = $before;
-        $data['after']         = $after;
-        
+        $data['after']         = $after;     
 // Check if profile is found
         if (isset($data['profile']['id'])) {
             $friend_key = $data['profile']['id'];
@@ -224,7 +217,7 @@ class Progress extends CI_Controller {
                 $view_allowed = false;
             }
         }
-// If not found, direct to not found page
+// If username not found, direct to not found page
         if (!$data['profile']) {
             $data['title'] = $slug;
             $data['slug']  = $slug;
@@ -239,9 +232,9 @@ class Progress extends CI_Controller {
             $this->load->view('templates/header', $data);
             $this->load->view('profile/private', $data);
             $this->load->view('templates/footer', $data);
-// Else, load comparison page
+// Else, move to checking for data points
         } else {
-// Get data
+// Get data for points
             $profile_id       = $data['profile']['id'];
             $before_data      = $data['before_data'] = $this->progress_model->get_progress_point($profile_id, $before);
             $data['b_images'] = $this->progress_model->get_images($profile_id, $before);
@@ -254,6 +247,7 @@ class Progress extends CI_Controller {
                 $this->load->view('templates/header', $data);
                 $this->load->view('progress/point_not_found', $data);
                 $this->load->view('templates/footer', $data);
+// Else, everything is good to go, load comparison page
             } else {
 // Set imperial conversion ratios
                 $cm_conv = 0.39370079;
