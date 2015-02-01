@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2015 at 09:12 PM
+-- Generation Time: Jan 30, 2015 at 07:33 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `friends` (
   `status` varchar(100) COLLATE utf8_bin NOT NULL COMMENT 'request/requested/accepted',
   `self` varchar(12) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `caption` varchar(150) COLLATE utf8_bin NOT NULL,
   `filesize` varchar(24) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `message` text COLLATE utf8_bin NOT NULL,
   `status` varchar(12) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `progress` (
   `deadlift` varchar(12) COLLATE utf8_bin NOT NULL,
   `extra` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `progress_comments` (
   `friend_key` int(12) NOT NULL COMMENT 'users FK / commenting on progress',
   `message` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -313,6 +313,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) COLLATE utf8_bin NOT NULL,
   `password` varchar(1000) COLLATE utf8_bin NOT NULL,
+  `facebook_id` varchar(64) COLLATE utf8_bin NOT NULL,
   `email` varchar(100) COLLATE utf8_bin NOT NULL,
   `first_name` varchar(100) COLLATE utf8_bin NOT NULL,
   `last_name` varchar(100) COLLATE utf8_bin NOT NULL,
@@ -329,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `gym_partner` varchar(12) COLLATE utf8_bin NOT NULL COMMENT 'true/false',
   `extra` text COLLATE utf8_bin NOT NULL COMMENT 'for admin notes',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -345,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `wall` (
   `friend_username` varchar(24) COLLATE utf8_bin NOT NULL COMMENT 'users FK / comments wall',
   `message` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
