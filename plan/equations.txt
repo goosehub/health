@@ -35,3 +35,7 @@ Metric and Imperial Conversions
 	1 ounce = 0.0625 pounds
 	1 pound = 16 ounces
 	1 pound = 0.45359237 kilograms
+
+Calorie Protein + Fat + Carbs
+
+Fat = 9 calories, Protein = 4 calories, Carbs = 4 calories… so (grams of fat  9) + (grams of protein  4) + (grams of carbs * 4)

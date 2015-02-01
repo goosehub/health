@@ -27,6 +27,8 @@ class Meals extends CI_Controller {
 // Meals form
     public function meals_new() {
         include 'global.php';
+        $data['today'] = date("Y-m-d", time());
+        $data['current_time'] = date("H:i", time());
         $data['title'] = 'New Meal';
         $this->load->view('templates/header', $data);
         $this->load->view('meals/meals_new', $data);
