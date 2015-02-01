@@ -47,7 +47,6 @@
 <!-- End Facebook Code -->
 
 <header>
-	<!-- <h1>Health Web App</h1> -->
 	<div class="top-header">
 
 <!-- show profile picture if user is logged in -->
