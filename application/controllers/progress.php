@@ -21,6 +21,8 @@ class Progress extends CI_Controller {
     public function index() {
         include 'global.php';
         $data['title'] = 'My Progress';
+        $data['joined'] = date("Y-m-d", $data['self']['joined']);
+        $data['today'] = date("Y-m-d", time());
         $this->load->view('templates/header', $data);
         $this->load->view('progress/progress_dash', $data);
         $this->load->view('templates/footer', $data);

@@ -7,10 +7,10 @@
    <?php echo form_open('progress/find_compare'); ?>
    		<h3>Before</h3>
 		<input class="input-textarea"
-		type="date" size="20" name="before"/>
+		type="date" size="20" name="before" value="<?php echo $joined; ?>"/>
    		<h3>After</h3>
 		<input class="input-textarea"
-		type="date" size="20" name="after"/>
+		type="date" size="20" name="after" value="<?php echo $today; ?>"/>
 
 		<input class="input-textarea"
 		type="submit" value="Submit Changes"/>
