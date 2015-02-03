@@ -1,0 +1,148 @@
+body {
+	background: #edf1f5;
+	font-family: "Montserrat", sans-serif;
+}
+.wrapper {
+	margin: 0 auto;
+	width: 960px;
+}
+
+.cf {
+	background: #fff;
+	border-radius: 3px;
+	border: #e4e8ed 1px solid;
+	padding: 20px;
+	box-shadow: #e1e7ee 0 2px 0;
+}
+h1 {
+	color: #505a66;
+	font-weight: 100;
+}
+.cf p {
+	font-size: 15px;
+	font-weight: 100;
+	color: #727c88;
+	padding-top: 10px;
+	line-height: 24px;
+}
+.calories {
+	margin-top: 20px;
+}
+.calories ul li {
+	color: #727c88;
+	display: inline;
+	font-size: 15px;
+	font-weight: 100;
+}
+/* Header */
+
+header {
+	background: #1f2429;
+	height: 50px;
+	padding: 0 2% 0 2%;
+}
+.site-search {
+	background: #fff url(images/search.png) no-repeat 210px;
+	border-radius: 3px;
+	border: #131619 1px solid;
+	height: 28px;
+	margin-top: 14px;
+	width: 220px;
+	padding-left: 10px;
+	float: left;
+}
+.active-user {
+	color: #cbd3db;
+	line-height: 50px;
+	font-size: 15px;
+	font-weight: bold;
+}
+.active-user img {
+	padding-right: 10px;
+	vertical-align: middle;
+}
+.active-user ul li {
+	
+}
+table img {
+	float: left;
+	padding-right: 15px;
+}
+td.message-received {
+	vertical-align: middle;
+}
+.active-user ul li:last-child {
+	background: url(images/dropdown.png) no-repeat right;
+	padding-right: 30px;
+}
+.active-user a {
+	color: #cbd3db;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+	text-shadow: #0c1116 0 2px 0;
+	transition: .3s;
+}
+.active-user a:hover {
+	color: #fff;
+}
+
+/* Icons */
+
+.icon-search {
+    color:#8b97a4;
+    font-size: 12px;
+   	top: 2px;
+    position:relative;
+    left:-24px;
+}
+.search {
+	margin-top: 9px;
+	background: #fff;
+	border-radius: 3px;
+	border: #000 1px solid;
+	height: 28px;
+	display: inline-block;
+	width: 240px;
+	padding-left: 10px;
+}
+
+/* Sidebar */
+
+aside {
+	background: #2b70b5;
+	height: 100%;
+	position: absolute;
+	width: 60px;
+}
+aside img {
+	opacity: .8;
+	padding: 20px;
+	transition: .1s;
+}
+aside img.active-img {
+	opacity: 1;
+}
+aside img:hover {
+	opacity: 1;
+}
+aside ul li {
+	border-bottom: #1f63a7 1px solid;
+	height: 60px;
+	transition: .1s;
+	text-align: center;
+	line-height: 68px;
+	width: 60px;
+}
+aside ul li:hover {
+	background: #3b82c8;
+}
+aside ul li.active {
+	background: #3b82c8;
+}
+aside ul li a {
+	text-decoration: none;
+	display: block;
+	height: 60px;
+	width: 60px;
+}
