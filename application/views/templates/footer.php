@@ -13,6 +13,6 @@
 
 </script>
 <!-- Not loading, needs to be fixed -->
-<script type="text/javascript" src="/health/resources/script.js"></script>
+<script type="text/javascript" src="<?=base_url()?>resources/script.js"></script>
 </body>
 </html>
