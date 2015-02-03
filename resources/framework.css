@@ -1,0 +1,50 @@
+/* Floating */
+
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+
+/* Margins */
+
+.mt-sml {
+	margin-top: 10px;
+}
+.mt-med {
+	margin-top: 20px;
+}
+.mt-lrg {
+	margin-top: 30px;
+}
+.mb-sml {
+	margin-bottom: 10px;
+}
+.mb-med {
+	margin-bottom: 20px;
+}
+.mb-lrg {
+	margin-bottom: 30px;
+}
+
+/* Buttons */
+
+.bl-btn-med {
+	background: #47a3ff;
+	height: 34px;
+	padding: 0 15px 0 15px;
+	line-height: 34px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #edf6ff;
+	display: block;
+	text-decoration: none;
+	border-bottom: 2px #2e8deb solid;
+	border-radius: 2px;
+	transition: .3s;
+}
+.bl-btn-med:hover {
+	color: #fff;
+	background: #58acff;
+}
