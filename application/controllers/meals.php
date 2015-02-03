@@ -84,47 +84,46 @@ class Meals extends CI_Controller {
         $this->form_validation->set_rules('vit_e[]', 'vit_e', 'trim|xss_clean|max_length[12]|numeric');
         $this->form_validation->set_rules('zinc[]', 'zinc', 'trim|xss_clean|max_length[12]|numeric');
 // Store inputs
-        // Store Inputs
-        $name       = $this->input->post('meal_name');
-        $name       = $this->input->post('save_as_recipe');
-        $name       = $this->input->post('category');
-        $name       = $this->input->post('date');
-        $name       = $this->input->post('time');
+        $meal_name       = $this->input->post('meal_name');
+        $save_as_recipe       = $this->input->post('save_as_recipe');
+        $category       = $this->input->post('category');
+        $date       = $this->input->post('date');
+        $time       = $this->input->post('time');
         $comment    = $this->input->post('comment');
-        $food_name[]     = $this->input->post('food_name[]');
-        $save_as_food[]     = $this->input->post('save_as_food[]');
-        $food_type_vegetable[]     = $this->input->post('food_type_vegetable[]');
-        $food_type_fruit[]     = $this->input->post('food_type_fruit[]');
-        $food_type_protein[]     = $this->input->post('food_type_protein[]');
-        $food_type_dairy[]     = $this->input->post('food_type_dairy[]');
-        $food_type_fats[]     = $this->input->post('food_type_fats[]');
-        $food_type_grain[]     = $this->input->post('food_type_grain[]');
-        $food_type_other[]     = $this->input->post('food_type_other[]');
-        $calories[]     = $this->input->post('calories[]');
-        $calories_fat[]     = $this->input->post('calories_fat[]');
-        $total_fat[]     = $this->input->post('total_fat[]');
-        $saturated_fat[]     = $this->input->post('saturated_fat[]');
-        $trans_fat[]     = $this->input->post('trans_fat[]');
-        $cholesterol[]     = $this->input->post('cholesterol[]');
-        $sodium[]     = $this->input->post('sodium[]');
-        $total_carb[]     = $this->input->post('total_carb[]');
-        $dietary_fiber[]     = $this->input->post('dietary_fiber[]');
-        $sugars[]     = $this->input->post('sugars[]');
-        $protein[]     = $this->input->post('protein[]');
-        $calcium[]     = $this->input->post('calcium[]');
-        $folic_acid[]     = $this->input->post('folic_acid[]');
-        $iron[]     = $this->input->post('iron[]');
-        $magnesium[]     = $this->input->post('magnesium[]');
-        $niacin[]     = $this->input->post('niacin[]');
-        $potassium[]     = $this->input->post('potassium[]');
-        $riboflavin[]     = $this->input->post('riboflavin[]');
-        $vit_a[]     = $this->input->post('vit_a[]');
-        $vit_b6[]     = $this->input->post('vit_b6[]');
-        $vit_b12[]     = $this->input->post('vit_b12[]');
-        $vit_c[]     = $this->input->post('vit_c[]');
-        $vit_d[]     = $this->input->post('vit_d[]');
-        $vit_e[]     = $this->input->post('vit_e[]');
-        $zinc[]     = $this->input->post('zinc[]');
+        $food_name[]     = $this->input->post('food_name');
+        $save_as_food[]     = $this->input->post('save_as_food');
+        $food_type_vegetable[]     = $this->input->post('food_type_vegetable');
+        $food_type_fruit[]     = $this->input->post('food_type_fruit');
+        $food_type_protein[]     = $this->input->post('food_type_protein');
+        $food_type_dairy[]     = $this->input->post('food_type_dairy');
+        $food_type_fats[]     = $this->input->post('food_type_fats');
+        $food_type_grain[]     = $this->input->post('food_type_grain');
+        $food_type_other[]     = $this->input->post('food_type_other');
+        $calories[]     = $this->input->post('calories');
+        $calories_fat[]     = $this->input->post('calories_fat');
+        $total_fat[]     = $this->input->post('total_fat');
+        $saturated_fat[]     = $this->input->post('saturated_fat');
+        $trans_fat[]     = $this->input->post('trans_fat');
+        $cholesterol[]     = $this->input->post('cholesterol');
+        $sodium[]     = $this->input->post('sodium');
+        $total_carb[]     = $this->input->post('total_carb');
+        $dietary_fiber[]     = $this->input->post('dietary_fiber');
+        $sugars[]     = $this->input->post('sugars');
+        $protein[]     = $this->input->post('protein');
+        $calcium[]     = $this->input->post('calcium');
+        $folic_acid[]     = $this->input->post('folic_acid');
+        $iron[]     = $this->input->post('iron');
+        $magnesium[]     = $this->input->post('magnesium');
+        $niacin[]     = $this->input->post('niacin');
+        $potassium[]     = $this->input->post('potassium');
+        $riboflavin[]     = $this->input->post('riboflavin');
+        $vit_a[]     = $this->input->post('vit_a');
+        $vit_b6[]     = $this->input->post('vit_b6');
+        $vit_b12[]     = $this->input->post('vit_b12');
+        $vit_c[]     = $this->input->post('vit_c');
+        $vit_d[]     = $this->input->post('vit_d');
+        $vit_e[]     = $this->input->post('vit_e');
+        $zinc[]     = $this->input->post('zinc');
 // If validation fails, reload meals form and display errors
         if ($this->form_validation->run() == FALSE) {
             $this->meals_new();
@@ -134,7 +133,16 @@ class Meals extends CI_Controller {
 // Insert into database
             $result = $this->meals_model->new_meal($user_key);
 // Redirect to dashboard
-            redirect('dashboard', 'refresh');
+            // redirect('dashboard', 'refresh');
+// Testing
+            $data['test'] = $food_type_fruit;
+            include 'global.php';
+            $data['today'] = date("Y-m-d", time());
+            $data['current_time'] = date("H:i", time());
+            $data['title'] = 'New Meal';
+            $this->load->view('templates/header', $data);
+            $this->load->view('meals/meals_new', $data);
+            $this->load->view('templates/footer', $data);
         }
     }
 
