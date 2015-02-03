@@ -563,7 +563,7 @@ class Progress extends CI_Controller {
     public function set_progress() {
 // Get data
         include 'global.php';
-        $data['profile'] = $this->health->get_profile($users_id);
+        $data['profile'] = $this->health->get_profile($user_key);
 // Set Rules
 // Involves callback for file upload
         $config['upload_path']   = './uploads/';

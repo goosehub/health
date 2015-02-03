@@ -1,15 +1,18 @@
 <?php
 
 // Logic to decide to use username or real name
-function set_name($username, $first, $last) {
-// If first name exists, use full name
-    if ($first != '') {
-        $name = $first . ' ' . $last;
-// Else, use username
-    } else {
-        $name = $username;
+// function_exists to prevent redeclare error
+if (! function_exists('set_name')) { 
+    function set_name($username, $first, $last) {
+    // If first name exists, use full name
+        if ($first != '') {
+            $name = $first . ' ' . $last;
+    // Else, use username
+        } else {
+            $name = $username;
+        }
+        return $name;
     }
-    return $name;
 }
 
 // If user logged in
