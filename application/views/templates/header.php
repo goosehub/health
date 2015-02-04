@@ -38,7 +38,6 @@
 <body>
 
 <!-- Facebook App Init -->
-
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -55,9 +54,7 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-
 </script>
-
 <!-- End Facebook Code -->
 
 <header>
@@ -108,21 +105,35 @@
 </header>
 
 <!-- User is logged in -->
-		<?php if ( isset($log_check) ) { ?>
-		<aside>
+	<?php if ( isset($log_check) ) { ?>
+<!-- Use URL to determine which button to apply active to -->
+  	<?php $second_seg = $this->uri->segment(2); ?>
+  	<?php $first_seg = $this->uri->segment(1); ?>
+	<aside>
 <!-- Sidebar -->
-		<ul>
+	<ul>
+		<li <?php if ($second_seg != 'meals' && $second_seg != 'routines' && $second_seg != 'progress' 
+		&& $second_seg != 'conversations' &&  $first_seg === 'dashboard') echo 'class="active"'; ?> >
+		<a href="<?=base_url()?>dashboard" id="dashboard"><span class="icon-gauge"></span></a></li>
 
-			<li><a href="<?=base_url()?>dashboard" id="dashboard"><span class="icon-gauge"></span></a></li>
-			<li><a href="<?=base_url()?>dashboard/meals" id="nutrition"><span class="icon-bowl"></span></a></li>
-			<li><a href="<?base_url()?>dashboard/routines" id="routines"><span class="icon-blackboard"></span></a></li>
-			<li><a href="<?=base_url()?>dashboard/progress" id="progress"><span class="icon-area-graph"></span></a></li>
-			<li class="active" id="conversations"><a href="<?=base_url()?>dashboard/conversations"><span class="icon-chat"></span></a></li>
-			<li><a href="<?=base_url()?>help" id="help"><span class="icon-lifebuoy"></span></a></li>
-
-		</ul>
+		<li <?php if ($second_seg === 'meals') echo 'class="active"'; ?> >
+		<a href="<?=base_url()?>dashboard/meals" id="nutrition"><span class="icon-bowl"></span></a></li>
 		
-		</aside>
+		<li <?php if ($second_seg === 'routines') echo 'class="active"'; ?> >
+		<a href="<?=base_url()?>dashboard/routines" id="routines"><span class="icon-blackboard"></span></a></li>
+		
+		<li <?php if ($second_seg === 'progress') echo 'class="active"'; ?> >
+		<a href="<?=base_url()?>dashboard/progress" id="progress"><span class="icon-area-graph"></span></a></li>
+		
+		<li <?php if ($second_seg === 'conversations') echo 'class="active"'; ?> id="conversations">
+		<a href="<?=base_url()?>dashboard/conversations"><span class="icon-chat"></span></a></li>
+		
+		<li <?php if ($first_seg === 'help') echo 'class="active"'; ?> >
+		<a href="<?=base_url()?>help" id="help"><span class="icon-lifebuoy"></span></a></li>
+
+	</ul>
+	
+	</aside>
 				
 <!-- Facebook Like Button
 <?php $hide_like = $this->uri->segment(1, 0);
