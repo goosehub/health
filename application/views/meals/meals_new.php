@@ -1,13 +1,5 @@
 <h1>Create New Meal</h1>
 
-<?php
-if (isset($test)) {
-echo '<hr/><h1>For Testing Purposes</h1>';
-var_dump($test);
-echo '<hr/>';
-}
-?>
-
 <?php echo validation_errors(); ?>
 <?php echo form_open_multipart('meals/create_meal'); ?>
 
