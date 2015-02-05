@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2015 at 07:33 AM
+-- Generation Time: Feb 05, 2015 at 02:01 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -30,8 +30,6 @@ CREATE TABLE IF NOT EXISTS `foods` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `timestamp` int(12) NOT NULL COMMENT 'unix',
   `name` varchar(100) COLLATE utf8_bin NOT NULL,
-  `category` varchar(100) COLLATE utf8_bin NOT NULL,
-  `user_comment` text COLLATE utf8_bin NOT NULL,
   `user_key` int(12) NOT NULL COMMENT 'users FK',
   `serving_size` int(12) NOT NULL,
   `calories` int(12) NOT NULL,
@@ -59,8 +57,16 @@ CREATE TABLE IF NOT EXISTS `foods` (
   `vit_d` int(12) NOT NULL,
   `vit_e` int(12) NOT NULL,
   `zinc` int(12) NOT NULL,
+  `saved` varchar(12) COLLATE utf8_bin NOT NULL,
+  `type_vegetable` varchar(12) COLLATE utf8_bin NOT NULL,
+  `type_fruit` varchar(12) COLLATE utf8_bin NOT NULL,
+  `type_protein` varchar(12) COLLATE utf8_bin NOT NULL,
+  `type_dairy` varchar(12) COLLATE utf8_bin NOT NULL,
+  `type_fats` varchar(12) COLLATE utf8_bin NOT NULL,
+  `type_grain` varchar(12) COLLATE utf8_bin NOT NULL,
+  `type_other` varchar(12) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=29 ;
 
 -- --------------------------------------------------------
 
@@ -76,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `friends` (
   `status` varchar(100) COLLATE utf8_bin NOT NULL COMMENT 'request/requested/accepted',
   `self` varchar(12) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
@@ -105,8 +111,10 @@ CREATE TABLE IF NOT EXISTS `images` (
 CREATE TABLE IF NOT EXISTS `meals` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `timestamp` int(12) NOT NULL COMMENT 'unix',
+  `slug` varchar(24) COLLATE utf8_bin NOT NULL,
   `user_key` int(12) NOT NULL COMMENT 'users FK',
   `name` varchar(100) COLLATE utf8_bin NOT NULL,
+  `saved` varchar(12) COLLATE utf8_bin NOT NULL,
   `category` varchar(100) COLLATE utf8_bin NOT NULL,
   `user_comment` text COLLATE utf8_bin NOT NULL,
   `food_key_01` int(12) NOT NULL COMMENT 'All the following are foods FK',
@@ -134,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `meals` (
   `food_key_23` int(12) NOT NULL,
   `food_key_24` int(12) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=93 ;
 
 -- --------------------------------------------------------
 
@@ -182,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `progress` (
   `deadlift` varchar(12) COLLATE utf8_bin NOT NULL,
   `extra` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
@@ -330,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `gym_partner` varchar(12) COLLATE utf8_bin NOT NULL COMMENT 'true/false',
   `extra` text COLLATE utf8_bin NOT NULL COMMENT 'for admin notes',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
 -- --------------------------------------------------------
 

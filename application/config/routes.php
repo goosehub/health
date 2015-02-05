@@ -58,7 +58,8 @@ $route['users/(:any)/progress/(:any)'] = 'progress/point/$1/$2';
 
 $route['dashboard/meals'] = 'meals';
 $route['dashboard/meals/new'] = 'meals/meals_new';
-$route['users/(:any)/meals'] = 'meals/meals_list';
+$route['users/(:any)/meals'] = 'meals/meals_list/$1';
+$route['users/(:any)/meals/(:any)'] = 'meals/meal_view/$1/$2';
 
 $route['dashboard/routines'] = 'routines';
 $route['dashboard/routines/new'] = 'routines/routines_new';

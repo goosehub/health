@@ -2,7 +2,31 @@
 
 Class meals_model extends CI_Model {
   
-    function new_meal($user_key, $meal_name, $category, $timestamp, $comment, $save_as_recipe,
+    function get_meal_list($user_key) {
+        return $this->db->from('meals')
+        ->where('user_key', $user_key)
+        ->order_by("id", "DESC")
+        ->limit(9999)
+        ->get()
+        ->result();
+    }
+    function get_meal_item($user_key, $meal_slug) {
+        return $this->db->from('meals')
+        ->where('slug', $meal_slug)
+        ->order_by("id", "DESC")
+        ->limit(9999)
+        ->get()
+        ->row();
+    }
+    function get_food_item($food_key) {
+        return $this->db->from('foods')
+        ->where('id', $food_key)
+        ->order_by("id", "DESC")
+        ->limit(9999)
+        ->get()
+        ->row();
+    }
+    function new_meal($user_key, $meal_name, $category, $timestamp, $slug, $comment, $save_as_recipe,
             $food_result_0, $food_result_1, $food_result_2, $food_result_3, $food_result_4, 
             $food_result_5, $food_result_6, $food_result_7, $food_result_8, $food_result_9, 
             $food_result_10, $food_result_11, $food_result_12, $food_result_13, $food_result_14, 
@@ -14,6 +38,7 @@ Class meals_model extends CI_Model {
             'saved' => $save_as_recipe,
             'category' => $category,
             'timestamp' => $timestamp,
+            'slug' => $slug,
             'user_comment' => $comment,
             'food_key_01' => $food_result_0,
             'food_key_02' => $food_result_1,

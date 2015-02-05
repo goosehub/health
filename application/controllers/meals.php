@@ -36,11 +36,53 @@ class Meals extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 // Meals history
-    public function meals_list() {
+    public function meals_list($slug) {
         include 'global.php';
+        $data['profile']  = $this->health->get_profile_slug($slug);
+        $profile_id = $data['profile']['id'];
+        $data['meals'] = $this->meals_model->get_meal_list($profile_id);
         $data['title'] = 'Meal History';
         $this->load->view('templates/header', $data);
         $this->load->view('meals/meals_list', $data);
+        $this->load->view('templates/footer', $data);
+    }
+// Meal View
+    public function meal_view($slug, $meal_slug) {
+// Get profile data
+        include 'global.php';
+        $data['profile']  = $this->health->get_profile_slug($slug);
+        $profile_id = $data['profile']['id'];
+// Get meal data
+        $data['meal'] = $this->meals_model->get_meal_item($profile_id, $meal_slug);
+// Get food data
+            $data['food'][0] = $this->meals_model->get_food_item($data['meal']->food_key_01);
+            $data['food'][1] = $this->meals_model->get_food_item($data['meal']->food_key_02);
+            $data['food'][2] = $this->meals_model->get_food_item($data['meal']->food_key_03);
+            $data['food'][3] = $this->meals_model->get_food_item($data['meal']->food_key_04);
+            $data['food'][4] = $this->meals_model->get_food_item($data['meal']->food_key_05);
+            $data['food'][5] = $this->meals_model->get_food_item($data['meal']->food_key_06);
+            $data['food'][6] = $this->meals_model->get_food_item($data['meal']->food_key_07);
+            $data['food'][7] = $this->meals_model->get_food_item($data['meal']->food_key_08);
+            $data['food'][8] = $this->meals_model->get_food_item($data['meal']->food_key_09);
+            $data['food'][9] = $this->meals_model->get_food_item($data['meal']->food_key_10);
+            $data['food'][10] = $this->meals_model->get_food_item($data['meal']->food_key_11);
+            $data['food'][11] = $this->meals_model->get_food_item($data['meal']->food_key_12);
+            $data['food'][12] = $this->meals_model->get_food_item($data['meal']->food_key_13);
+            $data['food'][13] = $this->meals_model->get_food_item($data['meal']->food_key_14);
+            $data['food'][14] = $this->meals_model->get_food_item($data['meal']->food_key_15);
+            $data['food'][15] = $this->meals_model->get_food_item($data['meal']->food_key_16);
+            $data['food'][16] = $this->meals_model->get_food_item($data['meal']->food_key_17);
+            $data['food'][17] = $this->meals_model->get_food_item($data['meal']->food_key_18);
+            $data['food'][18] = $this->meals_model->get_food_item($data['meal']->food_key_19);
+            $data['food'][19] = $this->meals_model->get_food_item($data['meal']->food_key_20);
+            $data['food'][20] = $this->meals_model->get_food_item($data['meal']->food_key_21);
+            $data['food'][21] = $this->meals_model->get_food_item($data['meal']->food_key_22);
+            $data['food'][22] = $this->meals_model->get_food_item($data['meal']->food_key_23);
+            $data['food'][23] = $this->meals_model->get_food_item($data['meal']->food_key_24);
+        // 
+        $data['title'] = 'Meal History';
+        $this->load->view('templates/header', $data);
+        $this->load->view('meals/meals_view', $data);
         $this->load->view('templates/footer', $data);
     }
 // Meals Create
@@ -125,9 +167,11 @@ class Meals extends CI_Controller {
         $vit_d    = $this->input->post('vit_d');
         $vit_e    = $this->input->post('vit_e');
         $zinc    = $this->input->post('zinc');
-// Turn date and time into timestamp
+// Turn date and time into timestamp, then timestamp into slug
         $datetime = $date.' '.$time;
         $timestamp = strtotime($datetime);
+        $slug = date('M-d-Y_h:i_A', $timestamp);
+
 // If validation fails, reload meals form and display errors
         if ($this->form_validation->run() == FALSE) {
             $this->meals_new();
@@ -135,9 +179,9 @@ class Meals extends CI_Controller {
         else
         {
 // Insert into foods table with loop
-            // $count = count($food_name);
             for ($i = 0; $i < 24; $i++)
             {
+// Give empty checkbox and radio inputs a blank value
                 if (! isset($save_as_food[$i])) { $save_as_food[$i] = ''; }
                 if (! isset($food_type_vegetable[$i])) { $food_type_vegetable[$i] = ''; }
                 if (! isset($food_type_fruit[$i])) { $food_type_fruit[$i] = ''; }
@@ -146,24 +190,28 @@ class Meals extends CI_Controller {
                 if (! isset($food_type_fats[$i])) { $food_type_fats[$i] = ''; }
                 if (! isset($food_type_grain[$i])) { $food_type_grain[$i] = ''; }
                 if (! isset($food_type_other[$i])) { $food_type_other[$i] = ''; }
+// When food does not exist, make the result a blank value
                 if (! isset($food_name[$i])) {
                     $food_result[$i] = '';
                 }
                 else
                 {
-                    $food_result[$i] = $this->meals_model->new_food($user_key, $timestamp, $food_name[$i], $save_as_food[$i],
-                     $food_type_vegetable[$i], $food_type_fruit[$i], $food_type_protein[$i], $food_type_dairy[$i], 
-                     $food_type_fats[$i], $food_type_grain[$i], $food_type_other[$i], $calories[$i], $calories_fat[$i], 
-                     $total_fat[$i], $saturated_fat[$i], $trans_fat[$i], $cholesterol[$i], $sodium[$i], $total_carb[$i], 
-                     $dietary_fiber[$i], $sugars[$i], $protein[$i], $calcium[$i], $folic_acid[$i], $iron[$i], $magnesium[$i], 
-                     $niacin[$i], $potassium[$i], $riboflavin[$i], $vit_a[$i], $vit_b6[$i], $vit_b12[$i], $vit_c[$i], $vit_d[$i], 
-                     $vit_e[$i], $zinc[$i] );
+                    $food_result[$i] = $this->meals_model->new_food($user_key, $timestamp, 
+                    $food_name[$i], $save_as_food[$i], $food_type_vegetable[$i], $food_type_fruit[$i],
+                    $food_type_protein[$i], $food_type_dairy[$i], $food_type_fats[$i], 
+                    $food_type_grain[$i], $food_type_other[$i], $calories[$i], $calories_fat[$i], 
+                    $total_fat[$i], $saturated_fat[$i], $trans_fat[$i], $cholesterol[$i],
+                    $sodium[$i], $total_carb[$i], $dietary_fiber[$i], $sugars[$i], 
+                    $protein[$i], $calcium[$i], $folic_acid[$i], $iron[$i], $magnesium[$i], 
+                    $niacin[$i], $potassium[$i], $riboflavin[$i], $vit_a[$i], $vit_b6[$i],
+                    $vit_b12[$i], $vit_c[$i], $vit_d[$i], $vit_e[$i], $zinc[$i] );
                 }
             }
 // Insert into meals table
             if (! isset($save_as_recipe)) { $save_as_recipe = ''; }
-            $result = $this->meals_model->new_meal($user_key, $meal_name, $category, $timestamp, $comment, 
-            $save_as_recipe, $food_result[0], $food_result[1], $food_result[2], $food_result[3], $food_result[4], 
+            $result = $this->meals_model->new_meal($user_key, $meal_name, $category,
+            $timestamp, $slug, $comment, $save_as_recipe,
+            $food_result[0], $food_result[1], $food_result[2], $food_result[3], $food_result[4], 
             $food_result[5], $food_result[6], $food_result[7], $food_result[8], $food_result[9], 
             $food_result[10], $food_result[11], $food_result[12], $food_result[13], $food_result[14], 
             $food_result[15], $food_result[16], $food_result[17], $food_result[18], $food_result[19], 
