@@ -51,9 +51,48 @@ class Meals extends CI_Controller {
 // Get profile data
         include 'global.php';
         $data['profile']  = $this->health->get_profile_slug($slug);
-        $profile_id = $data['profile']['id'];
+// Check if profile found
+        if (isset($data['profile']['id'])) {
+            $friend_key = $profile_id = $data['profile']['id'];
+// If found and user logged in, check friend status
+            if ($this->session->userdata('logged_in')) {
+                $data['friend_status'] = $friend_status = $this->health->friend_status($user_key, $friend_key);
+            }
+// If friend, user can view page even if private
+            if (!empty($friend_status) && $friend_status['status'] === 'accepted') {
+                $view_allowed = TRUE;
+// If not a friend, privacy will block page from user
+            } else {
+                $view_allowed = false;
+            }
+        }
+// If profile is not found, load not found page
+        if (!$data['profile']) {
+            $data['title'] = $slug;
+            $data['slug']  = $slug;
+            $this->load->view('templates/header', $data);
+            $this->load->view('profile/not_found', $data);
+            $this->load->view('templates/footer', $data);
+        }
+// If private and not friends, load private page
+        else if ($data['profile']['private'] === 'on' && $view_allowed != TRUE) {
+            $data['title'] = $slug;
+            $data['slug']  = $slug;
+            $this->load->view('templates/header', $data);
+            $this->load->view('profile/private', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
 // Get meal data
-        $data['meal'] = $this->meals_model->get_meal_item($profile_id, $meal_slug);
+            $data['meal'] = $this->meals_model->get_meal_item($profile_id, $meal_slug);
+// If point not found, load point not found page
+            if (!$data['meal']) {
+                $data['title'] = 'Meal Not Found';
+                $data['meal_slug'] = $meal_slug;
+                $this->load->view('templates/header', $data);
+                $this->load->view('meals/meal_not_found', $data);
+                $this->load->view('templates/footer', $data);
+// Else, load the meal page
+            } else {
 // Get food data
             $data['food'][0] = $this->meals_model->get_food_item($data['meal']->food_key_01);
             $data['food'][1] = $this->meals_model->get_food_item($data['meal']->food_key_02);
@@ -79,11 +118,51 @@ class Meals extends CI_Controller {
             $data['food'][21] = $this->meals_model->get_food_item($data['meal']->food_key_22);
             $data['food'][22] = $this->meals_model->get_food_item($data['meal']->food_key_23);
             $data['food'][23] = $this->meals_model->get_food_item($data['meal']->food_key_24);
-        // 
+// Add together food values
+            $data['sum_calories']  = $data['sum_calories_fat'] = $data['sum_total_fat'] = 
+            $data['sum_saturated_fat'] = $data['sum_trans_fat'] = $data['sum_cholesterol'] = 
+            $data['sum_sodium'] = $data['sum_total_carb'] = $data['sum_dietary_fiber'] = 
+            $data['sum_sugars'] = $data['sum_protein'] = $data['sum_calcium'] = $data['sum_folic_acid'] = 
+            $data['sum_iron'] = $data['sum_magnesium'] = $data['sum_niacin'] = $data['sum_potassium'] = 
+            $data['sum_riboflavin'] = $data['sum_vit_a'] = $data['sum_vit_b6'] = $data['sum_vit_b12'] = 
+            $data['sum_vit_c'] = $data['sum_vit_d'] = $data['sum_vit_e'] = $data['sum_zinc'] = '';
+            foreach ($data['food'] as $row) {
+                if (isset($row->name)) {
+                    $data['sum_calories'] = $data['sum_calories'] + $row->calories; 
+                    $data['sum_calories_fat'] = $data['sum_calories_fat'] + $row->calories_fat;
+                    $data['sum_total_fat'] = $data['sum_total_fat'] + $row->total_fat;
+                    $data['sum_saturated_fat'] = $data['sum_saturated_fat'] + $row->saturated_fat;
+                    $data['sum_trans_fat'] = $data['sum_trans_fat'] + $row->trans_fat;
+                    $data['sum_cholesterol'] = $data['sum_cholesterol'] + $row->cholesterol;
+                    $data['sum_sodium'] = $data['sum_sodium'] + $row->sodium;
+                    $data['sum_total_carb'] = $data['sum_total_carb'] + $row->total_carb;
+                    $data['sum_dietary_fiber'] = $data['sum_dietary_fiber'] + $row->dietary_fiber;
+                    $data['sum_sugars'] = $data['sum_sugars'] + $row->sugars;
+                    $data['sum_protein'] = $data['sum_protein'] + $row->protein;
+                    $data['sum_calcium'] = $data['sum_calcium'] + $row->calcium;
+                    $data['sum_folic_acid'] = $data['sum_folic_acid'] + $row->folic_acid;
+                    $data['sum_iron'] = $data['sum_iron'] + $row->iron;
+                    $data['sum_magnesium'] = $data['sum_magnesium'] + $row->magnesium;
+                    $data['sum_niacin'] = $data['sum_niacin'] + $row->niacin;
+                    $data['sum_potassium'] = $data['sum_potassium'] + $row->potassium;
+                    $data['sum_riboflavin'] = $data['sum_riboflavin'] + $row->riboflavin;
+                    $data['sum_vit_a'] = $data['sum_vit_a'] + $row->vit_a;
+                    $data['sum_vit_b6'] = $data['sum_vit_b6'] + $row->vit_b6;
+                    $data['sum_vit_b12'] = $data['sum_vit_b12'] + $row->vit_b12;
+                    $data['sum_vit_c'] = $data['sum_vit_c'] + $row->vit_c;
+                    $data['sum_vit_d'] = $data['sum_vit_d'] + $row->vit_d;
+                    $data['sum_vit_e'] = $data['sum_vit_e'] + $row->vit_e;
+                    $data['sum_zinc'] = $data['sum_zinc'] + $row->zinc;
+
+                }
+            }
+// Load View
         $data['title'] = 'Meal History';
         $this->load->view('templates/header', $data);
         $this->load->view('meals/meals_view', $data);
         $this->load->view('templates/footer', $data);
+    }
+    }
     }
 // Meals Create
     public function create_meal() {
@@ -98,7 +177,7 @@ class Meals extends CI_Controller {
         $this->form_validation->set_rules('time', 'Time', 'trim|xss_clean|max_length[64]|required');
         $this->form_validation->set_rules('comment', 'Comment', 'trim|xss_clean|max_length[10000]');
 // Food Fields
-        $this->form_validation->set_rules('food_name[]', 'Meal Name', 'trim|xss_clean|max_length[64]');
+        $this->form_validation->set_rules('food_name[]', 'Meal Name', 'trim|xss_clean|max_length[64]|required');
         $this->form_validation->set_rules('serving_size[]', 'Serving Sizes', 'trim|xss_clean|max_length[12]|numeric');
         $this->form_validation->set_rules('calories[]', 'calories', 'trim|xss_clean|max_length[12]|numeric');
         $this->form_validation->set_rules('calories_fat[]', 'calories_fat', 'trim|xss_clean|max_length[12]|numeric');
