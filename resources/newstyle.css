@@ -173,6 +173,12 @@ label {
 	box-shadow: #dce4eb 0 2px 0;
 	padding: 20px;
 }
+.content {
+	background: #fff;
+	border-left: #cdd6df 1px solid;
+	border-right: #cdd6df 1px solid;
+	padding: 20px;
+}
 p {
 	color: #808b96;
 	font-size: 13px;
