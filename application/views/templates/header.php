@@ -84,13 +84,13 @@
 				</select>
 			</div></div>
 	<!-- Profile Image -->
-		<!--
-			<div class="profile-img-cnt">
+		
+<!-- 			<div class="profile-img-cnt">
 				<a href="<?=base_url()?>users/<?php echo $self['username']; ?>">
 					<img class="nav-img" src="<?=base_url()?>uploads/<?php echo $self['image']; ?>"/>
 				</a>
-			</div>
-			<?php } ?></div><!-->
+			</div> -->
+			<?php } ?></div>
 			
 			<!-- User is NOT logged in -->
 			
@@ -99,6 +99,7 @@
 		<a href="<?=base_url()?>about">About</a> |<!-->
 		<!-- <a href="<?=base_url()?>dashboard">Login</a> | -->
 		<!-- <a href="<?=base_url()?>join">Join</a> | -->
+		<?php if ( ! isset($log_check) ) { ?>
 		<div class="fr"><div class="login">
 		  <?php echo validation_errors(); ?>
 		  <?php echo form_open('login/verifylogin'); ?>
@@ -109,6 +110,7 @@
 		   <input type="submit" value="Login"/>
 		  </form></div>
 		  </div></div>
+		<?php } ?>
 <!--
 		<script>
 		  // This is called with the results from from FB.getLoginStatus().

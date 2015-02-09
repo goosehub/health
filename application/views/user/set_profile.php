@@ -39,7 +39,7 @@
      <label for="gender">Gender:</label>
      <select class="input-textarea" type="gender" sixe="20" id="gender" name="gender">
        <option value="<?php echo $profile['gender']; ?>"><?php echo $profile['gender']; ?></option>
-       <option value="Private">Private</option>
+       <!-- <option value="Private">Private</option> -->
        <option value="Male">Male</option>
        <option value="Female">Female</option>
      </select>
@@ -59,10 +59,10 @@
      <label for="private">Only show profile to friends:</label>
      <input class="input-textarea"
      type="checkbox" size="20" id="private" name="private" <?php echo $profile['private']; ?>/>
-     <br/>
+      <!--      <br/>
      <label for="goal">Goal:</label>
      <textarea class="input-textarea"
-     rows="4" cols="50" id="goal" name="goal"/><?php echo $profile['goal']; ?></textarea>
+     rows="4" cols="50" id="goal" name="goal"/><?php echo $profile['goal']; ?></textarea> -->
      <br/>
      <label for="about">About:</label>
      <textarea class="input-textarea"
