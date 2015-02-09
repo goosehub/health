@@ -1,4 +1,62 @@
-<h1>Join</h1>
+<div class="mt-med"><div class="content-full">
+
+<h1>Create an Account</h1>
+
+<p>We need to collect some basic information to create an account for you.</p>
+	
+	<div class="mt-med"><div class="signup">
+		
+		<div class="input-row">
+		
+			<div class="question">
+				
+				Email Address:
+				
+			</div><!--question-->
+		
+			<div class="answer">
+				
+				<input type="text" class="answer-input" id="username" name="username" />
+				
+			</div><!--answer-->
+		
+		</div><!--input-row-->
+		
+		<div class="input-row">
+		
+			<div class="question">
+				
+				Password:
+				
+			</div><!--question-->
+		
+			<div class="answer">
+				
+				<input type="text" class="answer-input" id="username" name="username" />
+				
+			</div><!--answer-->
+		
+		</div><!--input-row-->
+		
+		<div class="input-row">
+		
+			<div class="question">
+				
+				Confirm Password:
+				
+			</div><!--question-->
+		
+			<div class="answer">
+				
+				<input type="text" class="answer-input" id="username" name="username" />
+				
+			</div><!--answer-->
+		
+		</div><!--input-row-->
+		
+	</div>
+	
+	<!--
    <?php echo validation_errors(); ?>
    <?php echo form_open('join/verifyjoin'); ?>
      <label for="username">Username:</label>
@@ -17,7 +75,7 @@
      <br/>
      <input type="submit" value="Join"/>
    </form>
-
+<!--
 <h3>Or login using Facebook</h3>
 
 <script>
@@ -110,9 +168,9 @@
   the JavaScript SDK to present a graphical Login button that triggers
   the FB.login() function when clicked.
 -->
-
+<!--
 <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+</fb:login-button><!-->
 
 <div id="status">
-</div>
+</div></div></div>

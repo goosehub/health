@@ -1,6 +1,6 @@
 body {
 	background: #edf1f5;
-	font-family: "Montserrat", sans-serif;
+	font-family: "Lato", sans-serif;
 }
 .wrapper {
 	margin: 0 auto;
@@ -16,7 +16,7 @@ body {
 }
 h1 {
 	color: #505a66;
-	font-weight: 100;
+	font-weight: 400;
 }
 .cf p {
 	font-size: 15px;
@@ -145,4 +145,78 @@ aside ul li a {
 	display: block;
 	height: 60px;
 	width: 60px;
+}
+
+/* Login */
+
+.login {
+	margin-top: 12px;
+}
+label {
+	color: #d9e0e7;
+	font-size: 13px;
+}
+.login-input {
+	background: #fff;
+	border: #131619 1px solid;
+	border-radius: 2px;
+	height: 24px;
+	padding: 0 10px 0 10px;
+}
+
+/* Content */
+
+.content-full {
+	background: #fff;
+	border-radius: 3px;
+	border: #cdd6df 1px solid;
+	box-shadow: #dce4eb 0 2px 0;
+	padding: 20px;
+}
+p {
+	color: #808b96;
+	font-size: 13px;
+	line-height: 20px;
+}
+.divider {
+	background: #e3e7ec;
+	display: block;
+	height: 1px;
+	width: 100%;
+	margin-top: 6px;
+	margin-bottom: 10px;
+}
+.mt-med {
+	margin-top: 20px;
+}
+.signup {
+	width: 340px;
+	display: inline-block;
+}
+.question {
+	color: #808b96;
+	font-size: 13px;
+	font-weight: 400;
+	width: 200px;
+	float: left;
+	line-height: 20px;
+}
+.answer {
+	float: left;
+	width: 200px;
+}
+.answer-input {
+	background: #fff;
+	border-radius: 2px;
+	border: #cdd6df 1px solid;
+	height: 24px;
+	width: 180px;
+	padding: 0 10px 0 10px;
+}
+
+/* Banner */
+
+.banner {
+	background: url(../images/banner.jpg) no-repeat;
+	height: 380px;
 }

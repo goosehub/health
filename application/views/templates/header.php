@@ -1,43 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- For character display -->
+
 	<meta charset="utf-8">
-<!-- Title -->
 	<title><?php echo $title ?></title>
-<!-- For mobile views -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- For Crawlers -->
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<meta name="robots" CONTENT="all">
-<!-- Fallback for Internet Explorer 9 -->
-	<!--[if lt IE 9]>
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-<!-- Favicon Icon -->
     <link rel="shortcut icon" href="<?=base_url()?>favicon.ico">
-<!-- CSS -->
 	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/reset.css">
 	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/style.css">
 	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/newstyle.css">
 	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/framework.css">
 	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/icons.css">
 	<link rel="stylesheet" href="http://i.icomoon.io/public/temp/cc430a925c/ProgressPals/style.css">
-	<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Montserrat:400,700' />
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="<?=base_url()?>resources/jquery-1.11.2.min.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>resources/tipped.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>resources/tooltips.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>resources/tipped.css" />
-	 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type="text/javascript" src="http://dl.dropbox.com/u/40036711/Scripts/ddslick.js"></script>
-	 <script type="text/javascript" src="<?=base_url()?>resources/dd.js"></script>
+	<link rel="stylesheet" href="https://s3.amazonaws.com/icomoon.io/55864/ProgressPals/style.css">
+	<!-- Fallback for Internet Explorer 9 -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 	
 </head>
 <body>
-
 <!-- Facebook App Init -->
+<!--
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -79,7 +72,7 @@
 			<div class="fr">
 				
 	<!-- Dropdown -->
-	
+			<div class="fr">
 			<div class="select-cnt">
 				<select class="nav-select" onChange="window.location.href=this.value">
 				  <option><?php echo $name; ?></option>
@@ -89,7 +82,7 @@
 				Friend Requests<?php echo $head_requests; ?></a></option>
 				  <option value="<?=base_url()?>login/logout">Logout</a></option>
 				</select>
-			</div>
+			</div></div>
 	<!-- Profile Image -->
 		<!--
 			<div class="profile-img-cnt">
@@ -97,74 +90,26 @@
 					<img class="nav-img" src="<?=base_url()?>uploads/<?php echo $self['image']; ?>"/>
 				</a>
 			</div>
-			<?php } ?></div>
-		-->
-		
-	</div><!--wrapper-->
-	
-</header>
-
-<!-- User is logged in -->
-	<?php if ( isset($log_check) ) { ?>
-<!-- Use URL to determine which button to apply active to -->
-  	<?php $second_seg = $this->uri->segment(2); ?>
-  	<?php $first_seg = $this->uri->segment(1); ?>
-	<aside>
-<!-- Sidebar -->
-	<ul>
-		<li <?php if ($second_seg != 'meals' && $second_seg != 'routines' && $second_seg != 'progress' 
-		&& $second_seg != 'conversations' &&  $first_seg === 'dashboard') echo 'class="active"'; ?> >
-		<a href="<?=base_url()?>dashboard" id="dashboard"><span class="icon-gauge"></span></a></li>
-
-		<li <?php if ($second_seg === 'meals') echo 'class="active"'; ?> >
-		<a href="<?=base_url()?>dashboard/meals" id="nutrition"><span class="icon-bowl"></span></a></li>
-		
-		<li <?php if ($second_seg === 'routines') echo 'class="active"'; ?> >
-		<a href="<?=base_url()?>dashboard/routines" id="routines"><span class="icon-blackboard"></span></a></li>
-		
-		<li <?php if ($second_seg === 'progress') echo 'class="active"'; ?> >
-		<a href="<?=base_url()?>dashboard/progress" id="progress"><span class="icon-area-graph"></span></a></li>
-		
-		<li <?php if ($second_seg === 'conversations') echo 'class="active"'; ?> id="conversations">
-		<a href="<?=base_url()?>dashboard/conversations"><span class="icon-chat"></span></a></li>
-		
-		<li <?php if ($first_seg === 'help') echo 'class="active"'; ?> >
-		<a href="<?=base_url()?>help" id="help"><span class="icon-lifebuoy"></span></a></li>
-
-	</ul>
-	
-	</aside>
-				
-<!-- Facebook Like Button
-<?php $hide_like = $this->uri->segment(1, 0);
-	if ($hide_like != 'dashboard')
-		{ ?>
-			<div
-			  class="fb-like"
-			  data-layout="box_count"
-			  data-send="true"
-			  data-width="450"
-			  data-show-faces="true">
-			</div>
-		<?php } ?>-->
-
-<!-- User is NOT logged in -->
-		<?php } else { ?>
-<!-- Unlogged in navbar -->
-		<a href="<?=base_url()?>">Home</a> |
-		<a href="<?=base_url()?>about">About</a> |
+			<?php } ?></div><!-->
+			
+			<!-- User is NOT logged in -->
+			
+<!-- Unlogged in navbar --><div class="wrapper">
+		<!--<a href="<?=base_url()?>">Home</a> |
+		<a href="<?=base_url()?>about">About</a> |<!-->
 		<!-- <a href="<?=base_url()?>dashboard">Login</a> | -->
 		<!-- <a href="<?=base_url()?>join">Join</a> | -->
-
+		<div class="fr"><div class="login">
 		  <?php echo validation_errors(); ?>
 		  <?php echo form_open('login/verifylogin'); ?>
-		   <label for="username">Username:</label>
-		   <input type="text" name="username"/>
+		   <label for="username">Email Address:</label>
+		   <input type="text" class="login-input" name="username"/>
 		   <label for="password">Password:</label>
-		   <input type="password" name="password"/>
+		   <input type="password" class="login-input" name="password"/>
 		   <input type="submit" value="Login"/>
-		  </form>
-
+		  </form></div>
+		  </div></div>
+<!--
 		<script>
 		  // This is called with the results from from FB.getLoginStatus().
 		  function statusChangeCallback(response) {
@@ -227,14 +172,53 @@
 		    });
 		  }
 		</script>
-		<!-- Login Button -->
+		
+		<!-- Login Button
 		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 		</fb:login-button>
-		<div id="status"></div>
+		<div id="status"></div><!-->
+		
+		</div>
+		</div>
+		
+	</div><!--wrapper-->
+	
+</header>
 
-		<?php } ?>
+<!-- User is logged in -->
+	<?php if ( isset($log_check) ) { ?>
+<!-- Use URL to determine which button to apply active to -->
+  	<?php $second_seg = $this->uri->segment(2); ?>
+  	<?php $first_seg = $this->uri->segment(1); ?>
+	<aside>
+<!-- Sidebar -->
+	<ul>
+		<li <?php if ($second_seg != 'meals' && $second_seg != 'routines' && $second_seg != 'progress' 
+		&& $second_seg != 'conversations' &&  $first_seg === 'dashboard') echo 'class="active"'; ?> >
+		<a href="<?=base_url()?>dashboard" id="dashboard"><span class="icon-gauge"></span></a></li>
+
+		<li <?php if ($second_seg === 'meals') echo 'class="active"'; ?> >
+		<a href="<?=base_url()?>dashboard/meals" id="nutrition"><span class="icon-bowl"></span></a></li>
+		
+		<li <?php if ($second_seg === 'routines') echo 'class="active"'; ?> >
+		<a href="<?=base_url()?>dashboard/routines" id="routines"><span class="icon-blackboard"></span></a></li>
+		
+		<li <?php if ($second_seg === 'progress') echo 'class="active"'; ?> >
+		<a href="<?=base_url()?>dashboard/progress" id="progress"><span class="icon-area-graph"></span></a></li>
+		
+		<li <?php if ($second_seg === 'conversations') echo 'class="active"'; ?> id="conversations">
+		<a href="<?=base_url()?>dashboard/conversations"><span class="icon-chat"></span></a></li>
+		
+		<li <?php if ($first_seg === 'help') echo 'class="active"'; ?> >
+		<a href="<?=base_url()?>help" id="help"><span class="icon-lifebuoy"></span></a></li>
+
+	</ul>
+	
+	</aside>
+
+
 
 		</div>
 	</div>
-
+<?php } ?>
 <div class="wrapper">
