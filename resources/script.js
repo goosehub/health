@@ -1,4 +1,3 @@
-// Used for food form
 var food_number = 1;
 
 $(document).ready(function()

@@ -441,21 +441,12 @@ class Progress extends CI_Controller {
         $before_point = date('m-d-y', $before);
         $after_point  = date('m-d-y', $after);
 // Find closest point
-        $new_before       = $this->progress_model->compare_search($user_key, $before, $before_point, 'before');
-        $new_after        = $this->progress_model->compare_search($user_key, $after, $after_point, 'after');
-// Determine if search returned two points
-        if ($new_before != NULL || $new_after != NULL )
-        {
-            $new_before = $new_before->date;
-            $new_after  = $new_after->date;
-        }
-        else
-        {
-            $new_before = date('m-d-y', $before);
-            $new_after  = date('m-d-y', $after);
-        }
+        $before       = $this->progress_model->compare_search($user_key, $before, $before_point, 'before');
+        $after        = $this->progress_model->compare_search($user_key, $after, $after_point, 'after');
+        $before       = $before->date;
+        $after        = $after->date;
 // Redirect
-        redirect('users/' . $slug . '/progress/' . $new_before . '/' . $new_after . '', 'refresh');
+        redirect('users/' . $slug . '/progress/' . $before . '/' . $after . '', 'refresh');
     }
 // Find progress point
     public function find_point($slug) {
