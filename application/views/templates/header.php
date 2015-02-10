@@ -27,6 +27,9 @@
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	
+	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/jquery.dropdown.css" />
+	<script type="text/javascript" src="<?=base_url()?>resources/jquery.dropdown.js"></script>
+	
 </head>
 <body>
 <!-- Facebook App Init -->
@@ -72,7 +75,31 @@
 			<div class="fr">
 				
 	<!-- Dropdown -->
+	
 			<div class="fr">
+				
+				<div class="nest">
+					
+					<div class="active-user" data-dropdown="#dropdown-1">
+				
+						<a href="#"><img src="<?=base_url()?>resources/images/avatar.jpg" alt="" /><?php echo $name; ?><span class="icon-chevron-down2"></span></a>
+						
+						<div class="mt-med"><div class="nest"><div id="dropdown-1" class="dropdown dropdown-tip">
+    <ul class="dropdown-menu">
+        <li><a href="<?=base_url()?>users/<?php echo $self['username']; ?>">My Profile</a></li>
+        <li><a href="<?=base_url()?>users/<?php echo $self['username']; ?>>/friends">Friends List</a></li>
+        <li><a href="<?=base_url()?>dashboard/friend_requests">Friend Requests</a></li>
+        <li class="dropdown-divider"></li>
+        <li><a href="<?=base_url()?>login/logout">Sign Out</a></li>
+    </ul>
+</div></div></div>
+						
+					</div><!--active-user-->
+					
+				</div><!--nest-->
+				
+			</div><!--fr-->
+			<!--
 			<div class="select-cnt">
 				<select class="nav-select" onChange="window.location.href=this.value">
 				  <option><?php echo $name; ?></option>
