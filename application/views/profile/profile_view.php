@@ -55,6 +55,10 @@
 
 <p><?php echo $gym_partner; ?></p>
 
+<!-- If goal exists, show goal -->
+<?php if ($profile['goal'] != '') { ?>
+<p>goal: <?php echo $profile['goal']; ?></p>
+
 <!-- If about exists, show about -->
 <?php if ($profile['about'] != '') { ?>
 <?php } ?>
