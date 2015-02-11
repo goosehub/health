@@ -52,23 +52,7 @@
 					</form>
 					
 			</div><!--fl-->
-					
-<<<<<<< Updated upstream
-					<div class="active-user" data-dropdown="#dropdown-1">
-				
-						<a href="#"><img src="<?=base_url()?>resources/images/avatar.jpg" alt="" />
-						<?php echo $name; ?><span class="icon-chevron-down2"></span></a>
-						
-						<div class="mt-med"><div class="nest"><div id="dropdown-1" class="dropdown dropdown-tip">
-    <ul class="dropdown-menu">
-        <li><a href="<?=base_url()?>users/<?php echo $self['username']; ?>">My Profile</a></li>
-        <li><a href="<?=base_url()?>users/<?php echo $self['username']; ?>/friends">Friends List</a></li>
-        <li><a href="<?=base_url()?>dashboard/friend_requests">Friend Requests</a></li>
-        <li class="dropdown-divider"></li>
-        <li><a href="<?=base_url()?>login/logout">Sign Out</a></li>
-    </ul>
-</div></div></div>
-=======
+
 				<!-- Dropdown -->
 				<div class="fr">
 					
@@ -101,23 +85,18 @@
 							</div><!--mt-med-->
 							
 						</div><!--active-user-->
->>>>>>> Stashed changes
 						
 					</div><!--nest-->
 					
 				</div><!--fr-->
-				
-<<<<<<< Updated upstream
-			</div><!--fr-->
 
-			<?php } ?></div>
+			</div><!--wrapper-->
+
 			<!-- User is NOT logged in -->
-=======
 				<?php } ?>
 				
 				<!-- User is NOT logged in -->
 				<div class="wrapper">
->>>>>>> Stashed changes
 			
 					<?php if ( ! isset($log_check) ) { ?>
 				

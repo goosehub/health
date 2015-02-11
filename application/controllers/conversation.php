@@ -30,7 +30,7 @@ class Conversation extends CI_Controller {
                 } else {
                     $day_name = date('M d Y', $timestamp);
                 }
-                $hours_mins = date('H:m a', $timestamp);
+                $hours_mins = date('h:m a', $timestamp);
                 return $day_name . ' ' . $hours_mins;
             }
 // Load view

@@ -89,6 +89,7 @@ class Dashboard extends CI_Controller {
     }
 // Used for processing profile information forms
     public function set_profile() {
+        include 'global.php';
 // Validation
         $this->load->library('form_validation');
         $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|xss_clean');
@@ -125,9 +126,8 @@ class Dashboard extends CI_Controller {
             $config['encrypt_name']  = TRUE;
             $this->load->library('upload', $config);
 // If upload failed, load form with errors
-            if (!$this->upload->do_upload()) {
+            if (!$this->upload->do_upload() && ! isset($file)) {
                 $data['image_error'] = $this->upload->display_errors();
-                include 'global.php';
                 $data['profile'] = $this->health->get_profile($users_id);
                 $data['title'] = 'Error';
                 $this->load->view('templates/header', $data);
@@ -135,12 +135,11 @@ class Dashboard extends CI_Controller {
                 $this->load->view('templates/footer', $data);
 // Else success, set data and redirect to dashboard
             } else {
-                include 'global.php';
                 $file     = $this->upload->data();
                 $filename = $file['file_name'];
                 $this->health->set_profile_picture($users_id, $filename);
-                redirect('dashboard', 'refresh');
             }
+            redirect('dashboard', 'refresh');
         }
     }
 // Callback used in set_profile

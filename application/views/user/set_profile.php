@@ -95,9 +95,6 @@
           <div class="mt-med">
               
               <div class="nest">
-              
-              <?php echo validation_errors(); ?>
-              <?php echo form_open('dashboard/set_password'); ?>
           
                 <label for="existing_password">Existing Password:</label>
                 <input class="input-textarea" type="password" size="20" id="existing_password" name="existing_password"/>
