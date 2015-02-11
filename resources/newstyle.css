@@ -51,19 +51,7 @@ header {
 	padding-left: 10px;
 	float: left;
 }
-.active-user {
-	color: #cbd3db;
-	line-height: 50px;
-	font-size: 15px;
-	font-weight: bold;
-}
-.active-user img {
-	padding-right: 10px;
-	vertical-align: middle;
-}
-.active-user ul li {
-	
-}
+
 table img {
 	float: left;
 	padding-right: 15px;
@@ -71,17 +59,13 @@ table img {
 td.message-received {
 	vertical-align: middle;
 }
-.active-user ul li:last-child {
-	background: url(images/dropdown.png) no-repeat right;
-	padding-right: 30px;
-}
 .active-user a {
 	color: #cbd3db;
 	font-size: 15px;
 	font-weight: bold;
 	text-decoration: none;
-	text-shadow: #0c1116 0 2px 0;
 	transition: .3s;
+	line-height: 50px;
 }
 .active-user a:hover {
 	color: #fff;
@@ -153,7 +137,7 @@ aside ul li a {
 	margin-top: 12px;
 }
 label {
-	color: #d9e0e7;
+	color: #808b96;
 	font-size: 13px;
 }
 .login-input {
@@ -164,6 +148,14 @@ label {
 	padding: 0 10px 0 10px;
 }
 
+.active-user img {
+	height: 28px;
+	width: 28px;
+	margin-top: 12px;
+	margin-right: 10px;
+	border-radius: 3px;
+	float: left;
+}
 /* Content */
 
 .content-full {
@@ -225,4 +217,13 @@ p {
 .banner {
 	background: url(../images/banner.jpg) no-repeat;
 	height: 380px;
+}
+
+
+
+
+.icon-chevron-down2:before {
+    content: "\f078";
+    font-size: 12px;
+    padding-left: 10px;
 }
