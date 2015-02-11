@@ -82,12 +82,13 @@
 					
 					<div class="active-user" data-dropdown="#dropdown-1">
 				
-						<a href="#"><img src="<?=base_url()?>resources/images/avatar.jpg" alt="" /><?php echo $name; ?><span class="icon-chevron-down2"></span></a>
+						<a href="#"><img src="<?=base_url()?>resources/images/avatar.jpg" alt="" />
+						<?php echo $name; ?><span class="icon-chevron-down2"></span></a>
 						
 						<div class="mt-med"><div class="nest"><div id="dropdown-1" class="dropdown dropdown-tip">
     <ul class="dropdown-menu">
         <li><a href="<?=base_url()?>users/<?php echo $self['username']; ?>">My Profile</a></li>
-        <li><a href="<?=base_url()?>users/<?php echo $self['username']; ?>>/friends">Friends List</a></li>
+        <li><a href="<?=base_url()?>users/<?php echo $self['username']; ?>/friends">Friends List</a></li>
         <li><a href="<?=base_url()?>dashboard/friend_requests">Friend Requests</a></li>
         <li class="dropdown-divider"></li>
         <li><a href="<?=base_url()?>login/logout">Sign Out</a></li>
@@ -99,26 +100,8 @@
 				</div><!--nest-->
 				
 			</div><!--fr-->
-			<!--
-			<div class="select-cnt">
-				<select class="nav-select" onChange="window.location.href=this.value">
-				  <option><?php echo $name; ?></option>
-				  <option value="<?=base_url()?>users/<?php echo $self['username']; ?>">Your Profile</option>
-				  <option value="<?=base_url()?>users/<?php echo $self['username']; ?>/friends">Your Friends</a></option>
-				  <option value="<?=base_url()?>dashboard/friend_requests">
-				Friend Requests<?php echo $head_requests; ?></a></option>
-				  <option value="<?=base_url()?>login/logout">Logout</a></option>
-				</select>
-			</div></div>
-	<!-- Profile Image -->
-		
-<!-- 			<div class="profile-img-cnt">
-				<a href="<?=base_url()?>users/<?php echo $self['username']; ?>">
-					<img class="nav-img" src="<?=base_url()?>uploads/<?php echo $self['image']; ?>"/>
-				</a>
-			</div> -->
+
 			<?php } ?></div>
-			
 			<!-- User is NOT logged in -->
 			
 <!-- Unlogged in navbar --><div class="wrapper">
