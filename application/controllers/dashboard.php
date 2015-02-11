@@ -71,6 +71,7 @@ class Dashboard extends CI_Controller {
     }
 // Used for entering profile information
     public function profile_form() {
+        $data['image_error'] = '';
 // If user logged in
         if ($this->session->userdata('logged_in')) {
 // Get data
@@ -90,6 +91,9 @@ class Dashboard extends CI_Controller {
     public function set_profile() {
 // Validation
         $this->load->library('form_validation');
+        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|xss_clean');
+        $this->form_validation->set_rules('password', 'New Password', 'trim|xss_clean|matches[confirm_password]');
+        $this->form_validation->set_rules('existing_password', 'Existing Password', 'trim|xss_clean|callback_password_insert_database');
         $this->form_validation->set_rules('email', 'Email', 'trim|xss_clean|valid_email');
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|xss_clean|max_length[24]');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim|xss_clean|max_length[24]');
@@ -111,7 +115,32 @@ class Dashboard extends CI_Controller {
             $this->load->view('templates/footer', $data);
 // Else, success, redirect to dashboard
         } else {
-            redirect('dashboard', 'refresh');
+// Image upload
+// Set rules
+            $config['upload_path']   = './uploads/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size']      = '100000000';
+            $config['max_width']     = '10240';
+            $config['max_height']    = '7680';
+            $config['encrypt_name']  = TRUE;
+            $this->load->library('upload', $config);
+// If upload failed, load form with errors
+            if (!$this->upload->do_upload()) {
+                $data['image_error'] = $this->upload->display_errors();
+                include 'global.php';
+                $data['profile'] = $this->health->get_profile($users_id);
+                $data['title'] = 'Error';
+                $this->load->view('templates/header', $data);
+                $this->load->view('user/set_profile', $data);
+                $this->load->view('templates/footer', $data);
+// Else success, set data and redirect to dashboard
+            } else {
+                include 'global.php';
+                $file     = $this->upload->data();
+                $filename = $file['file_name'];
+                $this->health->set_profile_picture($users_id, $filename);
+                redirect('dashboard', 'refresh');
+            }
         }
     }
 // Callback used in set_profile
@@ -131,7 +160,7 @@ class Dashboard extends CI_Controller {
         $username    = $this->input->post('username');
         $session_data = $this->session->userdata('logged_in');
         $users_id     = $data['id'] = $session_data['id'];        
-// Query the database
+// Query the database for username change
         $result = $this->health->username($users_id, $username);
 // If username exists, fail validation
         if ($result) {
@@ -143,81 +172,40 @@ class Dashboard extends CI_Controller {
             return TRUE;
         }
     }
-// Used for changing the password
-    public function set_password() {
-// Validation
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|xss_clean|required');
-        $this->form_validation->set_rules('password', 'New Password', 'trim|xss_clean|required|matches[confirm_password]');
-        $this->form_validation->set_rules('existing_password', 'Existing Password', 'trim|xss_clean|required|callback_password_insert_database');
-// If validation fails, load set_profile page
-        if ($this->form_validation->run() == FALSE) {
-            include 'global.php';
-            $data['profile'] = $this->health->get_profile($users_id);
-            $data['title']   = 'Changing Password';
-            $this->load->view('templates/header', $data);
-            $this->load->view('user/password_form', $data);
-            $this->load->view('templates/footer', $data);
-// Else, success, go to dashboard
-        } else {
-            redirect('dashboard', 'refresh');
-        }
-    }
 // Callback used in set_password
     public function password_insert_database($existing_password) {
 // Get data
-        $password     = $existing_password;
+        $existing_password     = $existing_password;
+        $password = $this->input->post('password');
+        $confirm_password = $this->input->post('confirm_password');
         $session_data = $this->session->userdata('logged_in');
         $users_id     = $data['id'] = $session_data['id'];
         $username     = $session_data['username'];
-        $result       = $this->health->login($username, $password);
-// If no result
-        if (!$result) {
-// Password incorrect
-            $this->form_validation->set_message('password_insert_database', 'Password incorrect');
-            return false;
-// Else, success, change password and pass validation
-        } else {
-            $password = $this->input->post('password');
-            $result   = $this->health->set_password($users_id, $password);
+// If not password given, pass validation
+        if ($password === '')
+        {
             return TRUE;
         }
-    }
-// Used for profile picture upload form
-    function picture() {
-        include 'global.php';
-        $data['error'] = '';
-        $data['title'] = 'Upload New Profile Picture';
-        $this->load->view('templates/header', $data);
-        $this->load->view('user/new_picture', $data);
-        $this->load->view('templates/footer', $data);
-    }
-// Used for processing uploaded profile pictures
-    public function do_upload() {
-// Set rules
-        $config['upload_path']   = './uploads/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size']      = '100000000';
-        $config['max_width']     = '10240';
-        $config['max_height']    = '7680';
-        $config['encrypt_name']  = TRUE;
-// Do upload
-        $this->load->library('upload', $config);
-// If upload failed, load form with errors
-        if (!$this->upload->do_upload()) {
-            $data['error'] = $this->upload->display_errors();
-            include 'global.php';
-            $data['title'] = 'Upload New Profile Picture';
-            $this->load->view('templates/header', $data);
-            $this->load->view('user/new_picture', $data);
-            $this->load->view('templates/footer', $data);
-// Else success, set data and redirect to dashboard
-        } else {
-            include 'global.php';
-            $file     = $this->upload->data();
-            $filename = $file['file_name'];
-            $this->health->set_profile_picture($users_id, $filename);
-            redirect('dashboard', 'refresh');
+// Check if new password matches confirm password
+        else if ($password === $confirm_password)
+        {
+            $result       = $this->health->login($username, $existing_password);
+    // If no result
+            if (!$result) {
+    // Password incorrect
+                $this->form_validation->set_message('password_insert_database', 'Password incorrect');
+                return false;
+    // Else, success, change password and pass validation
+            } else {
+                $password = $this->input->post('password');
+                $result   = $this->health->set_password($users_id, $password);
+                return TRUE;
+            }
+        }
+// If confirm password does not match, fail validation
+        else
+        {
+            return false;
         }
     }
 // Used for requesting freindship

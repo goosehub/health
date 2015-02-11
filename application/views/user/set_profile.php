@@ -1,6 +1,9 @@
      <h3>Set basic info</h3> 
    <?php echo validation_errors(); ?>
-   <?php echo form_open('dashboard/set_profile'); ?>
+   <?php echo $image_error; ?>
+   <?php $attributes = array('name' => 'profile_image_upload');
+   echo form_open_multipart('dashboard/set_profile', $attributes); ?>
+
    <?php
 // Translate result value into html value
    if ($profile['metric'] === 'on') {
@@ -68,6 +71,54 @@
      <textarea class="input-textarea"
      rows="4" cols="50" id="about" name="about"/><?php echo $profile['about']; ?></textarea>
      <br/>
+
+     <h2>Change your profile picture</h2> 
+     <h3>This is your current picture</h3>
+     <img width="150px" height="150px" src="../uploads/<?php echo $self['image']; ?>"/>
+     <h3>Upload a new Picture</h3>
+<!--         <?php echo $image_error; ?> -->
+         <?php $attributes = array('name' => 'profile_image_upload');
+         echo form_open_multipart('dashboard/do_upload', $attributes); ?>
+      <label for="userfile">Upload Picture:</label>
+      <input class="input-textarea"
+      type="file" size="20" id="userfile" name="userfile"/>
+
+      <br/>
+
+      <div class="mt-med">
+        
+        <div class="content-full">
+                
+          <h1>Modify Password</h1>
+          <p>We encourage you to choose a strong password for maximum security</p>
+          
+          <div class="mt-med">
+              
+              <div class="nest">
+              
+              <?php echo validation_errors(); ?>
+              <?php echo form_open('dashboard/set_password'); ?>
+          
+                <label for="existing_password">Existing Password:</label>
+                <input class="input-textarea" type="password" size="20" id="existing_password" name="existing_password"/>
+              
+                <label for="password">New Password:</label>
+                <input class="input-textarea" type="password" size="20" id="password" name="password"/>
+             
+                <label for="confirm_password">Confirm Password:</label>
+                <input class="input-textarea" type="password" size="20" id="confirm_password" name="confirm_password"/>
+                            
+            </div><!--nest-->
+            
+          </div><!--mt-med-->
+         
+         </div><!--content-full-->
+         
+      </div><!--mt-med-->
+
+      <br/>
+
+
      <input class="input-textarea"
      type="submit" value="Submit Changes"/>
    </form>
