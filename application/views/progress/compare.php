@@ -109,32 +109,84 @@ groups.add({
 
 <h1>These buttons do not work yet</h1>
 
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/weight"><button>weight</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/squats"><button>squats</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/bench"><button>bench</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/deadlift"><button>deadlift</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/weight"><button>weight</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/squats"><button>squats</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/bench"><button>bench</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/deadlift"><button>deadlift</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/height"><button>height</button></a>              
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/arm"><button>arm</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/thigh"><button>thigh</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/waist"><button>waist</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/chest"><button>chest</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/calves"><button>calves</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/forearms"><button>forearms</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/neck"><button>neck</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/hips"><button>hips</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/height"><button>height</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/arm"><button>arm</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/thigh"><button>thigh</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/waist"><button>waist</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/chest"><button>chest</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/calves"><button>calves</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/forearms"><button>forearms</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/neck"><button>neck</button></a>
-<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/hips"><button>hips</button></a>
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/weight">
+<button>weight</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/squats">
+<button>squats</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/bench">
+<button>bench</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/deadlift">
+<button>deadlift</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/weight">
+<button>weight</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/squats">
+<button>squats</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/bench">
+<button>bench</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/deadlift">
+<button>deadlift</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/height">
+<button>height</button></a>              
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/arm">
+<button>arm</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/thigh">
+<button>thigh</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/waist">
+<button>waist</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/chest">
+<button>chest</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/calves">
+<button>calves</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/forearms">
+<button>forearms</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/neck">
+<button>neck</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/hips">
+<button>hips</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/height">
+<button>height</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/arm">
+<button>arm</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/thigh">
+<button>thigh</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/waist">
+<button>waist</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/chest">
+<button>chest</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/calves">
+<button>calves</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/forearms">
+<button>forearms</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/neck">
+<button>neck</button></a>
+
+<a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/hips">
+<button>hips</button></a>
+
 <br/>
 <input type="checkbox" <?php if ($self['metric'] === 'on') { echo 'checked'; } ?> >Metric
 <hr/>

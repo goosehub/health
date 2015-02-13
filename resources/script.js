@@ -46,4 +46,20 @@ $(document).ready(function()
         ++food_number;
 	});
 
-});
+function ajax_call()
+{
+	$('#food_search').on('input', function() {
+	    $.ajax(
+	    {
+	        url: "resources/ajax/auto_complete.php",
+	        type: "POST",
+	        data: { client_input: client_input },
+	        cache: false,
+	        success: function(html)
+	        {
+	        	$('#auto_com_test').html('TEST');
+	        }
+	    });
+	});
+
+}); //End document
