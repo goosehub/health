@@ -6,4 +6,14 @@
 <h4><a href="dashboard/friend_requests">Friend Requests<?php echo $head_requests; ?></a></h4>
 <h4><a href="browse">Browse Users</a></h4>
 <h4><a href="dashboard/requirements">Nutritional Requirements</a></h4>
+<<<<<<< Updated upstream
 <h4><a href="dashboard/profile">Settings</a></h4>
+=======
+<<<<<<< Updated upstream
+<h4><a href="dashboard/profile">Settings</a></h4>
+=======
+<h4><a href="dashboard/profile">Change/Add Basic Information</a></h4>
+<h4><a href="dashboard/picture">Change Profile Picture</a></h4>
+<h4><a href="dashboard/password">Change Password</a></h4>
+<!-->
+>>>>>>> Stashed changes

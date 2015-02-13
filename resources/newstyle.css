@@ -163,12 +163,8 @@ label {
 	border-radius: 3px;
 	border: #cdd6df 1px solid;
 	box-shadow: #dce4eb 0 2px 0;
-	padding: 20px;
 }
 .content {
-	background: #fff;
-	border-left: #cdd6df 1px solid;
-	border-right: #cdd6df 1px solid;
 	padding: 20px;
 }
 p {
@@ -180,8 +176,6 @@ p {
 	background: #e3e7ec;
 	display: block;
 	height: 1px;
-	width: 100%;
-	margin-top: 6px;
 	margin-bottom: 10px;
 }
 .mt-med {
