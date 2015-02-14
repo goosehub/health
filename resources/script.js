@@ -46,20 +46,27 @@ $(document).ready(function()
         ++food_number;
 	});
 
-function ajax_call()
-{
-	$('#food_search').on('input', function() {
+
+// autocomplet : this function will be executed every time we change the text
+function autocomplet() {
+	var food_input = $('#food_search').val();
+	if (food_input.length > 0) {
 	    $.ajax(
 	    {
-	        url: "resources/ajax/auto_complete.php",
-	        type: "POST",
-	        data: { client_input: client_input },
+	        url: '../../resources/ajax/auto_complete.php',
+	        type: 'POST',
+	        data: {food_input:food_input},
 	        cache: false,
 	        success: function(html)
 	        {
-	        	$('#auto_com_test').html('TEST');
+	        	$('#auto_com_test').html(html);
 	        }
 	    });
-	});
+	} else {
+		// hide
+	}
+}
+
+setInterval(autocomplet, 1000); 
 
 }); //End document

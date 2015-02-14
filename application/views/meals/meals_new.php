@@ -52,13 +52,15 @@
 		|
 		<label for="food_search">Search for a food: </label>
 		<input class="input-textarea"
-		type="text" id="food_search" name="food_search" placeholder="Feature not yet added" disabled/>
-		<button type="button" disabled>Add</button>
+		type="text" id="food_search" name="food_search" placeholder="Feature not yet added"/>
+		<button id="food_add" type="button" >Add</button>
 		|
 		<label for="recipe_search">Search for a recipe: </label>
 		<input class="input-textarea"
 		type="text" id="recipe_search" name="recipe_search" placeholder="Feature not yet added" disabled/>
-		<button type="button" disabled>Add</button>
+		<button id="recipe_add" type="button" disabled>Add</button>
+
+		<div id="auto_com_test">First</div>
 	
 		<hr/>
 	
