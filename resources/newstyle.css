@@ -189,13 +189,14 @@ p {
 	color: #808b96;
 	font-size: 13px;
 	font-weight: 400;
-	width: 200px;
 	float: left;
 	line-height: 20px;
 }
 .answer {
-	float: left;
-	width: 200px;
+	
+}
+.pb-med {
+	padding-bottom: 20px;
 }
 .answer-input {
 	background: #fff;

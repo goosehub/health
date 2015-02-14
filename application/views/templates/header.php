@@ -93,6 +93,7 @@
 			</div><!--wrapper-->
 
 			<!-- User is NOT logged in -->
+
 				<?php } ?>
 				
 				<!-- User is NOT logged in -->

@@ -6,7 +6,7 @@
 		
 		<h1>Add a Meal</h1>
 		
-		<p>Providing as much information as possible will allow us to give you more precise data.</p>
+		<p>Creating a food will allow you to easily add it as a meal at any time.</p>
 		
 		</div>
 		
@@ -16,10 +16,23 @@
 
 			<?php echo validation_errors(); ?>
 			<?php echo form_open_multipart('meals/create_meal'); ?>
-
-			<label for="meal_name">Meal Name: </label>
-			<input class="input-textarea"
-			type="text" id="name" name="meal_name"/>
+			
+			<div class="input-row">
+			
+				<div class="question">
+	
+					<label for="meal_name">Meal Name:</label>
+					
+				</div><!--question-->
+				
+				<div class="answer">
+					
+					<input class="input-textarea" type="text" id="name" name="meal_name"/>
+					
+				</div><!--answer-->
+				
+			</div><!--input-row-->
+			
 		<br/>
 		<label for="save_as_recipe">Save this meal as a recipe:</label>
 		<input class="input-textarea"
