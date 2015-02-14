@@ -52,11 +52,7 @@
 					</form>
 					
 			</div><!--fl-->
-<<<<<<< Updated upstream
 
-=======
-					
->>>>>>> Stashed changes
 				<!-- Dropdown -->
 				<div class="fr">
 					
@@ -93,19 +89,17 @@
 					</div><!--nest-->
 					
 				</div><!--fr-->
-<<<<<<< Updated upstream
-=======
+
 				
 			</div><!--fr-->
->>>>>>> Stashed changes
+
 
 			</div><!--wrapper-->
 
 			<!-- User is NOT logged in -->
-<<<<<<< Updated upstream
+
 				<?php } ?>
-=======
->>>>>>> Stashed changes
+
 				
 				<!-- User is NOT logged in -->
 				<div class="wrapper">
