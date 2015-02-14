@@ -275,6 +275,7 @@ class Meals extends CI_Controller {
                 }
                 else
                 {
+// Store Result
                     $food_result[$i] = $this->meals_model->new_food($user_key, $timestamp, 
                     $food_name[$i], $save_as_food[$i], $food_type_vegetable[$i], $food_type_fruit[$i],
                     $food_type_protein[$i], $food_type_dairy[$i], $food_type_fats[$i], 

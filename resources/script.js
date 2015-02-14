@@ -57,16 +57,29 @@ function autocomplet() {
 	        type: 'POST',
 	        data: {food_input:food_input},
 	        cache: false,
-	        success: function(html)
+	        success: function(data)
 	        {
-	        	$('#auto_com_test').html(html);
+				$('#food_search_list').show();
+				$('#food_search_list').html(data);
 	        }
 	    });
 	} else {
-		// hide
+		$('#food_search_list').hide();
 	}
 }
 
-setInterval(autocomplet, 1000); 
+$('#food_search').keyup( function(){
+	autocomplet();
+});
+
+// set_item : this function will be executed when we select an item
+function set_item(item) {
+	$('#food_search').val(item);
+	$('#food_search_list').hide();
+}
+
+$('body').on('click', '.food_search_item', function(){
+	$('#food_search').val('Not working yet');
+});
 
 }); //End document

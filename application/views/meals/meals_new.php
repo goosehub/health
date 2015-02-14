@@ -62,18 +62,20 @@
 		<hr/>
 	
 		<button type="button" id="add_food_form">Add a New Food</button>
+		<br/>
 		|
 		<label for="food_search">Search for a food: </label>
-		<input class="input-textarea"
-		type="text" id="food_search" name="food_search" placeholder="Feature not yet added"/>
+		<input class="input-textarea" type="text" id="food_search" name="food_search" 
+		placeholder="Feature not yet added" onkeyup="autocomplet()" />
 		<button id="food_add" type="button" >Add</button>
+		<ul id="food_search_list"></ul>
+
 		|
+
 		<label for="recipe_search">Search for a recipe: </label>
 		<input class="input-textarea"
 		type="text" id="recipe_search" name="recipe_search" placeholder="Feature not yet added" disabled/>
 		<button id="recipe_add" type="button" disabled>Add</button>
-
-		<div id="auto_com_test">First</div>
 	
 		<hr/>
 	
