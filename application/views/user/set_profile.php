@@ -76,9 +76,6 @@
      <h3>This is your current picture</h3>
      <img width="150px" height="150px" src="../uploads/<?php echo $self['image']; ?>"/>
      <h3>Upload a new Picture</h3>
-<!--         <?php echo $image_error; ?> -->
-         <?php $attributes = array('name' => 'profile_image_upload');
-         echo form_open_multipart('dashboard/do_upload', $attributes); ?>
       <label for="userfile">Upload Picture:</label>
       <input class="input-textarea"
       type="file" size="20" id="userfile" name="userfile"/>

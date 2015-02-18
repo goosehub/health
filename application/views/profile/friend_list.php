@@ -16,7 +16,7 @@ $friend = $this->health->get_profile($row->send_request); } ?>
 </h3>
 <br/>
 <!-- For viewing your own friend list only -->
-<?php if ($self['id'] === $profile['id']) { ?>
+<?php if (isset($self['id']) && $self['id'] === $profile['id']) { ?>
 <a href="../../dashboard/reject/<?php echo $friend['id']; ?>">Delete This Friend</a>
 <?php } ?>
 
@@ -25,7 +25,7 @@ $friend = $this->health->get_profile($row->send_request); } ?>
 <!-- Start No Friends -->
 
 <!-- For viewing your own friend list only -->
-<?php if ($self['id'] === $profile['id']) { ?>
+<?php if (isset($self['id']) && $self['id'] === $profile['id']) { ?>
 <h3>You have no friends yet</h3>
 <?php } else { ?>
 <h3>This user has no friends yet</h3>

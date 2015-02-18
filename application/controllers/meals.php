@@ -19,21 +19,33 @@ class Meals extends CI_Controller {
     }
 // Meals dashboard
     public function index() {
-        include 'global.php';
-        $data['title'] = 'Meal Tracker';
-        $this->load->view('templates/header', $data);
-        $this->load->view('meals/meals_dash', $data);
-        $this->load->view('templates/footer', $data);
+// If user logged in
+        if ($this->session->userdata('logged_in')) {
+            include 'global.php';
+            $data['title'] = 'Meal Tracker';
+            $this->load->view('templates/header', $data);
+            $this->load->view('meals/meals_dash', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+//If user not logged in, redirect to login page
+            redirect('login', 'refresh');
+        }
     }
 // Meals form
     public function meals_new() {
-        include 'global.php';
-        $data['today'] = date("Y-m-d", time());
-        $data['current_time'] = date("H:i", time());
-        $data['title'] = 'New Meal';
-        $this->load->view('templates/header', $data);
-        $this->load->view('meals/meals_new', $data);
-        $this->load->view('templates/footer', $data);
+// If user logged in
+        if ($this->session->userdata('logged_in')) {
+            include 'global.php';
+            $data['today'] = date("Y-m-d", time());
+            $data['current_time'] = date("H:i", time());
+            $data['title'] = 'New Meal';
+            $this->load->view('templates/header', $data);
+            $this->load->view('meals/meals_new', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+//If user not logged in, redirect to login page
+            redirect('login', 'refresh');
+        }
     }
 // Meals history
     public function meals_list($slug) {
@@ -298,16 +310,6 @@ class Meals extends CI_Controller {
             $food_result[20], $food_result[21], $food_result[22], $food_result[23] );
 // Redirect to dashboard
             redirect('dashboard', 'refresh');
-// Testing
-            // $data['test'] = $food_type_fruit;
-            // $data['count'] = count($food_name);
-            // include 'global.php';
-            // $data['today'] = date("Y-m-d", time());
-            // $data['current_time'] = date("H:i", time());
-            // $data['title'] = 'New Meal';
-            // $this->load->view('templates/header', $data);
-            // $this->load->view('meals/meals_new', $data);
-            // $this->load->view('templates/footer', $data);
         }
     }
 

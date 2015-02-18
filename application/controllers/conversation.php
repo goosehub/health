@@ -38,6 +38,9 @@ class Conversation extends CI_Controller {
             $this->load->view('templates/header', $data);
             $this->load->view('user/conversations_list', $data);
             $this->load->view('templates/footer', $data);
+        } else {
+//If user not logged in, redirect to login page
+            redirect('login', 'refresh');
         }
     }
 // Used for viewing a conversation
@@ -74,7 +77,10 @@ class Conversation extends CI_Controller {
 //If not logged in, redirect to login page
             redirect('login', 'refresh');
         }
-    }
+    } else {
+//If user not logged in, redirect to login page
+            redirect('login', 'refresh');
+        }
     
 }
 ?>

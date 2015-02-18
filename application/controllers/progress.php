@@ -11,21 +11,23 @@ class Progress extends CI_Controller {
         $this->load->model('health', '', TRUE);
         $this->load->model('progress_model', '', TRUE);
         $this->load->model('conversation_model', '', TRUE);
-        $this->load->helper(array(
-            'form',
-            'url',
-            'date'
-        ));
+        $this->load->helper(array('date'));
     }
 // The progress dashboard
     public function index() {
-        include 'global.php';
-        $data['title'] = 'My Progress';
-        $data['joined'] = date("Y-m-d", $data['self']['joined']);
-        $data['today'] = date("Y-m-d", time());
-        $this->load->view('templates/header', $data);
-        $this->load->view('progress/progress_dash', $data);
-        $this->load->view('templates/footer', $data);
+// If user logged in
+        if ($this->session->userdata('logged_in')) {
+            include 'global.php';
+            $data['title'] = 'My Progress';
+            $data['joined'] = date("Y-m-d", $data['self']['joined']);
+            $data['today'] = date("Y-m-d", time());
+            $this->load->view('templates/header', $data);
+            $this->load->view('progress/progress_dash', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+//If user not logged in, redirect to login page
+            redirect('login', 'refresh');
+        }
     }
 // The progress history
     public function progress_list($slug) {

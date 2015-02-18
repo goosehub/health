@@ -10,27 +10,35 @@ class Routines extends CI_Controller {
         parent::__construct();
         $this->load->model('health', '', TRUE);
         $this->load->model('conversation_model', '', TRUE);
-        $this->load->helper(array(
-            'form',
-            'url',
-            'date'
-        ));
+        $this->load->helper(array('date'));
     }
 // Routine dashboard
     public function index() {
-        include 'global.php';
-        $data['title'] = 'Meal Tracker';
-        $this->load->view('templates/header', $data);
-        $this->load->view('routines/routines_dash', $data);
-        $this->load->view('templates/footer', $data);
+// If user logged in
+        if ($this->session->userdata('logged_in')) {
+            include 'global.php';
+            $data['title'] = 'Meal Tracker';
+            $this->load->view('templates/header', $data);
+            $this->load->view('routines/routines_dash', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+//If user not logged in, redirect to login page
+            redirect('login', 'refresh');
+        }
     }
 // Routine form
     public function routines_new() {
-        include 'global.php';
-        $data['title'] = 'New Routine';
-        $this->load->view('templates/header', $data);
-        $this->load->view('routines/routines_new', $data);
-        $this->load->view('templates/footer', $data);
+// If user logged in
+        if ($this->session->userdata('logged_in')) {
+            include 'global.php';
+            $data['title'] = 'New Routine';
+            $this->load->view('templates/header', $data);
+            $this->load->view('routines/routines_new', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+//If user not logged in, redirect to login page
+            redirect('login', 'refresh');
+        }
     }
 // Routine history/list
     public function routines_list() {

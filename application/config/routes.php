@@ -48,6 +48,7 @@ $route['start'] = 'join/start';
 $route['facebook_join/(:any)/(:any)/(:any)'] = 'join/facebook_join/$1/$2/$3';
 $route['facebook_login/(:any)/(:any)/(:any)'] = 'join/facebook_login/$1/$2/$3';
 $route['browse'] = 'pages/browse';
+$route['users'] = 'pages/browse';
 
 $route['dashboard'] = 'dashboard';
 $route['dashboard/progress'] = 'progress';

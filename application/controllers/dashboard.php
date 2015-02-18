@@ -218,13 +218,19 @@ class Dashboard extends CI_Controller {
     }
 // Used for listing pending friend requests
     public function friend_requests() {
-        include 'global.php';
-        $this->load->helper('date');
-        $data['requests'] = $this->health->find_requests($user_key);
-        $data['title']    = 'Friend Requests';
-        $this->load->view('templates/header', $data);
-        $this->load->view('user/friend_requests', $data);
-        $this->load->view('templates/footer', $data);
+// If user logged in
+        if ($this->session->userdata('logged_in')) {
+            include 'global.php';
+            $this->load->helper('date');
+            $data['requests'] = $this->health->find_requests($user_key);
+            $data['title']    = 'Friend Requests';
+            $this->load->view('templates/header', $data);
+            $this->load->view('user/friend_requests', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+//If user not logged in, redirect to login page
+            redirect('login', 'refresh');
+        }
     }
 // Used for accepting friend requests
     public function accept($friend_key) {

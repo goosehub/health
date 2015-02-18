@@ -22,7 +22,9 @@
 
 <hr/>
 <h4><a href="<?php echo $profile['username']; ?>/friends">View This Users Friends</a></h4>
-<h4><a class="dashboard-link" href="<?php echo $profile['username']; ?>/progress">See History of Progress</a></h4>
+<h4><a class="dashboard-link" href="<?php echo $profile['username']; ?>/progress">Progress History</a></h4>
+<h4><a class="dashboard-link" href="<?php echo $profile['username']; ?>/meals">Meals History</a></h4>
+<h4><a class="dashboard-link" href="<?php echo $profile['username']; ?>/routines">Routines History</a></h4>
 <hr/>
 
 <p>Username: <?php echo $profile['username']; ?></p>

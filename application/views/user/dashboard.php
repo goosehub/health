@@ -7,3 +7,5 @@
 <h4><a href="browse">Browse Users</a></h4>
 <h4><a href="dashboard/requirements">Nutritional Requirements</a></h4>
 <h4><a href="dashboard/profile">Settings</a></h4>
+<hr/>
+<h4><a href="login/logout">Logout</a></h4>
