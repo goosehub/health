@@ -27,9 +27,42 @@
 .mb-lrg {
 	margin-bottom: 30px;
 }
+.ml-med {
+	margin-left: 20px;
+}
 
+/* Padding */
+
+.p-med {
+	padding: 20px;
+}
+
+/* Inline Elements */
+
+.inline {
+	display: inline;
+}
+.inline-b {
+	display: inline-block;
+}
 /* Buttons */
 
+.bl-btn-sml {
+	/* Rectangle 7: */
+background: #6EB7FF;
+border: 1px solid #4790D7;
+border-radius: 2px;
+/* Add a Meal: */
+font-family: Lato-Bold;
+font-size: 13px;
+color: #FFFFFF;
+line-height: 16px;
+height: 28px;
+text-decoration: none;
+display: block;
+text-align: center;
+line-height: 28px;
+}
 .bl-btn-med {
 	background: #47a3ff;
 	height: 34px;
