@@ -44,7 +44,6 @@ Class join_model extends CI_Model
    $this->db->from('users');
    $this->db->limit(1);
    $query = $this->db->get()->row();
-   // $query->result();
    $users_id = $query->id;
 
 // Create default progress row

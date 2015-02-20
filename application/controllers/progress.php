@@ -199,7 +199,7 @@ class Progress extends CI_Controller {
         }
     }
 // Compare two progress points
-    public function compare($slug, $before, $after) {
+    public function compare($slug, $before, $after, $graph) {
 // Load data
         include 'global.php';
         $data['user_username'] = $slug;
@@ -417,6 +417,12 @@ class Progress extends CI_Controller {
                 } else {
                     $data['age'] = $data['profile']['birthdate'];
                 }
+// Get items to be graphed
+                $timestamp_before = $before_data->timestamp;
+                $timestamp_after = $after_data->timestamp;
+                $data['graphed'] = $this->progress_model->get_progress_graph(
+                    $profile_id, $timestamp_before, $timestamp_after, $graph);
+                $data['graph_point_count'] = count($data['graphed']);
 // Load view
                 $data['title'] = 'Progress Comparison | ' . $before . ' | ' . $after . '';
                 $this->load->view('templates/header', $data);
@@ -448,7 +454,7 @@ class Progress extends CI_Controller {
         $before       = $before->date;
         $after        = $after->date;
 // Redirect
-        redirect('users/' . $slug . '/progress/' . $before . '/' . $after . '', 'refresh');
+        redirect('users/' . $slug . '/progress/' . $before . '/' . $after . '/weight', 'refresh');
     }
 // Find progress point
     public function find_point($slug) {

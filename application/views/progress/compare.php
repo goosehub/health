@@ -21,38 +21,19 @@
 var groups = new vis.DataSet();
     groups.add({
     id: 0,
-    content: 'Weight',
-    options: {
-    }});
-
-groups.add({
-    id: 1,
-    content: 'Waist',
-    options: {
-    }});
-
-groups.add({
-    id: 2,
-    content: 'Bodyfat',
-    options: {
-    }});
-
-groups.add({
-    id: 3,
-    content: 'Bench',
+    content: 'Weight in Metric',
     options: {
     }});
 
     var container = document.getElementById('visualization');
     var items = [
-        {x: '<?php echo $before; ?>', y: <?php echo $measurement['b_i_weight']; ?>, group: 0},
-        {x: '<?php echo $after; ?>', y: <?php echo $measurement['a_i_weight']; ?>, group: 0},
-        {x: '<?php echo $before; ?>', y: <?php echo $measurement['b_i_waist']; ?>, group: 1},
-        {x: '<?php echo $after; ?>', y: <?php echo $measurement['a_i_waist']; ?>, group: 1},
-        {x: '<?php echo $before; ?>', y: <?php echo $measurement['b_bodyfat']; ?>, group: 2},
-        {x: '<?php echo $after; ?>', y: <?php echo $measurement['a_bodyfat']; ?>, group: 2},
-        {x: '<?php echo $before; ?>', y: <?php echo $measurement['b_i_bench']; ?>, group: 3},
-        {x: '<?php echo $after; ?>', y: <?php echo $measurement['a_i_bench']; ?>, group: 3}
+    <?php foreach ($graphed as $row) { ?>
+        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row["weight"]; ?>, group: 0},
+        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row["weight"]; ?>, group: 0},
+        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row["weight"]; ?>, group: 0},
+        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row["weight"]; ?>, group: 0},
+        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row["weight"]; ?>, group: 0},
+    <?php } ?>
     ];
 
     var dataset = new vis.DataSet(items);

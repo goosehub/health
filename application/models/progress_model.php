@@ -82,6 +82,18 @@ Class progress_model extends CI_Model {
     function get_all_progress($users_id) {
         return $this->db->from('progress')->where('user_key', $users_id)->where_not_in('extra', 'new_member_point')->order_by("id", "DESC")->limit(9999)->get()->result();
     }
+    function get_progress_graph($profile_id, $timestamp_before, $timestamp_after, $graph) {
+        return $this->db->select('date, '.$graph.'')
+        ->from('progress')
+        ->where('user_key', $profile_id)
+        ->where('timestamp >=', $timestamp_before)
+        ->where('timestamp <=', $timestamp_after)
+        ->where_not_in('extra', 'new_member_point')
+        ->order_by("id", "DESC")
+        ->limit(9999)
+        // Result array for iteration in view
+        ->get()->result_array();
+    }
     function comment_insert($profile_id, $friend_key, $point, $message, $timestamp) {
         $data = array(
             'user_key' => $profile_id,
