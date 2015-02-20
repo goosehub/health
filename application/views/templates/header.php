@@ -10,18 +10,18 @@
 	<meta name="author" content="">
 	<meta name="robots" CONTENT="all">
     <link rel="shortcut icon" href="<?=base_url()?>favicon.ico">
-	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/reset.css">
-	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/style.css">
-	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/newstyle.css">
-	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/framework.css">
-	<link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/icons.css">
-	<link rel="stylesheet" href="http://i.icomoon.io/public/temp/cc430a925c/ProgressPals/style.css">
-	<link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+	<!-- <link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/reset.css"> -->
+	<!-- <link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/style.css"> -->
+	<!-- <link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/newstyle.css"> -->
+	<!-- <link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/framework.css"> -->
+	<!-- <link type="text/css" rel="stylesheet" href="<?=base_url()?>resources/icons.css"> -->
+	<!-- <link rel="stylesheet" href="http://i.icomoon.io/public/temp/cc430a925c/ProgressPals/style.css"> -->
+	<!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'> -->
 	<script type="text/javascript" src="<?=base_url()?>resources/jquery-1.11.2.min.js"></script>
-	<script type="text/javascript" src="<?=base_url()?>resources/tipped.js"></script>
-	<script type="text/javascript" src="<?=base_url()?>resources/tooltips.js"></script>
-	<link rel="stylesheet" type="text/css" href="<?=base_url()?>resources/tipped.css" />
-	<link rel="stylesheet" href="https://s3.amazonaws.com/icomoon.io/55864/ProgressPals/style.css">
+	<!-- <script type="text/javascript" src="<?=base_url()?>resources/tipped.js"></script> -->
+	<!-- <script type="text/javascript" src="<?=base_url()?>resources/tooltips.js"></script> -->
+	<!-- <link rel="stylesheet" type="text/css" href="<?=base_url()?>resources/tipped.css" /> -->
+	<!-- <link rel="stylesheet" href="https://s3.amazonaws.com/icomoon.io/55864/ProgressPals/style.css"> -->
 	<!-- Fallback for Internet Explorer 9 -->
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

@@ -422,7 +422,7 @@ class Progress extends CI_Controller {
                 $timestamp_after = $after_data->timestamp;
                 $data['graphed'] = $this->progress_model->get_progress_graph(
                     $profile_id, $timestamp_before, $timestamp_after, $graph);
-                $data['graph_point_count'] = count($data['graphed']);
+                $data['graph_item'] = ucfirst($graph);
 // Load view
                 $data['title'] = 'Progress Comparison | ' . $before . ' | ' . $after . '';
                 $this->load->view('templates/header', $data);

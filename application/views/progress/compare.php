@@ -21,18 +21,19 @@
 var groups = new vis.DataSet();
     groups.add({
     id: 0,
-    content: 'Weight in Metric',
+    content: '<?php echo $graph_item; ?> in Metric',
     options: {
     }});
 
     var container = document.getElementById('visualization');
     var items = [
     <?php foreach ($graphed as $row) { ?>
-        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row["weight"]; ?>, group: 0},
-        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row["weight"]; ?>, group: 0},
-        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row["weight"]; ?>, group: 0},
-        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row["weight"]; ?>, group: 0},
-        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row["weight"]; ?>, group: 0},
+        <?php $keys = array_keys($row); ?>
+        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row[$keys[1]]; ?>, group: 0},
+        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row[$keys[1]]; ?>, group: 0},
+        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row[$keys[1]]; ?>, group: 0},
+        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row[$keys[1]]; ?>, group: 0},
+        {x: '<?php echo $row["date"]; ?>', y: <?php echo $row[$keys[1]]; ?>, group: 0},
     <?php } ?>
     ];
 
@@ -87,8 +88,6 @@ var groups = new vis.DataSet();
 </script>
 
 <hr/>
-
-<h1>These buttons do not work yet</h1>
 
 <a href="<?=base_url()?>users/<?php echo $profile['username']; ?>/progress/<?php echo $before; ?>/<?php echo $after; ?>/weight">
 <button>weight</button></a>
@@ -169,7 +168,7 @@ var groups = new vis.DataSet();
 <button>hips</button></a>
 
 <br/>
-<input type="checkbox" <?php if ($self['metric'] === 'on') { echo 'checked'; } ?> >Metric
+<!-- <input type="checkbox" <?php if ($self['metric'] === 'on') { echo 'checked'; } ?> >Metric -->
 <hr/>
 
 <table>
